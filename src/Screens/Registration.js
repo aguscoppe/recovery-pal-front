@@ -79,7 +79,7 @@ export default function Registration() {
     if (regisInfo.rdo===1){
       setErrorMessages({ name: "email", message: errors.email });
     }
-  }
+  }git p
 
   const pruebaGet = async function(){
     var patientInfo = await getPatientById("633c97e68efef931d4597301");
