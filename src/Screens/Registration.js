@@ -4,6 +4,8 @@ import {Redirect} from "react-router-dom";
 import { Button, FormControlLabel, FormLabel, Radio, RadioGroup, TextField } from "@mui/material";
 import {patientRegistration} from "../Controllers/PatientEntry.Controller";
 import {doctorRegistration} from "../Controllers/DoctorEntry.Controller";
+import {getPatientById} from "../Controllers/PatientEntry.Controller";
+
 
 export default function Registration() {
   
@@ -77,8 +79,12 @@ export default function Registration() {
     if (regisInfo.rdo===1){
       setErrorMessages({ name: "email", message: errors.email });
     }
-}
+  }
 
+  const pruebaGet = async function(){
+    var patientInfo = await getPatientById("633c97e68efef931d4597301");
+    console.log("Soy el paciente del Back:", patientInfo.patient)
+  }
   
   const handleSubmit = () => {
     console.log(radioValue);
@@ -96,7 +102,8 @@ export default function Registration() {
           setErrorMessages({ name: "pass2", message: errors.pass2 });
         }else {
           setErrorMessages({});
-          validarRegistro(); 
+          pruebaGet();
+          //validarRegistro(); 
         }
       }
     }
