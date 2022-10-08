@@ -11,6 +11,7 @@ import {
 } from '@mui/material';
 import { patientRegistration } from '../Controllers/PatientEntry.Controller';
 import { doctorRegistration } from '../Controllers/DoctorEntry.Controller';
+import { getPatientById } from '../Controllers/PatientEntry.Controller';
 
 const style = {
   container: {
@@ -80,6 +81,11 @@ export default function Register() {
     }
   };
 
+  const pruebaGet = async function () {
+    var patientInfo = await getPatientById('633c97e68efef931d4597301');
+    console.log('Soy el paciente del Back:', patientInfo.patient);
+  };
+
   const handleSubmit = () => {
     console.log(radioValue);
 
@@ -102,7 +108,8 @@ export default function Register() {
           setErrorMessages({ name: 'pass2', message: errors.pass2 });
         } else {
           setErrorMessages({});
-          validarRegistro();
+          // pruebaGet();
+          //validarRegistro();
         }
       }
     }
