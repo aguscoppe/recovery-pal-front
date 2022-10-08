@@ -14,6 +14,7 @@ const Home = () => {
       <Grid container justifyContent='center' sx={{ padding: '10vh 0' }}>
         <Grid item xs={11} md={6}>
           <Exercise
+            id={1}
             name='Sentadillas'
             description='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua.'
@@ -22,6 +23,7 @@ const Home = () => {
             }
           />
           <Exercise
+            id={2}
             name='Sentadillas'
             description='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua.'
@@ -31,6 +33,7 @@ const Home = () => {
             action={{ type: 'add', function: () => {} }}
           />
           <Exercise
+            id={3}
             name='Sentadillas'
             description='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua.'
