@@ -1,33 +1,28 @@
 import Header from '../Components/Header';
 import Navbar from '../Components/NavBar';
-import { Grid, Typography, TextField, Button, Box } from '@mui/material';
+import { Grid, TextField, Button, Box } from '@mui/material';
 import { useState } from 'react';
 import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
+
+const flexCenter = {
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  alignItems: 'center',
+};
+
+const textFieldSpacing = {
+  marginBottom: '20px',
+};
 
 const CreateExercise = ({ doctorId }) => {
   const [exerciseData, setExerciseData] = useState({
     name: '',
-    sets: 0,
-    weight: 0,
+    sets: '',
+    weight: '',
     description: '',
     videoURL: '',
   });
-
-  const flexCenter = {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-  };
-
-  const label = {
-    color: '#0B3D60',
-    fontWeight: '500',
-  };
-
-  const textFieldSpacing = {
-    marginBottom: '20px',
-  };
 
   const handleClick = () => {
     console.log(
@@ -40,85 +35,84 @@ const CreateExercise = ({ doctorId }) => {
     const { name } = e.target;
     setExerciseData({ ...exerciseData, [name]: value });
   };
+
   return (
     <>
-      <Box
-        sx={{
-          minHeight: '100vh',
-          width: '100vw',
-          display: 'flex',
-        }}
+      <Header title='Crear Ejercicio' icon={<AddCircleOutlineRoundedIcon />} />
+      <Grid
+        container
+        justifyContent='center'
+        alignItems='center'
+        style={{ height: '100vh', width: '100%' }}
       >
-        <Header
-          title="Crear Ejercicio"
-          icon={<AddCircleOutlineRoundedIcon />}
-        />
-        <Grid
-          container
-          spacing={0}
-          direction="column"
-          alignItems="center"
-          justifyContent="center"
-          style={{ minHeight: '100vh' }}
-        >
-          <Grid item>
-            <Typography sx={label}>Nombre</Typography>
-            <TextField
-              sx={textFieldSpacing}
-              name="name"
-              value={exerciseData.name}
-              onChange={handleChange}
-              variant="outlined"
-            />
-            <Typography sx={label}>Cantidad de sets</Typography>
-            <TextField
-              sx={textFieldSpacing}
-              name="sets"
-              value={exerciseData.sets}
-              onChange={handleChange}
-              variant="outlined"
-            />
-            <Typography sx={label}>Peso (opcional)</Typography>
-            <TextField
-              sx={textFieldSpacing}
-              name="weight"
-              value={exerciseData.weight}
-              onChange={handleChange}
-              variant="outlined"
-            />
-            <Typography sx={label}>Descripcion</Typography>
-            <TextField
-              sx={textFieldSpacing}
-              name="description"
-              value={exerciseData.description}
-              onChange={handleChange}
-              variant="outlined"
-            />
-            <Typography sx={label}>Video</Typography>
-            <TextField
-              sx={textFieldSpacing}
-              name="videoURL"
-              value={exerciseData.videoURL}
-              onChange={handleChange}
-              variant="outlined"
-            />
-            <Box sx={flexCenter}>
-              <Button
-                sx={{
-                  display: 'block',
-                  alignSelf: 'center',
-                  justifySelf: 'center',
-                }}
-                variant="contained"
-                onClick={handleClick}
-              >
-                Finalizar
-              </Button>
-            </Box>
-          </Grid>
+        <Grid item xs={10} sm={6} md={4}>
+          <TextField
+            name='name'
+            value={exerciseData.name}
+            fullWidth
+            label='Nombre'
+            variant='outlined'
+            onChange={handleChange}
+            sx={textFieldSpacing}
+          />
+          <TextField
+            name='sets'
+            value={exerciseData.sets}
+            fullWidth
+            label='Cantidad de sets'
+            variant='outlined'
+            onChange={handleChange}
+            sx={textFieldSpacing}
+          />
+          <TextField
+            name='weight'
+            value={exerciseData.weight}
+            fullWidth
+            label='Peso (opcional)'
+            variant='outlined'
+            onChange={handleChange}
+            sx={textFieldSpacing}
+          />
+          <TextField
+            name='description'
+            value={exerciseData.description}
+            fullWidth
+            label='Descripción'
+            variant='outlined'
+            onChange={handleChange}
+            sx={textFieldSpacing}
+          />
+          <TextField
+            name='videoURL'
+            value={exerciseData.videoURL}
+            fullWidth
+            label='Video'
+            variant='outlined'
+            onChange={handleChange}
+            sx={textFieldSpacing}
+          />
+          <Box sx={flexCenter}>
+            <Button
+              sx={{
+                display: 'block',
+                alignSelf: 'center',
+                justifySelf: 'center',
+              }}
+              disabled={
+                exerciseData.name === '' ||
+                exerciseData.sets === '' ||
+                exerciseData.description === '' ||
+                exerciseData.videoURL === ''
+              }
+              variant='contained'
+              onClick={handleClick}
+            >
+              Finalizar
+            </Button>
+          </Box>
         </Grid>
-        <Navbar />
-      </Box>
+      </Grid>
+      <Navbar />
     </>
   );
 };
