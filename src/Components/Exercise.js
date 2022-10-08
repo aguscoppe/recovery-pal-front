@@ -2,20 +2,24 @@ import { Grid, Card, Typography, IconButton } from '@mui/material';
 import { Link } from 'react-router-dom';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import DeleteIcon from '@mui/icons-material/Delete';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
-const Exercise = ({ id, name, description, imgSrc, action }) => {
+const Exercise = ({ id, name, description, imgSrc, action, isComplete }) => {
   return (
-    <Link to={`/${id}`} style={{ textDecoration: 'none' }}>
-      <Card>
+    <Link
+      to={action || isComplete ? '' : `/${id}`}
+      style={{ textDecoration: 'none' }}
+    >
+      <Card sx={isComplete ? { border: '2px solid green' } : {}}>
         <Grid container alignItems='center'>
-          <Grid item xs={action ? 5 : 6} margin='10px'>
+          <Grid item xs={action || isComplete ? 5 : 6} margin='10px'>
             <img
               src={imgSrc}
               alt={name}
               style={{ width: '100%', height: '100%', borderRadius: '6px' }}
             />
           </Grid>
-          <Grid item xs={5} margin='10px'>
+          <Grid item xs={action || isComplete ? 4 : 5} margin='10px'>
             <Typography variant='h6' sx={{ fontWeight: '500' }}>
               {name}
             </Typography>
@@ -24,8 +28,19 @@ const Exercise = ({ id, name, description, imgSrc, action }) => {
           {action && (
             <Grid item xs={1}>
               <IconButton onClick={action.function}>
-                {action.type === 'add' && <AddCircleIcon />}
-                {action.type === 'remove' && <DeleteIcon />}
+                {action.type === 'add' && (
+                  <AddCircleIcon sx={{ color: 'lightblue' }} />
+                )}
+                {action.type === 'remove' && (
+                  <DeleteIcon sx={{ color: 'red' }} />
+                )}
+              </IconButton>
+            </Grid>
+          )}
+          {isComplete && (
+            <Grid item xs={1}>
+              <IconButton>
+                <CheckCircleIcon sx={{ color: 'green' }} />
               </IconButton>
             </Grid>
           )}

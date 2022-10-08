@@ -16,31 +16,47 @@ const Home = () => {
           <Exercise
             id={1}
             name='Sentadillas'
-            description='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+            description='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do.'
             imgSrc={
               'https://www.runtastic.com/blog/wp-content/uploads/2018/07/Co%CC%81mo-hacer-sentadillas-1200x800-1024x683.jpg'
             }
+          />
+          <Exercise
+            id={1}
+            name='Sentadillas'
+            description='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do.'
+            imgSrc={
+              'https://www.runtastic.com/blog/wp-content/uploads/2018/07/Co%CC%81mo-hacer-sentadillas-1200x800-1024x683.jpg'
+            }
+            isComplete
           />
           <Exercise
             id={2}
             name='Sentadillas'
-            description='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+            description='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do.'
             imgSrc={
               'https://www.remusfitness.com/blog/wp-content/uploads/2020/04/Squat.jpg'
             }
-            action={{ type: 'add', function: () => {} }}
+            action={{
+              type: 'add',
+              function: () => {
+                console.log('adding');
+              },
+            }}
           />
           <Exercise
             id={3}
             name='Sentadillas'
-            description='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+            description='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do.'
             imgSrc={
               'https://www.runtastic.com/blog/wp-content/uploads/2018/07/Co%CC%81mo-hacer-sentadillas-1200x800-1024x683.jpg'
             }
-            action={{ type: 'remove', function: () => {} }}
+            action={{
+              type: 'remove',
+              function: () => {
+                console.log('removing');
+              },
+            }}
           />
         </Grid>
       </Grid>
