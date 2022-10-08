@@ -6,6 +6,8 @@ const urlWebServices = {
 
     getPatientById:urlApi +"api/patients/getPatient",
     getDoctorById:urlApi +"api/doctors/getDoctor",
+    
+    exerciseCreation:urlApi + "api/exercises"
 }
 
 
