@@ -4,13 +4,23 @@ export const ejercicios = [
       doctor: 1,
       instructions: "Sentadillas 20 veces",
       videoTitle: "Sentadilla",
-      videoURL: "https://mui.com/static/images/cards/contemplative-reptile.jpg",
+      videoImageURL: "https://mui.com/static/images/cards/contemplative-reptile.jpg",
+      videoURL:"https://www.youtube.com/watch?v=a2lXwR-7kD4",
     },
     {
       id: 2,
       doctor: 1,
-      instructions: "Estocadas 20 veces",
+      instructions: "Estocadas 50 veces",
       videoTitle: "Estocadas",
-      videoURL: "https://thumbs.gfycat.com/GrouchySneakyKingfisher-mobile.jpg",
+      videoImageURL: "https://thumbs.gfycat.com/GrouchySneakyKingfisher-mobile.jpg",
+      videoURL:"https://www.youtube.com/watch?v=e6w3JPbb83U"
+    },
+    {
+      id: 3,
+      doctor: 1,
+      instructions: "Sentadilla Bulgara 10 veces",
+      videoTitle: "Sentadilla Bulgara",
+      videoImageURL: "https://thumbs.gfycat.com/GrouchySneakyKingfisher-mobile.jpg",
+      videoURL:"https://www.youtube.com/watch?v=K-6DG1hcHzU"
     },
   ];

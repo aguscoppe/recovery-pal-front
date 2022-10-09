@@ -11,19 +11,20 @@ import {ejercicios} from "../ejercicios"
 import CardExercise from "../Components/CardExercise";
 
 
-export const PlayVideo = () => {
+export const PlayVideo = (props) => {
   const currentUser = useContext(UserContext);
+  const exercise = props.exercise;
   const navigate = useNavigate();
 
   return (
     <>
-      <Header title="Testing1" icon={<ArrowBack />} />
+      <Header title={`${exercise.videoTitle}`} icon={<ArrowBack />} />
       <Grid container justifyContent="center" sx={{ padding: "10vh 0" }}>
         <Grid item xs={11} md={6}>
           {ejercicios.map((ejercicio) => {
             return (
               <div
-                onClick={() => {navigate("/home/${ejercicios.title}");}}>
+                onClick={() => {navigate(`/home/${ejercicios.title}`);}}>
                 <Grid item xs={11} md={12} xl={11} lg={11}>
                   <CardExercise ejercicio={ejercicio} />
                 </Grid>{" "}

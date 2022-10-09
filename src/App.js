@@ -15,6 +15,7 @@ import { UserContext } from './Contexts/UserContext';
 import userEvent from '@testing-library/user-event';
 import PlayVideo from './Pages/PlayVideo';
 import VideoDisplay from './Pages/VideoDisplay';
+import VideoHome from './Pages/VideoHome';
 
 //Cosas a borrar, el routes de playvideo, acordarse de cerrar con la /  el de arriba
 
@@ -25,9 +26,8 @@ function App() {
       <UserContext.Provider value={currentUser}>
         <Routes>
           <Route path='/' element={<Login setCurrentUser={setCurrentUser} />} />
-          <Route path='/home' element={currentUser.role === "doctor" ?<HomeDoctor />:<HomePaciente />} >
-            <Route path=':videoTitle' element={<VideoDisplay />} />
-          </Route>
+          <Route path='/home' element={currentUser.role === "doctor" ?<HomeDoctor />:<HomePaciente />} />
+          <Route path='home/:id' element={<VideoDisplay />} />
           <Route path='/profile' element={<Profile />} />
           <Route path='/chat' element={<Chat />} />
           <Route path='/videos' element={<Videos />} />

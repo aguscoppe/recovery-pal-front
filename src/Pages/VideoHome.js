@@ -10,27 +10,14 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import {ejercicios} from "../ejercicios"
 
-function showExercise(exercise) {
-  return (
-    <Grid item xs={11} md={12} xl={11} lg={11}>
-      <CardExercise exercise={exercise} />
-    </Grid>
-  );
-}
-
-const HomePaciente = () => {
-  const currentUser = useContext(UserContext);
-
+function VideoHome() {
   return (
     <>
       <Header title="Home" icon={<HomeIcon />} />
-      <Grid container justifyContent="center" sx={{ padding: "10vh 0" }} spacing={2}>
-        {ejercicios.map(showExercise)}
-      </Grid>
-
+      <Outlet />
       <NavBar />
     </>
   );
 };
 
-export default HomePaciente;
+export default VideoHome;
