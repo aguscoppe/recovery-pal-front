@@ -6,12 +6,13 @@ const Header = ({ title, icon }) => {
   return (
     <Box
       bgcolor={theme.palette.primary.main}
-      display='flex'
-      alignItems='center'
+      display="flex"
+      alignItems="center"
+      justifyContent="center"
       sx={{ width: '100%', height: '8vh', position: 'fixed' }}
     >
       <IconButton sx={{ color: '#fff' }}>{icon}</IconButton>
-      <Typography color='white'>{title}</Typography>
+      <Typography color="white">{title}</Typography>
     </Box>
   );
 };
