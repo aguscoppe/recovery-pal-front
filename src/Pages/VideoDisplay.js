@@ -12,7 +12,7 @@ import {
 import NavBar from "../Components/NavBar";
 import Header from "../Components/Header";
 import { ejercicios } from "../ejercicios";
-import { Navigate, useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { ArrowBack, CheckCircle } from "@mui/icons-material";
 import ReactPlayer from "react-player";
 import * as React from "react";
@@ -23,6 +23,7 @@ function VideoDisplay() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const navigate = useNavigate();
   return (
     <>
       <Header title={ejercicios[id - 1].videoTitle} icon={<ArrowBack />} />
@@ -43,9 +44,20 @@ function VideoDisplay() {
             {ejercicios[id - 1].instructions}
           </Typography>
 
-          <Button onClick={handleOpen}>Completado</Button>
-          {/* MODAL STARTS */}
-          <Modal
+          <Button
+            onClick={handleOpen}
+            fullWidth
+            variant="contained"
+            size="large"
+          >
+            Completado
+          </Button>
+         
+        </Grid>
+      </Grid>
+      <NavBar />
+       {/* MODAL STARTS */}
+       <Modal
             open={open}
             onClose={handleClose}
             style={{
@@ -55,20 +67,60 @@ function VideoDisplay() {
             }}
           >
             <Box bgcolor="background.paper">
-              <Grid sx={{ p: "20px" }} container alignItems='center' justifyContent='center'>
+              <Grid
+                sx={{ p: "20px" }}
+                container
+                alignItems="center"
+                justifyContent="center"
+              >
                 <Grid item xs={12} xl={12} lg={12} md={12}>
-                  <CheckCircle fontSize="large" sx={{ color: "#22BEE9", position: "center" }} />
-                  <Typography variant="h3">Felicitaciones</Typography>
-                  <Typography variant="body1" marginTop="20px">Has completado el ejercicio</Typography>
-                  <Button >Continuar</Button><br/>
-                  <Button >Volver</Button>
+                  <Typography
+                    alignItems="center"
+                    justifyContent="center"
+                    display="flex"
+                  >
+                    <CheckCircle
+                      sx={{
+                        color: "#22BEE9",
+                        position: "center",
+                        fontSize: "100px",
+                      }}
+                    />
+                  </Typography>
+                  <Typography variant="h4">Felicitaciones</Typography>
+                  <Typography
+                    variant="body1"
+                    marginTop="20px"
+                    marginBottom="20px"
+                    alignItems="center"
+                    justifyContent="center"
+                    display="flex"
+                  >
+                    Has completado el ejercicio
+                  </Typography>
+                  <Typography>
+                    
+                  {/*<Button onClick={navigate(`/home/${ejercicios.id +1 }`)} fullWidth variant="contained" size="large">*/}
+                  <Button onClick={() => { setOpen(false);
+                  ejercicios[id].id === ejercicios.length ? navigate(`/home/${ejercicios[id].id}`): navigate('/home')
+  }} fullWidth variant="contained" size="large">
+                    Continuar
+                  </Button>
+                  </Typography>
+                  <br />
+                  <Typography>
+                  {/*<Button onClick={navigate('/home')} fullWidth variant="contained" size="large">*/}
+                  <Button onClick={() => {
+    navigate('/home');
+    setOpen(false)
+  }} fullWidth variant="outlined" size="large">
+                    Volver
+                  </Button>
+                  </Typography>
                 </Grid>
               </Grid>
             </Box>
           </Modal>
-        </Grid>
-      </Grid>
-      <NavBar />
     </>
   );
 }

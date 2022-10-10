@@ -9,6 +9,8 @@ import { Outlet } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import {ejercicios} from "../ejercicios"
+import {rutinas} from "../rutinas"
+import CardRoutine from "../Components/CardRoutine";
 
 function showExercise(exercise) {
   return (
@@ -18,6 +20,15 @@ function showExercise(exercise) {
   );
 }
 
+/*
+function showRoutines(routine) {
+  return (
+    <Grid item xs={11} md={12} xl={11} lg={11}>
+      <CardRoutine routine={routine} />
+    </Grid>
+  );
+}
+*/
 const HomePaciente = () => {
   const currentUser = useContext(UserContext);
 
@@ -26,6 +37,7 @@ const HomePaciente = () => {
       <Header title="Home" icon={<HomeIcon />} />
       <Grid container justifyContent="center" sx={{ padding: "10vh 0" }} spacing={2}>
         {ejercicios.map(showExercise)}
+        {/*rutinas.map(showRoutines)*/}
       </Grid>
 
       <NavBar />
