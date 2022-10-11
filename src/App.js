@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { ThemeProvider } from '@mui/material';
 import { Routes, Route } from 'react-router-dom';
+import { UserContext } from './Contexts/UserContext';
 import { theme } from './theme';
 import './App.css';
 import Home from './Pages/Home';
@@ -9,7 +10,7 @@ import Chat from './Pages/Chat';
 import Videos from './Pages/Videos';
 import Register from './Pages/Register';
 import Login from './Pages/Login';
-import { UserContext } from './Contexts/UserContext';
+import CreateExercise from './Pages/CreateExercise';
 
 function App() {
   const [currentUser, setCurrentUser] = useState({ name: '', password: '' });
@@ -23,6 +24,7 @@ function App() {
           <Route path='/chat' element={<Chat />} />
           <Route path='/videos' element={<Videos />} />
           <Route path='/register' element={<Register />} />
+          <Route path='/createExercise' element={<CreateExercise />} />
         </Routes>
       </UserContext.Provider>
     </ThemeProvider>
