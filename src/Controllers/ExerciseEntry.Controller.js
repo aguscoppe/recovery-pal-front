@@ -200,9 +200,13 @@ export const exerciseUpdate = async function(datos){
     };
 }
 
-export const getExerciseByVideoTitleMatch = async function(videoTitleToMatch){
+export const getExerciseByVideoTitleMatch = async function(videoTitleToMatch, doctorId){
     //url webservices
-    let url = urlWebServices.getExerciseByVideoTitleMatch + "/?videoTitle=" + videoTitleToMatch;
+    let url = urlWebServices.getExerciseByVideoTitleMatch 
+    + "/?videoTitle=" + videoTitleToMatch 
+    + "&doctor="
+    + doctorId
+    ;
     //armo json con datos
    //const formData = new URLSearchParams();
     //formData.append('_id', id);
