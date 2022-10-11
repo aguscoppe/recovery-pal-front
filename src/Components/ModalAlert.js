@@ -1,5 +1,4 @@
 import { Modal, Typography, Button, Box } from '@mui/material';
-import CloseIcon from '@mui/icons-material/Close';
 import { Link } from 'react-router-dom';
 
 const alertValues = {
@@ -15,6 +14,7 @@ const alertValues = {
         src={require('../Assets/icons/SuccessIcon.png')}
       />
     ),
+    color: '#22BEE9',
   },
   error: {
     icon: (
@@ -28,6 +28,7 @@ const alertValues = {
         src={require('../Assets/icons/ErrorIcon.png')}
       />
     ),
+    color: '#E92222',
   },
   warning: {
     icon: (
@@ -41,6 +42,7 @@ const alertValues = {
         src={require('../Assets/icons/WarningIcon.png')}
       />
     ),
+    color: '#E9D522',
   },
 };
 
@@ -55,15 +57,10 @@ const modalContainer = {
   justifyContent: 'center',
   alignItems: 'center',
   width: '350px',
-  height: '350px',
+  height: 'auto',
   backgroundColor: '#FFF',
   borderRadius: '20px',
-};
-
-const closeIconContainer = {
-  width: '100%',
-  display: 'flex',
-  justifyContent: 'flex-end',
+  padding: '20px',
 };
 
 const iconContainer = {
@@ -76,7 +73,7 @@ const buttonContainer = {
 
 const modalTitleContainer = {
   textAlign: 'center',
-  marginBottom: '50px',
+  marginBottom: '30px',
 };
 
 const ModalAlert = ({
@@ -92,9 +89,6 @@ const ModalAlert = ({
   return (
     <Modal open={open}>
       <Box sx={modalContainer}>
-        {/*<Box sx={closeIconContainer}>
-          <CloseIcon />
-        </Box> */}
         <Box sx={iconContainer}>{alertValues[type].icon}</Box>
         <Box sx={modalTitleContainer}>
           <Typography variant="h4" fontWeight="bold" marginBottom="10px">
@@ -104,13 +98,28 @@ const ModalAlert = ({
         </Box>
         <Box sx={buttonContainer}>
           <Link to={`${primaryBtnPage}`} style={{ textDecoration: 'none' }}>
-            <Button variant="contained" fullWidth={true}>
+            <Button
+              variant="contained"
+              fullWidth={true}
+              sx={{
+                backgroundColor: alertValues[type].color,
+                marginBottom: '15px',
+              }}
+            >
               {primaryBtnText}
             </Button>
           </Link>
           {secondaryBtnText && (
             <Link to={`${secondaryBtnPage}`} style={{ textDecoration: 'none' }}>
-              <Button variant="contained" fullWidth={true}>
+              <Button
+                variant="contained"
+                fullWidth={true}
+                sx={{
+                  border: 1,
+                  backgroundColor: '#FFF',
+                  color: alertValues[type].color,
+                }}
+              >
                 {secondaryBtnText}
               </Button>
             </Link>
