@@ -1,10 +1,11 @@
 import { useContext } from 'react';
 import { UserContext } from '../Contexts/UserContext';
-import { Grid, Typography } from '@mui/material';
+import { Grid } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 import Header from '../Components/Header';
 import NavBar from '../Components/NavBar';
 import Exercise from '../Components/Exercise';
+import MultipleSelectChip from '../Components/MultipleSelectChip';
 
 const Home = () => {
   const currentUser = useContext(UserContext);
@@ -13,6 +14,10 @@ const Home = () => {
       <Header title='Home' icon={<HomeIcon />} />
       <Grid container justifyContent='center' sx={{ padding: '10vh 0' }}>
         <Grid item xs={11} md={6}>
+          <MultipleSelectChip
+            label='Buscar ejercicio'
+            list={['Sentadillas', 'Estocadas']}
+          />
           <Exercise
             id={1}
             name='Sentadillas'
