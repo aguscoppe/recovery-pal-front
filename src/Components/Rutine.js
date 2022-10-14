@@ -8,6 +8,7 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
 const Rutine = ({
   id,
+  idPaciente,
   name,
   imgSrc,
   frecuencia,
@@ -16,7 +17,7 @@ const Rutine = ({
   isComplete,
 }) => {
   return (
-    <Link to={`/${id}`} style={{ textDecoration: "none" }}>
+    <Link to={`/paciente/${idPaciente}/${id}`} style={{ textDecoration: "none" }}>
       <Card
         sx={
           isComplete

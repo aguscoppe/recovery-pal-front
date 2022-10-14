@@ -13,6 +13,7 @@ import Register from './Pages/Register';
 import Login from './Pages/Login';
 import CreateExercise from './Pages/CreateExercise';
 import PacientProfile from './Pages/PacientProfile';
+import PacientRoutineExcercise from './Pages/PacientRoutineExercise';
 
 function App() {
   const [currentUser, setCurrentUser] = useState({ name: '', password: '' });
@@ -21,9 +22,11 @@ function App() {
       <UserContext.Provider value={currentUser}>
         <Routes>
           <Route path='/' element={<Login setCurrentUser={setCurrentUser} />} />
-          <Route path='/home' element={<Home />} />
+          <Route path='/home' element={<HomeDoctor />} />
           <Route path='/profile' element={<Profile />} />
-          <Route path='/paciente/:idPaciente' element={<PacientProfile/>}/>
+          <Route path='/paciente/:idPaciente' element={<PacientProfile/>}>
+            <Route path='/:idRutine' element={<PacientRoutineExcercise/>}/>
+          </Route>
           <Route path='/chat' element={<Chat />} />
           <Route path='/videos' element={<Videos />} />
           <Route path='/register' element={<Register />} />

@@ -29,6 +29,7 @@ const ListRutine = () =>{
         <Grid item>
               <Rutine
                 id={2}
+                idPaciente="NamePacient"
                 name="Rutina 1"
                 duracion="Dos meses"
                 frecuencia="Semanal"
@@ -58,7 +59,7 @@ const PacientProfile = () => {
         alignItems="center"
         justifyContent="center"
         flexWrap="wrap"
-        sx={{ width: "100%", height: "20vh" }}
+        sx={{ width: "100%", height: "25vh" }}
       >
         <Avatar
           alt="FotoPerfilPaciente"
@@ -95,8 +96,8 @@ const PacientProfile = () => {
             </Grid>
           
         </TabPanel>
-        <TabPanel value="2">Item Two</TabPanel>
-        <TabPanel value="3">Item Three</TabPanel>
+        <TabPanel value="2">Coming Soon</TabPanel>
+        <TabPanel value="3">Coming Soon</TabPanel>
       </TabContext>
     </>
   );
