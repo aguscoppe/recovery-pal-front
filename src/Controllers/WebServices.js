@@ -4,7 +4,6 @@ const urlWebServices = {
     patientRegistration:urlApi +"api/patients/registration",
     doctorRegistration:urlApi +"api/doctors/registration",
 
-    
     getPatientById:urlApi +"api/patients/getPatient",
     getDoctorById:urlApi +"api/doctors/getDoctor",
 
@@ -12,13 +11,14 @@ const urlWebServices = {
     getLastFeedbackByRoutine: urlApi + "api/feedbacks/getLastFeedbackByRoutine/",
     feedbackUpdate:urlApi + "api/feedbacks/",
 
-
     getExerciseById: urlApi + "api/exercises",
     getExerciseByVideoTitleMatch: urlApi + "exercises/getExercisesByVideoTitleMatch",
     exerciseCreation:urlApi + "api/exercises",
     exerciseUpdate:urlApi + "api/exercises",
-    deleteExerciseById: urlApi + "api/exercises"
+    deleteExerciseById: urlApi + "api/exercises",
 
+    createRoutine: urlApi + "api/routines",
+    getRoutineById: urlApi + "api/routines/getRoutine"
 }
 
 
