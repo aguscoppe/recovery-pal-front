@@ -1,49 +1,16 @@
-import { useContext, useState } from "react";
-import { UserContext } from "../Contexts/UserContext";
-import {
-  Box,
-  Grid,
-  Typography,
-  Paper,
-  Avatar,
-  Button,
-  Tab,
-} from "@mui/material";
-import HomeIcon from "@mui/icons-material/Home";
-import Header from "../Components/Header";
-import NavBar from "../Components/NavBar";
-import Exercise from "../Components/Exercise";
-import { useTheme } from "@mui/material";
-import { Link } from "react-router-dom";
-import TabContext from "@mui/lab/TabContext";
-import TabList from "@mui/lab/TabList";
-import TabPanel from "@mui/lab/TabPanel";
-import Rutine from "../Components/Rutine";
-import { Margin } from "@mui/icons-material";
+import { useState } from 'react';
+import { Box, Grid, Typography, Avatar, Button, Tab } from '@mui/material';
+import { useTheme } from '@mui/material';
+import { Link } from 'react-router-dom';
+import TabContext from '@mui/lab/TabContext';
+import TabList from '@mui/lab/TabList';
+import TabPanel from '@mui/lab/TabPanel';
+import Rutine from '../Components/Rutine';
 
-
-
-const ListRutine = () =>{
-    return(
-        <Grid item paddingBottom={2}>
-              <Rutine
-                id={2}
-                idPaciente="NamePacient"
-                name="Rutina 1"
-                duracion="Dos meses"
-                frecuencia="Semanal"
-                cantidad="3 ejercicios"
-                imgSrc={
-                  "https://www.remusfitness.com/blog/wp-content/uploads/2020/04/Squat.jpg"
-                }
-              />
-        </Grid> 
-    )
-}
 /** Esta Pagina es el perfil del paciente que el doctor puede ver, aca puede administrar las rutinas del paciente y crear nuevas  */
 const PacientProfile = () => {
   const theme = useTheme();
-  const [value, setValue] = useState("1");
+  const [value, setValue] = useState('1');
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -54,52 +21,64 @@ const PacientProfile = () => {
     <>
       <Box
         bgcolor={theme.palette.primary.main}
-        display="flex"
-        flexDirection="column"
-        alignItems="center"
-        justifyContent="center"
-        flexWrap="wrap"
-        sx={{ width: "100%", height: "25vh" }}
+        display='flex'
+        flexDirection='column'
+        alignItems='center'
+        justifyContent='center'
+        flexWrap='wrap'
+        sx={{ width: '100%', height: '25vh' }}
       >
         <Avatar
-          alt="FotoPerfilPaciente"
-          src="https://mui.com/static/images/avatar/3.jpg"
+          alt='FotoPerfilPaciente'
+          src='https://mui.com/static/images/avatar/3.jpg'
           sx={{ width: 90, height: 90 }}
         ></Avatar>
-        <Typography variant="h4" color={theme.palette.textPrimary.main}>
+        <Typography variant='h4' color={theme.palette.textPrimary.main}>
           Maria Laura
         </Typography>
-        <Typography variant="body1" color={theme.palette.textSecondary.main}>
+        <Typography variant='body1' color={theme.palette.textSecondary.main}>
           Edad 33
         </Typography>
       </Box>
       <TabContext value={value}>
-        <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
           <TabList
             onChange={handleChange}
-            aria-label="lab API tabs example"
+            aria-label='lab API tabs example'
             centered
           >
-            <Tab label="Rutina" value="1" />
-            <Tab label="Videos" value="2" />
-            <Tab label="Progreso" value="3" />
+            <Tab label='Rutina' value='1' />
+            <Tab label='Videos' value='2' />
+            <Tab label='Progreso' value='3' />
           </TabList>
         </Box>
-        <TabPanel value="1">
-          <Grid container justifyContent="center">
-                {[1,2,3].map(()=>{
-                    return ListRutine()
-                 })} 
-              <Link to={`/pacient/${idPaciente}/createRutine`} style={{ textDecoration: "none" }}>
-              <Button size='large' variant="contained" color={"primary"}>
+        <TabPanel value='1'>
+          <Grid container justifyContent='center'>
+            <Link
+              to={`/pacient/${idPaciente}/createRutine`}
+              style={{ textDecoration: 'none' }}
+            >
+              <Button size='large' variant='contained' color={'primary'}>
                 CREAR RUTINA
               </Button>
-              </Link>
+            </Link>
+            <Grid item paddingBottom={2}>
+              <Rutine
+                id={2}
+                idPaciente='NamePacient'
+                name='Rutina 1'
+                duracion='Dos meses'
+                frecuencia='Semanal'
+                cantidad='3 ejercicios'
+                imgSrc={
+                  'https://www.remusfitness.com/blog/wp-content/uploads/2020/04/Squat.jpg'
+                }
+              />
             </Grid>
-          
+          </Grid>
         </TabPanel>
-        <TabPanel value="2">Coming Soon</TabPanel>
-        <TabPanel value="3">Coming Soon</TabPanel>
+        <TabPanel value='2'>Coming Soon</TabPanel>
+        <TabPanel value='3'>Coming Soon</TabPanel>
       </TabContext>
     </>
   );

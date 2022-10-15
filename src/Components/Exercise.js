@@ -7,7 +7,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 const Exercise = ({ id, name, description, imgSrc, action, isComplete }) => {
   return (
     <Link
-      to={action || isComplete ? '' : `/${id}`}
+      to={action || isComplete ? '' : `/home/${id}`}
       style={{ textDecoration: 'none' }}
     >
       <Card sx={isComplete ? { border: '2px solid green' } : {}}>
