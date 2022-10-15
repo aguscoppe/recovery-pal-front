@@ -10,7 +10,7 @@ export default function CardExercise(props) {
   const exercise = props.exercise;
 
   return (
-    <Link to={`/home/${exercise.id}`} style={{ textDecoration: 'none' }}>
+    <Link to={`/home/Mi%20Rutina/${exercise.id}`} style={{ textDecoration: 'none' }}>
       <Card>
         <Grid sx={{ p: '20px' }} container columnSpacing={2}>
           <Grid item xs={6} xl={3} lg={3} md={3}>

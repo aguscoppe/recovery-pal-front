@@ -17,7 +17,7 @@ const Rutine = ({
   isComplete,
 }) => {
   return (
-    <Link to={`/pacient/${idPaciente}/rutine/${id}`} style={{ textDecoration: "none" }}>
+    <Link to={`/home/${name}`} style={{ textDecoration: "none" }}>
       <Card
         sx={
           isComplete

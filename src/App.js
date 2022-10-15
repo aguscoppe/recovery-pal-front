@@ -16,6 +16,7 @@ import PacientProfile from './Pages/PacientProfile';
 import PacientRoutineExcercise from './Pages/PacientRoutineExercise';
 import CreateRoutine from './Pages/CreateRoutine';
 import VideoDisplay from './Pages/VideoDisplay';
+import HomePacienteRoutine from './Pages/HomePacienteRoutine';
 
 function App() {
   const [currentUser, setCurrentUser] = useState({ name: '', password: '' });
@@ -30,10 +31,11 @@ function App() {
           <Route
             path='/home'
             element={
-              currentUser.role === 'doctor' ? <HomeDoctor /> : <HomePaciente />
+              currentUser.role === 'doctor' ? <HomeDoctor /> : <HomePacienteRoutine />
             }
           />
-          <Route path='/home/:id' element={<VideoDisplay />} />
+          <Route path='/home/:name' element={<HomePaciente />} />
+          <Route path='/home/:name/:id' element={<VideoDisplay />} />
           <Route path='/profile' element={<Profile />} />
           <Route path='/pacient/:idPaciente' element={<PacientProfile />} />
           <Route

@@ -3,20 +3,26 @@ import { Link } from 'react-router-dom';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import { useContext } from 'react';
+import { UserContext } from '../Contexts/UserContext';
+import ReactPlayer from 'react-player';
 
 const Exercise = ({ id, name, description, imgSrc, action, isComplete }) => {
+  const currentUser = useContext(UserContext);
+
   return (
     <Link
-      to={action || isComplete ? '' : `/home/${id}`}
+      to={action ? '' : `/home/Mi%20Rutina/${id}`}
       style={{ textDecoration: 'none' }}
     >
       <Card sx={isComplete ? { border: '2px solid green' } : {}}>
         <Grid container alignItems='center'>
           <Grid item xs={action || isComplete ? 5 : 6} margin='10px'>
-            <img
-              src={imgSrc}
-              alt={name}
-              style={{ width: '100%', height: '100%', borderRadius: '6px' }}
+          <ReactPlayer
+              light
+              url={imgSrc}
+              width='100%'
+              height='100%'
             />
           </Grid>
           <Grid item xs={4} margin='10px'>

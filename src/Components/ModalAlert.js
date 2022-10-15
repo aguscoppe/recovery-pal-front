@@ -84,6 +84,7 @@ const ModalAlert = ({
   primaryBtnText,
   secondaryBtnText,
   primaryBtnPage,
+  setNotOpen,
   secondaryBtnPage,
 }) => {
   return (
@@ -99,6 +100,7 @@ const ModalAlert = ({
         <Box sx={buttonContainer}>
           <Link to={`${primaryBtnPage}`} style={{ textDecoration: 'none' }}>
             <Button
+            onClick= {setNotOpen }
               variant="contained"
               fullWidth={true}
               sx={{
@@ -112,6 +114,7 @@ const ModalAlert = ({
           {secondaryBtnText && (
             <Link to={`${secondaryBtnPage}`} style={{ textDecoration: 'none' }}>
               <Button
+                          onClick= {setNotOpen}
                 variant="contained"
                 fullWidth={true}
                 sx={{
