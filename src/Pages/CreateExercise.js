@@ -1,7 +1,7 @@
 import Header from '../Components/Header';
 import Navbar from '../Components/NavBar';
 import ModalAlert from '../Components/ModalAlert';
-import { Grid, TextField, Button, Box } from '@mui/material';
+import { Grid, TextField, Button, Input } from '@mui/material';
 import { useState } from 'react';
 import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
 
@@ -61,9 +61,9 @@ const CreateExercise = ({ doctorId }) => {
       <Header title='Crear Ejercicio' icon={<AddCircleOutlineRoundedIcon />} />
       <Grid
         container
-        justifyContent="center"
-        alignItems="center"
-        sx={{ paddingTop: "10vh" }}
+        justifyContent='center'
+        alignItems='center'
+        sx={{ paddingTop: '10vh' }}
       >
         <ModalAlert
           open={modal.open}
@@ -84,24 +84,6 @@ const CreateExercise = ({ doctorId }) => {
             sx={textFieldSpacing}
           />
           <TextField
-            name='sets'
-            value={exerciseData.sets}
-            fullWidth
-            label='Cantidad de sets'
-            variant='outlined'
-            onChange={handleChange}
-            sx={textFieldSpacing}
-          />
-          <TextField
-            name='weight'
-            value={exerciseData.weight}
-            fullWidth
-            label='Peso (opcional)'
-            variant='outlined'
-            onChange={handleChange}
-            sx={textFieldSpacing}
-          />
-          <TextField
             name='description'
             value={exerciseData.description}
             fullWidth
@@ -110,30 +92,24 @@ const CreateExercise = ({ doctorId }) => {
             onChange={handleChange}
             sx={textFieldSpacing}
           />
-          <TextField
-            name='videoURL'
-            value={exerciseData.videoURL}
-            fullWidth
+          <Input
+            type='file'
             label='Video'
-            variant='outlined'
-            onChange={handleChange}
             sx={textFieldSpacing}
+            disableUnderline
           />
-          <Grid item container  justifyContent="center">
+          <Grid item container justifyContent='center'>
             <Grid item>
-            <Button
-              disabled={
-                exerciseData.name === '' ||
-                exerciseData.sets === '' ||
-                exerciseData.description === '' ||
-                exerciseData.videoURL === ''
-              }
-              size='large'
-              variant="contained"
-              onClick={handleClick}
-            >
-              Finalizar
-            </Button>
+              <Button
+                disabled={
+                  exerciseData.name === '' || exerciseData.description === ''
+                }
+                size='large'
+                variant='contained'
+                onClick={handleClick}
+              >
+                Finalizar
+              </Button>
             </Grid>
           </Grid>
         </Grid>
