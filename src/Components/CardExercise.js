@@ -8,10 +8,9 @@ import ReactPlayer from 'react-player';
 
 export default function CardExercise(props) {
   const exercise = props.exercise;
-
   return (
-    <Link to={`/home/${exercise.id}`} style={{ textDecoration: 'none' }}>
-      <Card>
+    <Link to={`/exercise/${exercise.id}`} style={{ textDecoration: 'none' }}>
+      <Card sx={{ marginBottom: '12px' }}>
         <Grid sx={{ p: '20px' }} container columnSpacing={2}>
           <Grid item xs={6} xl={3} lg={3} md={3}>
             <ReactPlayer
