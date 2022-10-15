@@ -1,5 +1,3 @@
-import { useContext } from 'react';
-import { UserContext } from '../Contexts/UserContext';
 import { Grid } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 import Header from '../Components/Header';
@@ -8,7 +6,6 @@ import Exercise from '../Components/Exercise';
 import MultipleSelectChip from '../Components/MultipleSelectChip';
 
 const Home = () => {
-  const currentUser = useContext(UserContext);
   return (
     <>
       <Header title='Home' icon={<HomeIcon />} />

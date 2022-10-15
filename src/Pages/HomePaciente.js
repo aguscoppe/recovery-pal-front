@@ -5,12 +5,13 @@ import HomeIcon from '@mui/icons-material/Home';
 import Header from '../Components/Header';
 import NavBar from '../Components/NavBar';
 import CardExercise from '../Components/CardExercise';
-import { exercises } from '../data';
+import { exercises, routines } from '../data';
+import Exercise from '../Components/Exercise';
 
 function showExercise(exercise) {
   return (
     <Grid item xs={11} md={12} xl={11} lg={11}>
-      <CardExercise exercise={exercise} />
+      <Exercise id={exercise.id} name={exercise.name} description={exercise.instructions} imgSrc={exercise.videoURL} action={false} isComplete={false} />
     </Grid>
   );
 }

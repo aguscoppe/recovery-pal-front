@@ -10,7 +10,7 @@ export default function CardRoutine(props) {
   const routine = props.routine;
 
   return (
-    <Link to={`/home/${routine.id}`} style={{ textDecoration: 'none' }}>
+    <Link to={`/home/${routine.name}`} style={{ textDecoration: 'none' }}>
       <Card>
         <Grid sx={{ p: '20px' }} container columnSpacing={2}>
           <Grid item xs={6} xl={3} lg={3} md={3}>
@@ -24,7 +24,7 @@ export default function CardRoutine(props) {
           <Grid item xs={6} xl={6} lg={6} md={6}>
             <CardHeader title={routine.doctor} />
             <CardContent>
-              <Typography>{routine.exercises[1].instructions}</Typography>
+              <Typography>{routine.name}</Typography>
             </CardContent>
           </Grid>
         </Grid>
