@@ -12,8 +12,8 @@ import Videos from './Pages/Videos';
 import Register from './Pages/Register';
 import Login from './Pages/Login';
 import CreateExercise from './Pages/CreateExercise';
-import PacientProfile from './Pages/PacientProfile';
-import PacientRoutineExcercise from './Pages/PacientRoutineExercise';
+import PatientProfile from './Pages/PatientProfile';
+import ExerciseList from './Pages/ExerciseList';
 import CreateRoutine from './Pages/CreateRoutine';
 import VideoDisplay from './Pages/VideoDisplay';
 import HomePacienteRoutine from './Pages/HomePacienteRoutine';
@@ -34,18 +34,11 @@ function App() {
               currentUser.role === 'doctor' ? <HomeDoctor /> : <HomePacienteRoutine />
             }
           />
-          <Route path='/home/:name' element={<HomePaciente />} />
-          <Route path='/home/:name/:id' element={<VideoDisplay />} />
           <Route path='/profile' element={<Profile />} />
-          <Route path='/pacient/:idPaciente' element={<PacientProfile />} />
-          <Route
-            path='/pacient/:idPaciente/rutine/:idRutine'
-            element={<PacientRoutineExcercise />}
-          />
-          <Route
-            path='/pacient/:idPaciente/createRutine'
-            element={<CreateRoutine />}
-          />
+          <Route path='/patient/:idPatient' element={<PatientProfile />} />
+          <Route path='/routine/:idRoutine' element={<ExerciseList />} />
+          <Route path='/exercise/:idExercise' element={<VideoDisplay />} />
+          <Route path='/createRoutine' element={<CreateRoutine />} />
           <Route path='/createExercise' element={<CreateExercise />} />
           <Route path='/chat' element={<Chat />} />
           <Route path='/videos' element={<Videos />} />
