@@ -58,7 +58,7 @@ const CreateExercise = ({ doctorId }) => {
 
   return (
     <>
-      <Header title="Crear Ejercicio" icon={<AddCircleOutlineRoundedIcon />} />
+      <Header title='Crear Ejercicio' icon={<AddCircleOutlineRoundedIcon />} />
       <Grid
         container
         justifyContent="center"
@@ -68,54 +68,54 @@ const CreateExercise = ({ doctorId }) => {
         <ModalAlert
           open={modal.open}
           type={modal.type}
-          title="Bien hecho!"
-          subtitle="El ejercicio ha sido creado con exito"
-          primaryBtnText="Continuar"
-          primaryBtnPage="/home"
+          title='¡Bien hecho!'
+          subtitle='El ejercicio ha sido creado con éxito.'
+          primaryBtnText='Continuar'
+          primaryBtnPage='/home'
         />
         <Grid item xs={10} sm={6} md={4}>
           <TextField
-            name="name"
+            name='name'
             value={exerciseData.name}
             fullWidth
-            label="Nombre"
-            variant="outlined"
+            label='Nombre'
+            variant='outlined'
             onChange={handleChange}
             sx={textFieldSpacing}
           />
           <TextField
-            name="sets"
+            name='sets'
             value={exerciseData.sets}
             fullWidth
-            label="Cantidad de sets"
-            variant="outlined"
+            label='Cantidad de sets'
+            variant='outlined'
             onChange={handleChange}
             sx={textFieldSpacing}
           />
           <TextField
-            name="weight"
+            name='weight'
             value={exerciseData.weight}
             fullWidth
-            label="Peso (opcional)"
-            variant="outlined"
+            label='Peso (opcional)'
+            variant='outlined'
             onChange={handleChange}
             sx={textFieldSpacing}
           />
           <TextField
-            name="description"
+            name='description'
             value={exerciseData.description}
             fullWidth
-            label="Descripción"
-            variant="outlined"
+            label='Descripción'
+            variant='outlined'
             onChange={handleChange}
             sx={textFieldSpacing}
           />
           <TextField
-            name="videoURL"
+            name='videoURL'
             value={exerciseData.videoURL}
             fullWidth
-            label="Video"
-            variant="outlined"
+            label='Video'
+            variant='outlined'
             onChange={handleChange}
             sx={textFieldSpacing}
           />
