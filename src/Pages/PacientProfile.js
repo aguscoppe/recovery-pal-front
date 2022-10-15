@@ -6,7 +6,6 @@ import {
   Typography,
   Paper,
   Avatar,
-  Link,
   Button,
   Tab,
 } from "@mui/material";
@@ -15,7 +14,7 @@ import Header from "../Components/Header";
 import NavBar from "../Components/NavBar";
 import Exercise from "../Components/Exercise";
 import { useTheme } from "@mui/material";
-
+import { Link } from "react-router-dom";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
@@ -50,6 +49,7 @@ const PacientProfile = () => {
     setValue(newValue);
   };
 
+  const idPaciente = 1;
   return (
     <>
       <Box
@@ -90,9 +90,11 @@ const PacientProfile = () => {
                 {[1,2,3,4].map(()=>{
                     return ListRutine()
                  })} 
+              <Link to={`/pacient/${idPaciente}/createRutine`} style={{ textDecoration: "none" }}>
               <Button variant="contained" color={"primary"}>
                 CREAR RUTINA
               </Button>
+              </Link>
             </Grid>
           
         </TabPanel>

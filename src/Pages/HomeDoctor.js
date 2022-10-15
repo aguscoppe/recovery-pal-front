@@ -1,10 +1,12 @@
 import { useContext } from "react";
 import { UserContext } from "../Contexts/UserContext";
-import { Grid, Typography,Paper,Avatar,Link,Button } from "@mui/material";
+import { Grid, Typography,Paper,Avatar,Button } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 import Header from "../Components/Header";
 import NavBar from "../Components/NavBar";
 import Exercise from "../Components/Exercise";
+
+import { Link } from "react-router-dom";
 import {useTheme} from '@mui/material';
 
 const HomeDoctor = () => {
@@ -39,7 +41,7 @@ const HomeDoctor = () => {
                 </Typography>
               </Grid>
               <Grid item xs={4} justifySelf="end">
-                <Link to={`/Paciente/1}`} sx={{textDecoration:"none"}}>
+                <Link to={`/pacient/1`} style={{textDecoration: "none"}}>
                   <Button
                     variant="contained"
                     color={"secondary"}
@@ -47,7 +49,7 @@ const HomeDoctor = () => {
                   >
                     Ver Rutina
                   </Button>
-                </Link>
+                  </Link>
               </Grid>
             </Grid>
           </Grid>
