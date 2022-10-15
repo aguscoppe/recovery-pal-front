@@ -8,12 +8,12 @@ export const theme = createTheme({
     secondary: {
       main: '#22BEE9',
     },
-    textPrimary:{
-      main:'#ffffff',
+    textPrimary: {
+      main: '#ffffff',
     },
-    textSecondary:{
-      main:'#cccccc',
-    }
+    textSecondary: {
+      main: '#cccccc',
+    },
   },
   components: {
     MuiTypography: {
@@ -87,6 +87,25 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           fontFamily: 'Montserrat',
+        },
+      },
+    },
+    MuiTab: {
+      styleOverrides: {
+        root: {
+          fontFamily: 'Montserrat',
+        },
+      },
+    },
+    MuiChip: {
+      styleOverrides: {
+        root: {
+          fontFamily: 'Montserrat',
+          backgroundColor: '#22BEE9',
+          color: 'white',
+          '& .MuiChip-deleteIcon': {
+            color: 'white',
+          },
         },
       },
     },

@@ -1,11 +1,11 @@
 import Header from '../Components/Header';
 import Navbar from '../Components/NavBar';
 import ModalAlert from '../Components/ModalAlert';
-import { Grid, TextField, Button } from '@mui/material';
+import { Autocomplete, Grid, TextField, Button } from '@mui/material';
 import { useState } from 'react';
 import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
-import MultipleSelectChip from '../Components/MultipleSelectChip';
 import { Link } from 'react-router-dom';
+import { exercises } from '../data';
 
 const flexCenter = {
   display: 'flex',
@@ -28,18 +28,7 @@ const CreateRoutine = (pacinetId) => {
     imageUrl: '',
   });
   //recuperacion de los ejercicios de la base
-  let listEjercicios = [
-    'Sentadillas1',
-    'Estocadas1',
-    'Sentadillas2',
-    'Estocadas2',
-    'Sentadillas3',
-    'Estocadas3',
-    'Sentadillas4',
-    'Estocadas4',
-    'Sentadillas5',
-    'Estocadas5',
-  ];
+  let listEjercicios = exercises.map((exercise) => exercise.videoTitle);
 
   const [modal, setModal] = useState({ type: 'success', open: false });
 
@@ -101,8 +90,17 @@ const CreateRoutine = (pacinetId) => {
             onChange={handleChange}
             sx={textFieldSpacing}
           />
-          <MultipleSelectChip label='Buscar ejercicio' list={listEjercicios} />
-
+          <Autocomplete
+            multiple
+            disablePortal
+            id='combo-box-demo'
+            options={listEjercicios}
+            renderInput={(params) => (
+              <TextField {...params} label='Buscar ejercicio' />
+            )}
+            sx={textFieldSpacing}
+            noOptionsText='No hay resultados'
+          />
           <Grid item container alignItems='center' direction='column'>
             <Grid item paddingTop={3}>
               <Link to={`/createExercise`} style={{ textDecoration: 'none' }}>

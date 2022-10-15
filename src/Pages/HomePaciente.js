@@ -5,7 +5,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import Header from '../Components/Header';
 import NavBar from '../Components/NavBar';
 import CardExercise from '../Components/CardExercise';
-import { ejercicios } from '../ejercicios';
+import { exercises } from '../data';
 
 function showExercise(exercise) {
   return (
@@ -30,13 +30,8 @@ const HomePaciente = () => {
   return (
     <>
       <Header title='Home' icon={<HomeIcon />} />
-      <Grid
-        container
-        justifyContent='center'
-        sx={{ padding: '10vh 0' }}
-        spacing={2}
-      >
-        {ejercicios.map(showExercise)}
+      <Grid container justifyContent='center' sx={{ padding: '10vh 0' }}>
+        {exercises.map(showExercise)}
         {/*rutinas.map(showRoutines)*/}
       </Grid>
       <NavBar />
