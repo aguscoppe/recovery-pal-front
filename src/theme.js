@@ -8,6 +8,12 @@ export const theme = createTheme({
     secondary: {
       main: '#22BEE9',
     },
+    textPrimary:{
+      main:'#ffffff',
+    },
+    textSecondary:{
+      main:'#cccccc',
+    }
   },
   components: {
     MuiTypography: {
