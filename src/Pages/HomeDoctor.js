@@ -9,6 +9,9 @@ import Exercise from "../Components/Exercise";
 import { Link } from "react-router-dom";
 import {useTheme} from '@mui/material';
 
+
+
+/* Esta pagina es el home que deberia ver el doctor con la lista de sus pacientes aun no conectada con el back */
 const HomeDoctor = () => {
   const currentUser = useContext(UserContext);
 

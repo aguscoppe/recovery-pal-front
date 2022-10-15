@@ -40,7 +40,7 @@ const ListRutine = () =>{
         </Grid> 
     )
 }
-
+/** Esta Pagina es el perfil del paciente que el doctor puede ver, aca puede administrar las rutinas del paciente y crear nuevas  */
 const PacientProfile = () => {
   const theme = useTheme();
   const [value, setValue] = useState("1");
