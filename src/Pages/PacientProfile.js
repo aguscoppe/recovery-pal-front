@@ -25,7 +25,7 @@ import { Margin } from "@mui/icons-material";
 
 const ListRutine = () =>{
     return(
-        <Grid item>
+        <Grid item paddingBottom={2}>
               <Rutine
                 id={2}
                 idPaciente="NamePacient"
@@ -87,11 +87,11 @@ const PacientProfile = () => {
         </Box>
         <TabPanel value="1">
           <Grid container justifyContent="center">
-                {[1,2,3,4].map(()=>{
+                {[1,2,3].map(()=>{
                     return ListRutine()
                  })} 
               <Link to={`/pacient/${idPaciente}/createRutine`} style={{ textDecoration: "none" }}>
-              <Button variant="contained" color={"primary"}>
+              <Button size='large' variant="contained" color={"primary"}>
                 CREAR RUTINA
               </Button>
               </Link>

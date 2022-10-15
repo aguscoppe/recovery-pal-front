@@ -20,7 +20,7 @@ const HomeDoctor = () => {
       <Grid item xs={10} md={5}>
         <Paper elevation={3} sx={{ margin: "2vh" }}>
           <Grid container padding={"3vh"}>
-            <Grid item xs={5}>
+            <Grid item xs={4.7}>
               <Avatar
                 alt="FotoPerfilPaciente"
                 src="https://mui.com/static/images/avatar/3.jpg"
@@ -35,7 +35,7 @@ const HomeDoctor = () => {
               flexWrap="nowrap"
               xs={7}
             >
-              <Grid item xs={8}>
+              <Grid item xs={8.2}>
                 <Typography variant="h5" color={theme.palette.primary.main}>
                   Rutina de Maria
                 </Typography>
@@ -61,9 +61,9 @@ const HomeDoctor = () => {
   return (
     <>
       <Header title="Home" icon={<HomeIcon />} />
-      <Grid container justifyContent="center" sx={{ padding: "10vh 0" }}>
+      <Grid container justifyContent="center" sx={{ paddingTop: "8vh" }}>
         <Grid item xs={11} md={6}>
-        <Typography variant="body1" display={"block"}>Lista de Pacientes</Typography>
+        <Typography variant="h4" align="center">Lista de Pacientes</Typography>
         </Grid>
         {[1,2,3,4].map(()=>{
             return tarjeta()

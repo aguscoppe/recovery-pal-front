@@ -6,7 +6,6 @@ import { useState } from 'react';
 import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
 
 const flexCenter = {
-  display: 'flex',
   flexDirection: 'column',
   justifyContent: 'center',
   alignItems: 'center',
@@ -15,7 +14,7 @@ const flexCenter = {
 const textFieldSpacing = {
   marginBottom: '20px',
 };
-
+//create debe saber desde donde es llamado
 const CreateExercise = ({ doctorId }) => {
   const [exerciseData, setExerciseData] = useState({
     name: '',
@@ -64,7 +63,7 @@ const CreateExercise = ({ doctorId }) => {
         container
         justifyContent="center"
         alignItems="center"
-        style={{ height: '100vh', width: '100%' }}
+        sx={{ paddingTop: "10vh" }}
       >
         <ModalAlert
           open={modal.open}
@@ -120,7 +119,8 @@ const CreateExercise = ({ doctorId }) => {
             onChange={handleChange}
             sx={textFieldSpacing}
           />
-          <Box sx={flexCenter}>
+          <Grid item container  justifyContent="center">
+            <Grid item>
             <Button
               disabled={
                 exerciseData.name === '' ||
@@ -128,12 +128,14 @@ const CreateExercise = ({ doctorId }) => {
                 exerciseData.description === '' ||
                 exerciseData.videoURL === ''
               }
+              size='large'
               variant="contained"
               onClick={handleClick}
             >
               Finalizar
             </Button>
-          </Box>
+            </Grid>
+          </Grid>
         </Grid>
       </Grid>
       <Navbar />
