@@ -74,8 +74,10 @@ function VideoDisplay({ exerciseList, handleCompleteExercise }) {
       <ModalAlert
         open={open}
         type={modal.type}
-        title='Felicitaciones!'
-        subtitle='Has completado la RUTINA'
+        title='¡Felicitaciones!'
+        subtitle={`Has completado ${
+          filtered.length ? 'el ejercicio' : 'la rutina'
+        } `}
         primaryBtnText='Continuar'
         setNotOpen={() => {
           setOpen(false);
