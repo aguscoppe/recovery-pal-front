@@ -6,6 +6,7 @@ export const patient = {
   surname: 'López',
   role: 'paciente',
   imgSrc: 'https://mui.com/static/images/avatar/3.jpg',
+  _id: "63476ca587539638249f3c9a"
 };
 
 export const doctor = {
@@ -28,7 +29,7 @@ export const exercises = [
       'https://mui.com/static/images/cards/contemplative-reptile.jpg',
     /*videoURL:"https://www.youtube.com/watch?v=a2lXwR-7kD4",*/
     videoURL:
-      'https://joy.videvo.net/videvo_files/video/free/2019-03/large_watermarked/180419_Boxing_20_15_preview.mp4',
+      'http://127.0.0.1:8080/videos/1828960062.mp4',
   },
   {
     id: 'ex2',
@@ -72,8 +73,10 @@ export const routines = [
     name: 'Rutina inicial',
     exercises: [exercises[0], exercises[1], exercises[2]],
     feedbacks: [1, 2, 3],
-    frequency: 'Semanal',
-    duration: '2',
+    schedule: {
+      weeks: '3',
+      times: '2',
+    }
   },
   {
     id: 'ro2',
@@ -82,7 +85,9 @@ export const routines = [
     name: 'Rutina avanzada',
     exercises: [exercises[0], exercises[1], exercises[2], exercises[3]],
     feedbacks: [1, 2, 3],
-    frequency: 'Semanal',
-    duration: '2',
+    schedule: {
+      weeks: '3',
+      times: '2',
+    }
   },
 ];
