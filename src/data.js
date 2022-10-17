@@ -6,6 +6,7 @@ export const patient = {
   surname: 'López',
   role: 'paciente',
   imgSrc: 'https://mui.com/static/images/avatar/3.jpg',
+  _id: "63476ca587539638249f3c9a"
 };
 
 export const doctor = {
@@ -20,7 +21,7 @@ export const doctor = {
 
 export const exercises = [
   {
-    id: 'ex1',
+    _id: 'ex1',
     doctor: 'do1',
     instructions: 'Sentadillas 20 veces',
     videoTitle: 'Sentadilla',
@@ -28,10 +29,10 @@ export const exercises = [
       'https://mui.com/static/images/cards/contemplative-reptile.jpg',
     /*videoURL:"https://www.youtube.com/watch?v=a2lXwR-7kD4",*/
     videoURL:
-      'https://joy.videvo.net/videvo_files/video/free/2019-03/large_watermarked/180419_Boxing_20_15_preview.mp4',
+      'http://127.0.0.1:8080/videos/1828960062.mp4',
   },
   {
-    id: 'ex2',
+    _id: 'ex2',
     doctor: 'do1',
     instructions: 'Estocadas 50 veces',
     videoTitle: 'Estocadas',
@@ -42,7 +43,7 @@ export const exercises = [
       'https://player.vimeo.com/video/422883518?h=aee925f4ae&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;loop=1',
   },
   {
-    id: 'ex3',
+    _id: 'ex3',
     doctor: 'do1',
     instructions: 'Sentadilla Bulgara 10 veces',
     videoTitle: 'Sentadilla Bulgara',
@@ -53,7 +54,7 @@ export const exercises = [
       'https://cdn.videvo.net/videvo_files/video/premium/video0261/large_watermarked/500_00481_preview.mp4',
   },
   {
-    id: 'ex4',
+    _id: 'ex4',
     doctor: 'do1',
     instructions: 'Levantamiento de pesas 10 veces',
     videoTitle: 'Levantar Pesas',
@@ -66,23 +67,27 @@ export const exercises = [
 
 export const routines = [
   {
-    id: 'ro1',
+    _id: 'ro1',
     doctor: 'do1',
     patient: 'pa1',
     name: 'Rutina inicial',
     exercises: [exercises[0], exercises[1], exercises[2]],
     feedbacks: [1, 2, 3],
-    frequency: 'Semanal',
-    duration: '2',
+    schedule: {
+      weeks: '3',
+      times: '2',
+    }
   },
   {
-    id: 'ro2',
+    _id: 'ro2',
     doctor: 'do1',
     patient: 'pa1',
     name: 'Rutina avanzada',
     exercises: [exercises[0], exercises[1], exercises[2], exercises[3]],
     feedbacks: [1, 2, 3],
-    frequency: 'Semanal',
-    duration: '2',
+    schedule: {
+      weeks: '3',
+      times: '2',
+    }
   },
 ];

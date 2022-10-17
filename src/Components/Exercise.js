@@ -6,10 +6,10 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ReactPlayer from 'react-player';
 
 const Exercise = ({ exercise }) => {
-  const { id, videoURL, videoTitle, instructions, action, isComplete } =
+  const { _id, videoURL, videoTitle, instructions, action, isComplete } =
     exercise;
   return (
-    <Link to={`exercise/${id}`} style={{ textDecoration: 'none' }}>
+    <Link to={`exercise/${_id}`} style={{ textDecoration: 'none' }}>
       <Card
         sx={
           isComplete

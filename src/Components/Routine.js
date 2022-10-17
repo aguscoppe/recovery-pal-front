@@ -7,9 +7,12 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ReactPlayer from 'react-player';
 
 const Routine = ({ routine }) => {
-  const { id, name, frequency, duration, exercises, isComplete } = routine;
+  const { _id, name, exercises, isComplete } = routine;
+  const duration = routine.schedule.weeks
+  const frequency = routine.schedule.times
+
   return (
-    <Link to={`/routine/${id}`} style={{ textDecoration: 'none' }}>
+    <Link to={`/routine/${_id}`} style={{ textDecoration: 'none' }}>
       <Card
         sx={
           isComplete
@@ -38,10 +41,10 @@ const Routine = ({ routine }) => {
                 {name}
               </Typography>
               <Typography variant='body1' sx={{ fontWeight: '500' }}>
-                <CalendarTodayIcon /> {frequency}
+                <CalendarTodayIcon /> {frequency} por semana
               </Typography>
               <Typography variant='body1' sx={{ fontWeight: '500' }}>
-                <AccessTimeIcon /> {duration} meses
+                <AccessTimeIcon /> {duration} semanas
               </Typography>
               <Typography variant='body1' sx={{ fontWeight: '500' }}>
                 <VideoLibraryIcon /> {exercises.length} ejercicios

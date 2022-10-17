@@ -30,6 +30,7 @@ function VideoDisplay({ exerciseList, handleCompleteExercise }) {
     setModal({ type: 'success', open: true });
     setOpen(true);
   };
+  console.log(exercise.videoURL)
 
   return (
     <>
@@ -52,8 +53,9 @@ function VideoDisplay({ exerciseList, handleCompleteExercise }) {
               onStart={() => console.log('onStart callback')}
               onPause={() => console.log('onPause callback')}
               onEnded={() => console.log('onEnded callback')}
-              onError={() => console.log('onError callback')}
+              onError={(e) => console.log(e)}
             />
+
           </div>
           <Typography variant='body1' marginTop='20px'>
             {exercise.instructions}
