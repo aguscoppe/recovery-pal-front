@@ -1,11 +1,11 @@
 import Header from '../Components/Header';
 import Navbar from '../Components/NavBar';
-import { Grid, TextField, Button, Box } from '@mui/material';
+import ModalAlert from '../Components/ModalAlert';
+import { Grid, TextField, Button, Input } from '@mui/material';
 import { useState } from 'react';
 import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
 
 const flexCenter = {
-  display: 'flex',
   flexDirection: 'column',
   justifyContent: 'center',
   alignItems: 'center',
@@ -14,7 +14,7 @@ const flexCenter = {
 const textFieldSpacing = {
   marginBottom: '20px',
 };
-
+//create debe saber desde donde es llamado
 const CreateExercise = ({ doctorId }) => {
   const [exerciseData, setExerciseData] = useState({
     name: '',
@@ -24,10 +24,30 @@ const CreateExercise = ({ doctorId }) => {
     videoURL: '',
   });
 
+  const [modal, setModal] = useState({ type: 'success', open: false });
+
   const handleClick = () => {
     console.log(
       'Aca va la llamada al backend. Si recibo 200 OK modal success, sino otro.'
     );
+    setModal({ type: 'success', open: true });
+
+    /*
+    fetch('http://recoverypal.com/api/v1/createExercise', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: exerciseData.name,
+        sets: exerciseData.sets,
+        weight: exerciseData.weight,
+        description: exerciseData.description,
+        videoURL: exerciseData.videoURL,
+      }),
+    });
+     */
   };
 
   const handleChange = (e) => {
@@ -43,32 +63,22 @@ const CreateExercise = ({ doctorId }) => {
         container
         justifyContent='center'
         alignItems='center'
-        style={{ height: '100vh', width: '100%' }}
+        sx={{ paddingTop: '10vh' }}
       >
+        <ModalAlert
+          open={modal.open}
+          type={modal.type}
+          title='¡Bien hecho!'
+          subtitle='El ejercicio ha sido creado con éxito.'
+          primaryBtnText='Continuar'
+          primaryBtnPage='/home'
+        />
         <Grid item xs={10} sm={6} md={4}>
           <TextField
             name='name'
             value={exerciseData.name}
             fullWidth
             label='Nombre'
-            variant='outlined'
-            onChange={handleChange}
-            sx={textFieldSpacing}
-          />
-          <TextField
-            name='sets'
-            value={exerciseData.sets}
-            fullWidth
-            label='Cantidad de sets'
-            variant='outlined'
-            onChange={handleChange}
-            sx={textFieldSpacing}
-          />
-          <TextField
-            name='weight'
-            value={exerciseData.weight}
-            fullWidth
-            label='Peso (opcional)'
             variant='outlined'
             onChange={handleChange}
             sx={textFieldSpacing}
@@ -82,34 +92,26 @@ const CreateExercise = ({ doctorId }) => {
             onChange={handleChange}
             sx={textFieldSpacing}
           />
-          <TextField
-            name='videoURL'
-            value={exerciseData.videoURL}
-            fullWidth
+          <Input
+            type='file'
             label='Video'
-            variant='outlined'
-            onChange={handleChange}
             sx={textFieldSpacing}
+            disableUnderline
           />
-          <Box sx={flexCenter}>
-            <Button
-              sx={{
-                display: 'block',
-                alignSelf: 'center',
-                justifySelf: 'center',
-              }}
-              disabled={
-                exerciseData.name === '' ||
-                exerciseData.sets === '' ||
-                exerciseData.description === '' ||
-                exerciseData.videoURL === ''
-              }
-              variant='contained'
-              onClick={handleClick}
-            >
-              Finalizar
-            </Button>
-          </Box>
+          <Grid item container justifyContent='center'>
+            <Grid item>
+              <Button
+                disabled={
+                  exerciseData.name === '' || exerciseData.description === ''
+                }
+                size='large'
+                variant='contained'
+                onClick={handleClick}
+              >
+                Finalizar
+              </Button>
+            </Grid>
+          </Grid>
         </Grid>
       </Grid>
       <Navbar />

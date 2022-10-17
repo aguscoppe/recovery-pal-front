@@ -12,6 +12,7 @@ import {
 import { patientRegistration } from '../Controllers/PatientEntry.Controller';
 import { doctorRegistration } from '../Controllers/DoctorEntry.Controller';
 import { getPatientById } from '../Controllers/PatientEntry.Controller';
+import { createRoutine, getRoutineById } from '../Controllers/RoutineEntry.Controller';
 
 const style = {
   container: {
@@ -81,9 +82,33 @@ export default function Register() {
     }
   };
 
-  const pruebaGet = async function () {
+  const pruebaGetPatient = async function () {
     var patientInfo = await getPatientById('633c97e68efef931d4597301');
     console.log('Soy el paciente del Back:', patientInfo.patient);
+  };
+
+  const pruebaGetRoutine = async function () {
+    var routine = await getRoutineById("6349b619392aa41984a968c8")
+    console.log('Soy la routine del Back:', routine.routine);
+  };
+
+  const pruebaPostRoutine = async function () {
+    let datos = {
+      name: "Rutina Final",
+      weeks: 1,
+      times: 1,
+      patient: "633c97e68efef931d4597301",
+      doctor: "633c98148efef931d4597302",
+      exercises: ["6344efd0a35b582f6c5f1890","6344efd0a35b582f6c5f1890"]
+    };
+    let info = await createRoutine(datos)
+    console.log(info.mensaje);
+    if (info.rdo === 0) {
+      console.log(info.routine)
+    }
+    if (info.rdo === 1) {
+      console.log("ERRORRRRRRRR")
+    }
   };
 
   const handleSubmit = () => {
@@ -108,8 +133,10 @@ export default function Register() {
           setErrorMessages({ name: 'pass2', message: errors.pass2 });
         } else {
           setErrorMessages({});
-          // pruebaGet();
+          // pruebaGetPatient();
           //validarRegistro();
+          // pruebaGetRoutine()
+          pruebaPostRoutine();
         }
       }
     }
