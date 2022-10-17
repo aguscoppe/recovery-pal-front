@@ -17,6 +17,7 @@ import CreateRoutine from './Pages/CreateRoutine';
 import VideoDisplay from './Pages/VideoDisplay';
 import PatientRoutine from './Pages/PatientRoutine';
 import { exercises } from './data';
+import { Navigate } from "react-router-dom";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({ name: '', password: '' });
@@ -32,7 +33,9 @@ function App() {
     <ThemeProvider theme={theme}>
       <UserContext.Provider value={currentUser}>
         <Routes>
-          <Route path='/' element={<Login setCurrentUser={setCurrentUser} />} />
+        <Route path='/register' element={<Register />} />
+        <Route path='/' element={<Login setCurrentUser={setCurrentUser} />} />
+          {!currentUser.id? <Route path="/*" element={<Navigate to="/" />}/>:<>
           <Route
             path='/home'
             element={
@@ -63,7 +66,7 @@ function App() {
           <Route path='/createExercise' element={<CreateExercise />} />
           <Route path='/chat' element={<Chat />} />
           <Route path='/videos' element={<Videos />} />
-          <Route path='/register' element={<Register />} />
+          </>}
         </Routes>
       </UserContext.Provider>
     </ThemeProvider>
