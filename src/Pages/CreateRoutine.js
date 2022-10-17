@@ -6,6 +6,7 @@ import { useState } from 'react';
 import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
 import { Link } from 'react-router-dom';
 import { exercises } from '../data';
+import ModalExercise from '../Components/ModalExercise';
 
 const flexCenter = {
   display: 'flex',
@@ -31,6 +32,7 @@ const CreateRoutine = (pacinetId) => {
   let listEjercicios = exercises.map((exercise) => exercise.videoTitle);
 
   const [modal, setModal] = useState({ type: 'success', open: false });
+  const [showExerciseModal, setShowExerciseModal] = useState(false);
 
   const handleClick = () => {
     console.log(
@@ -45,69 +47,79 @@ const CreateRoutine = (pacinetId) => {
     setRutineData({ ...rutineData, [name]: value });
   };
 
+  const openExerciseModal = () => {
+    setShowExerciseModal(!showExerciseModal);
+  };
+
   return (
     <>
-      <Header title='Crear Rutina' icon={<AddCircleOutlineRoundedIcon />} />
+      <Header title="Crear Rutina" icon={<AddCircleOutlineRoundedIcon />} />
       <Grid
         container
-        justifyContent='center'
-        alignItems='center'
+        justifyContent="center"
+        alignItems="center"
         sx={{ paddingTop: '10vh' }}
       >
         <ModalAlert
           open={modal.open}
           type={modal.type}
-          title='Bien hecho!'
-          subtitle='El ejercicio ha sido creado con exito'
-          primaryBtnText='Continuar'
-          primaryBtnPage='/home'
+          title="Bien hecho!"
+          subtitle="El ejercicio ha sido creado con exito"
+          primaryBtnText="Continuar"
+          primaryBtnPage="/home"
+        />
+        <ModalExercise
+          open={showExerciseModal}
+          handleClose={openExerciseModal}
         />
         <Grid item xs={10} sm={6} md={4}>
           <TextField
-            name='name'
+            name="name"
             value={rutineData.name}
             fullWidth
-            label='Nombre'
-            variant='outlined'
+            label="Nombre"
+            variant="outlined"
             onChange={handleChange}
             sx={textFieldSpacing}
           />
           <TextField
-            name='frecuency'
+            name="frecuency"
             value={rutineData.frecuency}
             fullWidth
-            label='Frecuencia'
-            variant='outlined'
+            label="Frecuencia"
+            variant="outlined"
             onChange={handleChange}
             sx={textFieldSpacing}
           />
           <TextField
-            name='duration'
+            name="duration"
             value={rutineData.duration}
             fullWidth
-            label='Duracion'
-            variant='outlined'
+            label="Duracion"
+            variant="outlined"
             onChange={handleChange}
             sx={textFieldSpacing}
           />
           <Autocomplete
             multiple
             disablePortal
-            id='combo-box-demo'
+            id="combo-box-demo"
             options={listEjercicios}
             renderInput={(params) => (
-              <TextField {...params} label='Buscar ejercicio' />
+              <TextField {...params} label="Buscar ejercicio" />
             )}
             sx={textFieldSpacing}
-            noOptionsText='No hay resultados'
+            noOptionsText="No hay resultados"
           />
-          <Grid item container alignItems='center' direction='column'>
+          <Grid item container alignItems="center" direction="column">
             <Grid item paddingTop={3}>
-              <Link to={`/createExercise`} style={{ textDecoration: 'none' }}>
-                <Button size='large' variant='contained'>
-                  CREAR EJERCICIO
-                </Button>
-              </Link>
+              <Button
+                size="large"
+                variant="contained"
+                onClick={openExerciseModal}
+              >
+                CREAR EJERCICIO
+              </Button>
             </Grid>
             <Grid item paddingTop={3}>
               <Button
@@ -116,9 +128,9 @@ const CreateRoutine = (pacinetId) => {
                   rutineData.frecuency === '' ||
                   rutineData.duration === ''
                 }
-                variant='contained'
+                variant="contained"
                 onClick={handleClick}
-                size='large'
+                size="large"
               >
                 FINALIZAR
               </Button>
