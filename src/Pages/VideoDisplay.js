@@ -13,13 +13,13 @@ import { UserContext } from '../Contexts/UserContext';
 
 function VideoDisplay({ exerciseList, handleCompleteExercise }) {
   const { idRoutine, idExercise } = useParams();
-  const [exercise] = exercises.filter((e) => e.id === idExercise);
+  const [exercise] = exercises.filter((e) => e._id === idExercise);
   const currentUser = useContext(UserContext);
   const [open, setOpen] = React.useState(false);
   const [modal, setModal] = useState({ type: 'success', open: false });
   const filtered = exerciseList.filter((ex) => !ex.isComplete);
   const nextURL = filtered.length
-    ? `/routine/${idRoutine}/exercise/${filtered[0].id}`
+    ? `/routine/${idRoutine}/exercise/${filtered[0]._id}`
     : `/routine/${idRoutine}`;
 
   const handleClick = () => {

@@ -6,15 +6,15 @@ import { routines } from '../data';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import Exercise from '../Components/Exercise';
 
-const isNotIncluded = (id, arr) => {
-  return arr.filter((el) => el.id !== id).length;
+const isNotIncluded = (_id, arr) => {
+  return arr.filter((el) => el._id !== _id).length;
 };
 
 const ExerciseList = ({ exerciseList }) => {
   const { idRoutine } = useParams();
-  const [routine] = routines.filter((r) => r.id === idRoutine);
+  const [routine] = routines.filter((r) => r._id === idRoutine);
   const exercises = exerciseList.filter((ex) =>
-    isNotIncluded(ex.id, routine.exercises)
+    isNotIncluded(ex._id, routine.exercises)
   );
 
   return (
