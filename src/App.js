@@ -23,9 +23,9 @@ function App() {
   const [currentUser, setCurrentUser] = useState({ name: '', password: '' });
   const [exerciseList, setExerciseList] = useState(exercises);
 
-  const handleCompleteExercise = (id) => {
+  const handleCompleteExercise = (_id) => {
     setExerciseList((prev) =>
-      prev.map((el) => (el.id === id ? { ...el, isComplete: true } : el))
+      prev.map((el) => (el._id === _id ? { ...el, isComplete: true } : el))
     );
   };
 
