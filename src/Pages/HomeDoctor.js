@@ -9,7 +9,7 @@ import { patient } from '../data';
 const HomeDoctor = () => {
   return (
     <>
-      <Header title='Home' icon={<HomeIcon />} />
+      <Header title='Pacientes' icon={<HomeIcon />} />
       <Grid container justifyContent='center' sx={{ paddingTop: '8vh' }}>
         <Grid item xs={11} md={6}>
           <Typography variant='h4' align='center'>
