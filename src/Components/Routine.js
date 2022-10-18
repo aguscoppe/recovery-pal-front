@@ -23,7 +23,7 @@ const Routine = ({ routine }) => {
         <Grid container justifyContent='center' alignItems='center'>
           <Grid item xs={5} margin='10px'>
             <ReactPlayer
-              light
+              
               url={routine.exercises[0].videoURL}
               width='100%'
               height='100%'
