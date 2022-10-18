@@ -51,6 +51,11 @@ const CreateRoutine = (pacinetId) => {
     setShowExerciseModal(!showExerciseModal);
   };
 
+  const closeExerciseModal = () => {
+    setShowExerciseModal(!showExerciseModal);
+    setModal({...modal, open : true})
+  };
+
   return (
     <>
       <Header title="Crear Rutina" icon={<AddCircleOutlineRoundedIcon />} />
@@ -63,14 +68,15 @@ const CreateRoutine = (pacinetId) => {
         <ModalAlert
           open={modal.open}
           type={modal.type}
+          setNotOpen={() => setModal({...modal, open : false})}
           title="Bien hecho!"
           subtitle="El ejercicio ha sido creado con exito"
           primaryBtnText="Continuar"
-          primaryBtnPage="/home"
+          primaryBtnPage="/createRoutine"
         />
         <ModalExercise
           open={showExerciseModal}
-          handleClose={openExerciseModal}
+          handleClose={closeExerciseModal}
         />
         <Grid item xs={10} sm={6} md={4}>
           <TextField

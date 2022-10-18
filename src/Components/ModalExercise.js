@@ -57,7 +57,6 @@ const ModalExercise = ({ open, handleClose }) => {
       description: '',
       videoURL: '',
     });
-    handleClose();
   };
 
   const handleClick = () => {
