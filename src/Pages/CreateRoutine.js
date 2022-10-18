@@ -31,14 +31,17 @@ const CreateRoutine = (pacinetId) => {
   //recuperacion de los ejercicios de la base
   let listEjercicios = exercises.map((exercise) => exercise.videoTitle);
 
-  const [modal, setModal] = useState({ type: 'success', open: false });
+  const [modalAlertExercise, setModalAlertExercise] = useState({ type: 'success', open: false });
+  const [modalAlertRoutine, setModalAlertRoutine] = useState({ type: 'success', open: false });
+
   const [showExerciseModal, setShowExerciseModal] = useState(false);
 
-  const handleClick = () => {
+  
+  const handleClickCrearRoutine = () => {
     console.log(
       'Aca va la llamada al backend. Si recibo 200 OK modal success, sino otro.'
     );
-    setModal({ type: 'success', open: true });
+    setModalAlertRoutine({ type: 'success', open: true });
   };
 
   const handleChange = (e) => {
@@ -53,7 +56,7 @@ const CreateRoutine = (pacinetId) => {
 
   const closeExerciseModal = () => {
     setShowExerciseModal(!showExerciseModal);
-    setModal({...modal, open : true})
+    setModalAlertExercise({...modalAlertExercise, open : true})
   };
 
   return (
@@ -66,13 +69,22 @@ const CreateRoutine = (pacinetId) => {
         sx={{ paddingTop: '10vh' }}
       >
         <ModalAlert
-          open={modal.open}
-          type={modal.type}
-          setNotOpen={() => setModal({...modal, open : false})}
+          open={modalAlertExercise.open}
+          type={modalAlertExercise.type}
+          setNotOpen={() => setModalAlertExercise({...modalAlertExercise, open : false})}
           title="Bien hecho!"
           subtitle="El ejercicio ha sido creado con exito"
           primaryBtnText="Continuar"
           primaryBtnPage="/createRoutine"
+        />
+        <ModalAlert
+          open={modalAlertRoutine.open}
+          type={modalAlertRoutine.type}
+          setNotOpen={() => setModalAlertRoutine({...modalAlertRoutine, open : false})}
+          title="Bien hecho!"
+          subtitle="La rutina ha sido creada con exito !"
+          primaryBtnText="Continuar"
+          primaryBtnPage="/home"
         />
         <ModalExercise
           open={showExerciseModal}
@@ -135,7 +147,7 @@ const CreateRoutine = (pacinetId) => {
                   rutineData.duration === ''
                 }
                 variant="contained"
-                onClick={handleClick}
+                onClick={handleClickCrearRoutine}
                 size="large"
               >
                 FINALIZAR
