@@ -28,6 +28,7 @@ const PatientProfile = () => {
         justifyContent='center'
         flexWrap='wrap'
         sx={{ width: '100%', height: '25vh' }}
+        
       >
         <Avatar
           alt='FotoPerfilPaciente'
@@ -70,9 +71,13 @@ const PatientProfile = () => {
                   CREAR RUTINA
                 </Button>
               </Link>
-              {routines.map((routine) => (
-                <Routine routine={routine} />
-              ))}
+              <Grid container justifyContent='center' sx={{ padding: '3vh 0' }}>
+        <Grid item xs={12} md={6}>
+          {routines.map((routine) => (
+            <Routine routine={routine} />
+          ))}
+        </Grid>
+      </Grid>
             </Grid>
           </Grid>
         </TabPanel>

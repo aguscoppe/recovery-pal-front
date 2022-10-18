@@ -18,8 +18,8 @@ const Exercise = ({ exercise }) => {
         }
       >
         <Grid container alignItems='center'>
-          <Grid item xs={action || isComplete ? 5 : 6} margin='10px'>
-            <ReactPlayer light url={videoURL} width='100%' height='100%' />
+          <Grid item xs={6} margin='10px'>
+            <ReactPlayer  url={videoURL} width='100%' height='100%' />
           </Grid>
           <Grid item xs={4} margin='10px'>
             <Typography variant='h6' sx={{ fontWeight: '500' }}>

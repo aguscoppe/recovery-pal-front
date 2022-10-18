@@ -23,44 +23,33 @@ export const exercises = [
   {
     _id: 'ex1',
     doctor: 'do1',
-    instructions: 'Sentadillas 20 veces',
-    videoTitle: 'Sentadilla',
-    videoImageURL:
-      'https://mui.com/static/images/cards/contemplative-reptile.jpg',
-    /*videoURL:"https://www.youtube.com/watch?v=a2lXwR-7kD4",*/
+    instructions: 'Caminar Recto durante 5 cuadras',
+    videoTitle: 'Caminar Recto 5 Cuadras',
     videoURL:
-      'http://127.0.0.1:8080/videos/1828960062.mp4',
+      'http://127.0.0.1:8080/videos/Caminar_Recto.mp4',
   },
   {
     _id: 'ex2',
     doctor: 'do1',
-    instructions: 'Estocadas 50 veces',
-    videoTitle: 'Estocadas',
-    videoImageURL:
-      'https://thumbs.gfycat.com/GrouchySneakyKingfisher-mobile.jpg',
-    /*videoURL:"https://www.youtube.com/watch?v=e6w3JPbb83U"*/
+    instructions: 'Flexiones con pesas',
+    videoTitle: 'Flexiones con pesas',
     videoURL:
-      'https://player.vimeo.com/video/422883518?h=aee925f4ae&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;loop=1',
+      'http://127.0.0.1:8080/videos/Flexiones_Peso.mp4',
   },
   {
     _id: 'ex3',
     doctor: 'do1',
-    instructions: 'Sentadilla Bulgara 10 veces',
-    videoTitle: 'Sentadilla Bulgara',
-    videoImageURL:
-      'https://thumbs.gfycat.com/GrouchySneakyKingfisher-mobile.jpg',
-    /*videoURL:"https://www.youtube.com/watch?v=K-6DG1hcHzU"*/
+    instructions: 'Girar las muñecas',
+    videoTitle: 'Girar Muñecas',
     videoURL:
-      'https://cdn.videvo.net/videvo_files/video/premium/video0261/large_watermarked/500_00481_preview.mp4',
+      'http://127.0.0.1:8080/videos/Girar_Muñecas.mp4',
   },
+  
   {
     _id: 'ex4',
     doctor: 'do1',
     instructions: 'Levantamiento de pesas 10 veces',
     videoTitle: 'Levantar Pesas',
-    videoImageURL:
-      'https://thumbs.gfycat.com/GrouchySneakyKingfisher-mobile.jpg',
-    /*videoURL:"https://www.youtube.com/watch?v=K-6DG1hcHzU"*/
     videoURL: 'https://www.youtube.com/watch?v=e6w3JPbb83U',
   },
 ];
@@ -91,3 +80,33 @@ export const routines = [
     }
   },
 ];
+ /*
+ {
+    _id: 'ex1',
+    doctor: 'do1',
+    instructions: 'Sentadillas 20 veces',
+    videoTitle: 'Sentadilla',
+    videoURL:
+      'http://127.0.0.1:8080/videos/1828960062.mp4',
+  },
+  {
+    _id: 'ex2',
+    doctor: 'do1',
+    instructions: 'Estocadas 50 veces',
+    videoTitle: 'Estocadas',
+    videoImageURL:
+      'https://thumbs.gfycat.com/GrouchySneakyKingfisher-mobile.jpg',
+    videoURL:"https://www.youtube.com/watch?v=e6w3JPbb83U"
+    videoURL:
+      'https://player.vimeo.com/video/422883518?h=aee925f4ae&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;loop=1',
+  },
+
+  {
+    _id: 'ex3',
+    doctor: 'do1',
+    instructions: 'Sentadilla Bulgara 10 veces',
+    videoTitle: 'Sentadilla Bulgara',
+    videoURL:
+      'https://cdn.videvo.net/videvo_files/video/premium/video0261/large_watermarked/500_00481_preview.mp4',
+  },
+  */
