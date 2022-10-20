@@ -99,7 +99,14 @@ export default function Register() {
       times: 1,
       patient: "633c97e68efef931d4597301",
       doctor: "633c98148efef931d4597302",
-      exercises: ["6344efd0a35b582f6c5f1890","6344efd0a35b582f6c5f1890"]
+      exercises: [
+        {exercise: "6344efd0a35b582f6c5f1890",
+        weight: "5 Kilos",
+        sets: 5},
+        {exercise: "6344efd0a35b582f6c5f1890",
+        weight: "10 Kilos",
+        sets: 10},
+      ]
     };
     let info = await createRoutine(datos)
     console.log(info.mensaje);
