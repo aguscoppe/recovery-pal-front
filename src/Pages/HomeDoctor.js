@@ -9,11 +9,16 @@ import { patient } from '../data';
 const HomeDoctor = () => {
   return (
     <>
-      <Header title='Pacientes' icon={<HomeIcon />} />
-      <Grid container justifyContent='center' sx={{ paddingTop: '8vh' }}>
+      <Header title="Pacientes" icon={<HomeIcon />} />
+      <Grid
+        container
+        direction="column"
+        justifyContent="center"
+        sx={{ paddingTop: '8vh' }}
+      >
         <Grid item xs={11} md={6}>
-          <Typography variant='h4' align='center'>
-            Pacientes
+          <Typography variant="h4" fontWeight="600" align="center">
+            Mis Pacientes
           </Typography>
         </Grid>
         <PatientCard patient={patient} />

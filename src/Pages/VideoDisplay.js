@@ -30,14 +30,27 @@ function VideoDisplay({ exerciseList, handleCompleteExercise }) {
     setModal({ type: 'success', open: true });
     setOpen(true);
   };
-  console.log(exercise.videoURL)
+  console.log(exercise.videoURL);
 
   return (
     <>
       <Header title={exercise.videoTitle} icon={<FitnessCenterIcon />} />
-      <Grid container justifyContent='center' sx={{ padding: '10vh 0' }}>
-        <Grid item xs={11} md={6}>
-          <Typography variant='h3'>{exercise.videoTitle}</Typography>
+      <Grid
+        container
+        justifyContent="center"
+        alignItems="space-between"
+        sx={{ padding: '8vh 0' }}
+      >
+        <Grid item xs={11} md={6} sx={{ height: '100%' }}>
+          <Typography
+            variant="h3"
+            textAlign="center"
+            fontWeight="600"
+            marginTop="20px"
+            marginBottom="20px"
+          >
+            {exercise.videoTitle}
+          </Typography>
           <div
             style={{
               justifyContent: 'center',
@@ -46,7 +59,7 @@ function VideoDisplay({ exerciseList, handleCompleteExercise }) {
             }}
           >
             <ReactPlayer
-              size='100%'
+              height="auto"
               controls
               url={exercise.videoURL}
               onReady={() => console.log('onReady callback')}
@@ -55,17 +68,16 @@ function VideoDisplay({ exerciseList, handleCompleteExercise }) {
               onEnded={() => console.log('onEnded callback')}
               onError={(e) => console.log(e)}
             />
-
           </div>
-          <Typography variant='body1' marginTop='20px'>
+          <Typography variant="body1" marginTop="20px" marginBottom="40px">
             {exercise.instructions}
           </Typography>
           {currentUser.role === 'paciente' ? (
             <Button
               onClick={handleClick}
               fullWidth
-              variant='contained'
-              size='large'
+              variant="contained"
+              size="large"
             >
               Completado
             </Button>
@@ -76,17 +88,17 @@ function VideoDisplay({ exerciseList, handleCompleteExercise }) {
       <ModalAlert
         open={open}
         type={modal.type}
-        title='¡Felicitaciones!'
+        title="¡Felicitaciones!"
         subtitle={`Has completado ${
           filtered.length ? 'el ejercicio' : 'la rutina'
         } `}
-        primaryBtnText='Continuar'
+        primaryBtnText="Continuar"
         setNotOpen={() => {
           setOpen(false);
           console.log(modal);
         }}
         secondaryBtnPage={`/routine/${idRoutine}`}
-        secondaryBtnText='Volver'
+        secondaryBtnText="Volver"
         primaryBtnPage={nextURL}
       />
     </>
