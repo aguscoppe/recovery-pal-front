@@ -5,7 +5,7 @@ export const patient = {
   surname: 'López',
   role: 'paciente',
   imgSrc: 'https://mui.com/static/images/avatar/3.jpg',
-  _id: "63476ca587539638249f3c9a"
+  _id: '63476ca587539638249f3c9a',
 };
 
 export const doctor = {
@@ -25,32 +25,29 @@ export const exercises = [
     doctor: 'do1',
     instructions: 'Caminar Recto durante 5 cuadras',
     videoTitle: 'Caminar Recto 5 Cuadras',
-    videoURL:
-      'http://127.0.0.1:8080/videos/Caminar_Recto.mp4',
+    videoURL: 'http://127.0.0.1:8080/videos/Caminar_Recto.mp4',
   },
   {
     _id: 'ex2',
     doctor: 'do1',
     instructions: 'Flexiones con pesas',
     videoTitle: 'Flexiones con pesas',
-    videoURL:
-      'http://127.0.0.1:8080/videos/Flexiones_Peso.mp4',
+    videoURL: 'http://127.0.0.1:8080/videos/Flexiones_Peso.mp4',
   },
   {
     _id: 'ex3',
     doctor: 'do1',
     instructions: 'Girar las muñecas',
     videoTitle: 'Girar Muñecas',
-    videoURL:
-      'http://127.0.0.1:8080/videos/Girar_Muñecas.mp4',
+    videoURL: 'http://127.0.0.1:8080/videos/Girar_Muñecas.mp4',
   },
-  
+
   {
     _id: 'ex4',
     doctor: 'do1',
-    instructions: 'Levantamiento de pesas 10 veces',
-    videoTitle: 'Levantar Pesas',
-    videoURL: 'https://www.youtube.com/watch?v=e6w3JPbb83U',
+    instructions: 'Dominadas con agarre prono',
+    videoTitle: 'Dominadas',
+    videoURL: 'http://127.0.0.1:8080/videos/Dominadas.mp4',
   },
 ];
 
@@ -65,7 +62,7 @@ export const routines = [
     schedule: {
       weeks: '3',
       times: '2',
-    }
+    },
   },
   {
     _id: 'ro2',
@@ -77,10 +74,10 @@ export const routines = [
     schedule: {
       weeks: '3',
       times: '2',
-    }
+    },
   },
 ];
- /*
+/*
  {
     _id: 'ex1',
     doctor: 'do1',
