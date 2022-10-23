@@ -25,7 +25,7 @@ const PatientCard = ({ patient }) => {
           >
             <Grid item xs={8.2}>
               <Typography variant='h5' color={theme.palette.primary.main}>
-                {patient.name} {patient.surname}
+                {patient.name} {patient.lastName}
               </Typography>
             </Grid>
             <Grid item xs={4} justifySelf='end'>

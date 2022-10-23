@@ -42,8 +42,9 @@ const PatientProfile = () => {
           respuestaDoctor.doctor.routines.filter((e) => e.patient === idPatient)
         );
         setDoctor(respuestaDoctor.doctor);
-        setPatient(respuestaDoctor.doctor.patients.filter((e) => e._id === idPatient));
+        setPatient(respuestaDoctor.doctor.patients.filter((e) => e._id === idPatient)[0]);
         console.log(JSON.stringify(respuestaDoctor));
+        console.log( "Es la paciente: ", respuestaDoctor.doctor.patients.filter((e) => e._id === idPatient))
       }
     };
     getDoctor();
@@ -69,7 +70,7 @@ const PatientProfile = () => {
             sx={{ width: 90, height: 90 }}
           ></Avatar>
           <Typography variant="h4" color={theme.palette.textPrimary.main}>
-            {patient.name} {patient.surname}
+            {patient.name} {patient.lastName}
           </Typography>
           <Typography variant="body1" color={theme.palette.textSecondary.main}>
             Edad: 33
