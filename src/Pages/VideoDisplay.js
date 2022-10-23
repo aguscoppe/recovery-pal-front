@@ -1,26 +1,27 @@
 import { Grid, Typography, Button } from '@mui/material';
 import NavBar from '../Components/NavBar';
 import Header from '../Components/Header';
-import { exercises } from '../data';
 import { useParams } from 'react-router-dom';
 import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 import ReactPlayer from 'react-player';
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ModalAlert from '../Components/ModalAlert';
 import { useContext } from 'react';
 import { UserContext } from '../Contexts/UserContext';
+import { getRoutineById } from '../Controllers/RoutineEntry.Controller';
+import Box from "@mui/material/Box";
+import CircularProgress from "@mui/material/CircularProgress";
+
 
 function VideoDisplay({ exerciseList, handleCompleteExercise }) {
   const { idRoutine, idExercise } = useParams();
-  const [exercise] = exercises.filter((e) => e._id === idExercise);
+  const [routine, setRoutine] = useState(null)
   const currentUser = useContext(UserContext);
   const [open, setOpen] = React.useState(false);
   const [modal, setModal] = useState({ type: 'success', open: false });
-  const filtered = exerciseList.filter((ex) => !ex.isComplete);
-  const nextURL = filtered.length
-    ? `/routine/${idRoutine}/exercise/${filtered[0]._id}`
-    : `/routine/${idRoutine}`;
+  const [exercise, setExercise] = useState(null)
+  const nextURL = `/routine/${idRoutine}`;
 
   const handleClick = () => {
     console.log(
@@ -30,12 +31,35 @@ function VideoDisplay({ exerciseList, handleCompleteExercise }) {
     setModal({ type: 'success', open: true });
     setOpen(true);
   };
-  console.log(exercise.videoURL)
+
+  useEffect(() => {
+    const getRoutine = async function () {
+      const respuesta = await getRoutineById(idRoutine)
+      console.log("Console log de respuesta de back ", respuesta);
+      if (respuesta.rdo === 1) {
+        alert("Rutine invalida para usar esta pagina");
+        window.location.href = "/";
+      } else {
+        setRoutine(respuesta.routine);
+        console.log(respuesta.routine);
+        setExercise(respuesta.routine.exercises.filter((e) => e._id === idExercise)[0])
+      }
+    };
+    getRoutine();
+  }, [idRoutine, idExercise]);
+
 
   return (
     <>
-      <Header title={exercise.videoTitle} icon={<FitnessCenterIcon />} />
+      <Header title={routine === null? "Cargando...": exercise.videoTitle} icon={<FitnessCenterIcon />} />
       <Grid container justifyContent='center' sx={{ padding: '10vh 0' }}>
+      {routine === null ? (
+          <Grid item xs={12} md={12}>
+            <Box  display="flex" justifyContent="center">
+              <CircularProgress />
+            </Box>
+          </Grid>
+        ) : (
         <Grid item xs={11} md={6}>
           <Typography variant='h3'>{exercise.videoTitle}</Typography>
           <div
@@ -70,7 +94,7 @@ function VideoDisplay({ exerciseList, handleCompleteExercise }) {
               Completado
             </Button>
           ) : null}
-        </Grid>
+        </Grid> ) }
       </Grid>
       <NavBar />
       <ModalAlert
@@ -78,7 +102,7 @@ function VideoDisplay({ exerciseList, handleCompleteExercise }) {
         type={modal.type}
         title='¡Felicitaciones!'
         subtitle={`Has completado ${
-          filtered.length ? 'el ejercicio' : 'la rutina'
+          true ? 'el ejercicio' : 'la rutina'
         } `}
         primaryBtnText='Continuar'
         setNotOpen={() => {
