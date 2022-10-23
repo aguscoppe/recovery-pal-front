@@ -30,7 +30,7 @@ const PatientCard = ({ patient }) => {
             </Grid>
             <Grid item xs={4} justifySelf='end'>
               <Link
-                to={`/patient/${patient.id}`}
+                to={`/patient/${patient._id}`}
                 style={{ textDecoration: 'none' }}
               >
                 <Button
