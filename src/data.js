@@ -1,5 +1,4 @@
 export const patient = {
-  id: 'pa1',
   email: 'paciente@mail.com',
   password: '123',
   name: 'María',
@@ -17,6 +16,7 @@ export const doctor = {
   surname: 'González',
   role: 'doctor',
   imgSrc: 'https://mui.com/static/images/avatar/1.jpg',
+  _id : "6344f9393a24686318707f3f"
 };
 
 export const exercises = [
