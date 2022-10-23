@@ -2,30 +2,50 @@ import { useParams } from 'react-router-dom';
 import { Grid } from '@mui/material';
 import Header from '../Components/Header';
 import NavBar from '../Components/NavBar';
-import { routines } from '../data';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import Exercise from '../Components/Exercise';
-
-const isNotIncluded = (_id, arr) => {
-  return arr.filter((el) => el._id !== _id).length;
-};
+import { useContext, useState, useEffect } from "react";
+import { getRoutineById } from '../Controllers/RoutineEntry.Controller';
+import Box from "@mui/material/Box";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const ExerciseList = ({ exerciseList }) => {
   const { idRoutine } = useParams();
-  const [routine] = routines.filter((r) => r._id === idRoutine);
-  const exercises = exerciseList.filter((ex) =>
-    isNotIncluded(ex._id, routine.exercises)
-  );
+  const [routine, setRoutine] = useState(null)
+
+  useEffect(() => {
+    const getRoutine = async function () {
+      const respuesta = await getRoutineById(idRoutine)
+      console.log("Console log de respuesta de back ", respuesta);
+      if (respuesta.rdo === 1) {
+        alert("Rutine invalida para usar esta pagina");
+        window.location.href = "/";
+      } else {
+        setRoutine(respuesta.routine);
+        console.log(respuesta.routine);
+      }
+    };
+    getRoutine();
+  }, [idRoutine]);
 
   return (
     <>
-      <Header title={routine.name} icon={<CalendarMonthIcon />} />
+      <Header title={routine === null? "Cargando...": routine.name} icon={<CalendarMonthIcon />} />
       <Grid container justifyContent='center' sx={{ padding: '10vh 0' }}>
-        <Grid item xs={11} md={6}>
-          {exercises.map((exercise) => (
+      {routine === null ? (
+          <Grid item xs={12} md={12}>
+            <Box  display="flex" justifyContent="center">
+              <CircularProgress />
+            </Box>
+          </Grid>
+        ) : (
+          routine.exercises.map((exercise) => (
+            <Grid item xs={11} md={6}>
             <Exercise exercise={exercise} />
-          ))}
-        </Grid>
+            </Grid>
+          ))
+        )}
+        
       </Grid>
       <NavBar />
     </>
