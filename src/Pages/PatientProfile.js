@@ -11,6 +11,8 @@ import { useContext, useState, useEffect } from "react";
 import { getDoctorById } from "../Controllers/DoctorEntry.Controller";
 import { UserContext } from "../Contexts/UserContext";
 import CircularProgress from "@mui/material/CircularProgress";
+import Fab from "@mui/material/Fab";
+import AddIcon from "@mui/icons-material/Add";
 
 /** Esta Pagina es el perfil del paciente que el doctor puede ver, aca puede administrar las rutinas del paciente y crear nuevas  */
 const PatientProfile = () => {
@@ -42,9 +44,14 @@ const PatientProfile = () => {
           respuestaDoctor.doctor.routines.filter((e) => e.patient === idPatient)
         );
         setDoctor(respuestaDoctor.doctor);
-        setPatient(respuestaDoctor.doctor.patients.filter((e) => e._id === idPatient)[0]);
+        setPatient(
+          respuestaDoctor.doctor.patients.filter((e) => e._id === idPatient)[0]
+        );
         console.log(JSON.stringify(respuestaDoctor));
-        console.log( "Es la paciente: ", respuestaDoctor.doctor.patients.filter((e) => e._id === idPatient))
+        console.log(
+          "Es la paciente: ",
+          respuestaDoctor.doctor.patients.filter((e) => e._id === idPatient)
+        );
       }
     };
     getDoctor();
@@ -98,13 +105,24 @@ const PatientProfile = () => {
           >
             <Grid sx={{ textAlign: "center", width: "100%" }}>
               <Link to={`/createRoutine`} style={{ textDecoration: "none" }}>
-                <Button
+                {/**<Button
                   size="large"
                   variant="contained"
                   sx={{ marginBottom: "12px" }}
                 >
                   CREAR RUTINA
-                </Button>
+                </Button>**/}
+                <Fab
+                  color="primary"
+                  aria-label="add"
+                  sx={{
+                    position: "absolute",
+                    bottom: 80,
+                    right: 25,
+                  }}
+                >
+                  <AddIcon />
+                </Fab>
               </Link>
               <Grid container justifyContent="center" sx={{ padding: "3vh 0" }}>
                 {routines === null ? (

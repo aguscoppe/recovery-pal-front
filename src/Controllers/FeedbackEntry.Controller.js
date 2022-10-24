@@ -11,7 +11,7 @@ export const getFeedbackById = async function(idFeedback){
     
     try{
         let response = await fetch(url,{
-            method: 'GET', // or 'PUT'
+            method: 'POST', // or 'PUT'
             mode: "cors",
             headers:{
                 'Accept':'application/x-www-form-urlencoded',
