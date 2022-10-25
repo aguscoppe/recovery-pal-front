@@ -7,7 +7,7 @@ import urlWebServices from './WebServices.js';
 
 export const getFeedbackById = async function(idFeedback){
     //url webservices
-    let url = urlWebServices.getFeedbackById + "/" + idFeedback ;
+    let url = urlWebServices.getFeedbackById + idFeedback ;
     
     try{
         let response = await fetch(url,{
@@ -48,7 +48,7 @@ export const getFeedbackById = async function(idFeedback){
 
 export const feedbackUpdate = async function(datos){
     //url webservices
-    let url = urlWebServices.feedbackUpdate + "/"+ datos._id;
+    let url = urlWebServices.feedbackUpdate + datos._id;
     //armo json con datos
     const formData = new URLSearchParams();
     formData.append('patient', datos.patient);
@@ -103,7 +103,7 @@ export const feedbackUpdate = async function(datos){
 
 export const getLastFeedbackByRoutin = async function(idRoutine){
     //url webservices
-    let url = urlWebServices.getLastFeedbackByRoutine + "/" + idRoutine ;
+    let url = urlWebServices.getLastFeedbackByRoutine + idRoutine ;
     
     try{
         let response = await fetch(url,{

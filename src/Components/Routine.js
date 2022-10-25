@@ -60,6 +60,8 @@ const Routine = ({ routine }) => {
 
   const obtenerFeedback = async function(idRoutine){
     const feedback = await getLastFeedbackByRoutin(idRoutine);
+    setFeedback(feedback.exercise.exercisesDone.length)
+    //setFeedback(1)  --> esto es para ver que funcione en la practica es cambiado actualizando el feedback
     console.log(feedback.exercise);
   }
 
@@ -114,10 +116,10 @@ const Routine = ({ routine }) => {
             </Grid>
           )}
           <Grid item xs={9} sx={{ paddingBottom: '2vh'}}>
-              <BorderLinearProgress variant="determinate" value={50}/>
+              <BorderLinearProgress variant="determinate" value={(feedback / exercises.length) *100}/>
           </Grid>
           <Grid item xs={1} sx={{ paddingBottom: '2vh'}}>
-          <Typography variant="body2">50%</Typography>
+          <Typography variant="body2">{(feedback / exercises.length) *100}%</Typography>
           </Grid>
           
         </Grid>
