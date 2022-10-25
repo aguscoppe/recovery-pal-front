@@ -8,7 +8,7 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import ReactPlayer from "react-player";
 import { useContext, useState, useEffect } from "react";
 import { getRoutineById } from "../Controllers/RoutineEntry.Controller";
-import { getLastFeedbackByRoutin } from "../Controllers/FeedbackEntry.Controller";
+import { getFeedbackById, getLastFeedbackByRoutin } from "../Controllers/FeedbackEntry.Controller";
 import CircularProgress from "@mui/material/CircularProgress";
 import LinearProgress, {
   linearProgressClasses,
@@ -40,25 +40,29 @@ const Routine = ({ routine }) => {
 
   useEffect(() => {
 
-      
-    
     const getRoutine = async function () {
       const respuesta = await getRoutineById(_id);
-      const respuestaFeed = await getLastFeedbackByRoutin(_id);
-      console.log("Console log de respuesta de back ", respuesta, respuestaFeed);
+      console.log("Console log de respuesta de back ", respuesta);
       if (respuesta.rdo === 1) {
         alert("Rutine invalida para usar esta pagina");
         window.location.href = "/";
       } else {
         setExercise(respuesta.routine.exercises[0]);
-        console.log(respuestaFeed.exercise.exercisesDone);
       }
     };
 
     getRoutine();
+    obtenerFeedback(_id);
 
     
   }, [_id]);
+
+
+  const obtenerFeedback = async function(idRoutine){
+    const feedback = await getLastFeedbackByRoutin(idRoutine);
+    console.log(feedback.exercise);
+  }
+
 
   return (
     <Link to={`/routine/${_id}`} style={{ textDecoration: "none" }}>
