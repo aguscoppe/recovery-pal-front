@@ -7,6 +7,7 @@ import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRou
 import { Link } from 'react-router-dom';
 import { exercises } from '../data';
 import ModalExercise from '../Components/ModalExercise';
+import { useParams } from "react-router-dom";
 
 const flexCenter = {
   display: 'flex',
@@ -21,12 +22,17 @@ const textFieldSpacing = {
 };
 
 const CreateRoutine = (pacinetId) => {
+  const { idPatient } = useParams();
   const [rutineData, setRutineData] = useState({
     name: '',
-    frecuency: '',
-    duration: '',
     exercises: [],
+    schedule:{
+      days: '' ,
+      weeks: ''
+    },
     imageUrl: '',
+    patient : idPatient,
+    feedbacksDone : 0,
   });
   //recuperacion de los ejercicios de la base
   let listEjercicios = exercises.map((exercise) => exercise.videoTitle);
@@ -48,6 +54,20 @@ const CreateRoutine = (pacinetId) => {
     const { value } = e.target;
     const { name } = e.target;
     setRutineData({ ...rutineData, [name]: value });
+  };
+
+  const handleChangeDuration = (e) => {
+    const { value } = e.target;
+    const { name } = e.target;
+    setRutineData({ ...rutineData, "schedule": {...rutineData.schedule, "weeks" : value} });
+  };
+
+
+  
+  const handleChangeFrecuency = (e) => {
+    const { value } = e.target;
+    const { name } = e.target;
+    setRutineData({ ...rutineData, "schedule": {...rutineData.schedule, "days" : value} });
   };
 
   const openExerciseModal = () => {
@@ -106,7 +126,7 @@ const CreateRoutine = (pacinetId) => {
             fullWidth
             label="Frecuencia"
             variant="outlined"
-            onChange={handleChange}
+            onChange={handleChangeFrecuency}
             sx={textFieldSpacing}
           />
           <TextField
@@ -115,7 +135,7 @@ const CreateRoutine = (pacinetId) => {
             fullWidth
             label="Duracion"
             variant="outlined"
-            onChange={handleChange}
+            onChange={handleChangeDuration}
             sx={textFieldSpacing}
           />
           <Autocomplete
