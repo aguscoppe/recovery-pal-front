@@ -11,6 +11,7 @@ import { useContext, useState, useEffect } from "react";
 import { getDoctorById } from "../Controllers/DoctorEntry.Controller";
 import { UserContext } from "../Contexts/UserContext";
 import CircularProgress from "@mui/material/CircularProgress";
+import Progress from "./../Components/Progress";
 
 /** Esta Pagina es el perfil del paciente que el doctor puede ver, aca puede administrar las rutinas del paciente y crear nuevas  */
 const PatientProfile = () => {
@@ -42,9 +43,14 @@ const PatientProfile = () => {
           respuestaDoctor.doctor.routines.filter((e) => e.patient === idPatient)
         );
         setDoctor(respuestaDoctor.doctor);
-        setPatient(respuestaDoctor.doctor.patients.filter((e) => e._id === idPatient)[0]);
+        setPatient(
+          respuestaDoctor.doctor.patients.filter((e) => e._id === idPatient)[0]
+        );
         console.log(JSON.stringify(respuestaDoctor));
-        console.log( "Es la paciente: ", respuestaDoctor.doctor.patients.filter((e) => e._id === idPatient))
+        console.log(
+          "Es la paciente: ",
+          respuestaDoctor.doctor.patients.filter((e) => e._id === idPatient)
+        );
       }
     };
     getDoctor();
@@ -97,7 +103,10 @@ const PatientProfile = () => {
             alignItems="center"
           >
             <Grid sx={{ textAlign: "center", width: "100%" }}>
-              <Link to={`/patient/${idPatient}/createRoutine`} style={{ textDecoration: "none" }}>
+              <Link
+                to={`/patient/${idPatient}/createRoutine`}
+                style={{ textDecoration: "none" }}
+              >
                 <Button
                   size="large"
                   variant="contained"
@@ -126,7 +135,9 @@ const PatientProfile = () => {
           <Typography>Coming Soon</Typography>
         </TabPanel>
         <TabPanel value="3">
-          <Typography>Coming Soon</Typography>
+          <Typography>
+            <Progress />
+          </Typography>
         </TabPanel>
       </TabContext>
       <NavBar />
