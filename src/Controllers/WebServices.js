@@ -8,8 +8,12 @@ const urlWebServices = {
   getDoctorById: urlApi + 'api/doctors/getDoctor',
 
   getFeedbackById: urlApi + 'api/feedbacks/',
-  getLastFeedbackByRoutine: urlApi + 'api/feedbacks/getLastFeedbackByRoutine/',
-  feedbackUpdate: urlApi + 'api/feedbacks/',
+  getLastFeedbackByRoutine: urlApi + 'api/feedbacks/getLastFeedbackByRoutine',
+  feedbackUpdate: urlApi + 'api/feedbacks',
+  completeExerciseInFeedback: urlApi + "api/feedbacks/completeExerciseInFeedback",
+
+
+
 
   getExerciseById: urlApi + 'api/exercises',
   getExerciseByVideoTitleMatch:

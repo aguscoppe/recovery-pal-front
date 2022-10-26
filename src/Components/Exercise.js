@@ -6,8 +6,11 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ReactPlayer from 'react-player';
 
 const Exercise = ({ exercise }) => {
-  const { _id, videoURL, videoTitle, instructions, action, isComplete } =
-    exercise;
+  const { _id, videoURL, videoTitle, instructions, action } =
+    exercise.exercise;
+  const {isComplete } = exercise //ya que is complete esta sobre el ejercicio con peso y set
+
+  console.log(exercise)
   return (
     <Link to={`exercise/${_id}`} style={{ textDecoration: 'none' }}>
       <Card
