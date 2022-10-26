@@ -39,9 +39,9 @@ const ExerciseList = ({ exerciseList }) => {
             </Box>
           </Grid>
         ) : (
-          routine.exercises.map((exercise) => (
+          routine.exercises.map((e) => (//obtener excercise
             <Grid item xs={11} md={6}>
-            <Exercise exercise={exercise} />
+            <Exercise exercise={e.exercise} /> 
             </Grid>
           ))
         )}
