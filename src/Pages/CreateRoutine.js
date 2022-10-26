@@ -30,9 +30,9 @@ const CreateRoutine = (pacinetId) => {
     name: '',
     days: [1,3],
     weeks: 4,
-    patient : idPatient,
+    patient : idPatient, 
     feedbacksDone : 0,
-    exercises :  [{set : 4, weight: "4KG", exercise : "634b10569aa4b12bc8e55dd7"}],
+    exercises :  [{set : 4, weight: "4KG", exercise : "634b10569aa4b12bc8e55dd7"}, {set : 4, weight: "4KG", exercise : "634b10719aa4b12bc8e55dd8"}] ,
     doctor : currentUser._id
   });
   //recuperacion de los ejercicios de la base

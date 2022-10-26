@@ -8,12 +8,33 @@ import { useContext, useState, useEffect } from "react";
 import { getRoutineById } from '../Controllers/RoutineEntry.Controller';
 import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
-
+import { getLastFeedbackByRoutin } from './../Controllers/FeedbackEntry.Controller';
+import { UserContext } from "../Contexts/UserContext";
 const ExerciseList = ({ exerciseList }) => {
+  const currentUser = useContext(UserContext);
+
   const { idRoutine } = useParams();
   const [routine, setRoutine] = useState(null)
+  const [feedback, setFeedback] = useState(null)
+
+
 
   useEffect(() => {
+    const getFeedback = async function () {
+      const respuesta = await getLastFeedbackByRoutin(idRoutine)
+      console.log("Console log de respuesta de back ", respuesta);
+      if (respuesta.rdo === 1) {
+        alert("No existe feedback para esta rutina");
+        window.location.href = "/";
+      } else {
+        setFeedback(respuesta.feedback);
+        console.log("Feedback: ", respuesta.feedback);
+      }
+    };
+
+
+
+
     const getRoutine = async function () {
       const respuesta = await getRoutineById(idRoutine)
       console.log("Console log de respuesta de back ", respuesta);
@@ -23,16 +44,30 @@ const ExerciseList = ({ exerciseList }) => {
       } else {
         setRoutine(respuesta.routine);
         console.log(respuesta.routine);
+        if(currentUser.role === "paciente")
+          getFeedback(respuesta.routine)
       }
     };
     getRoutine();
-  }, [idRoutine]);
+  }, [idRoutine, currentUser]);
+
+  useEffect( () => {
+    if (routine && feedback) {
+      if (routine.exercises) {
+        const exercises = routine.exercises.map((e)=>feedback.exercisesDone.includes(e.exercise._id) ? {...e, "isComplete": true}: {...e, "isComplete": false})
+        console.log("exercises", exercises)
+        setRoutine({...routine, "exercises" : exercises})
+      }
+    }
+
+  }, [feedback])
+
 
   return (
     <>
       <Header title={routine === null? "Cargando...": routine.name} icon={<CalendarMonthIcon />} />
       <Grid container justifyContent='center' sx={{ padding: '10vh 0' }}>
-      {routine === null ? (
+      {routine === null || (feedback === null && currentUser.role === "paciente") ? (
           <Grid item xs={12} md={12}>
             <Box  display="flex" justifyContent="center">
               <CircularProgress />
@@ -41,7 +76,7 @@ const ExerciseList = ({ exerciseList }) => {
         ) : (
           routine.exercises.map((e) => (//obtener excercise
             <Grid item xs={11} md={6}>
-            <Exercise exercise={e.exercise} /> 
+            <Exercise exercise={e} /> 
             </Grid>
           ))
         )}
