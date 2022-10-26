@@ -8,17 +8,24 @@ import {
   Typography,
 } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { UserContext } from '../Contexts/UserContext';
 import { theme } from '../theme';
+import CreateExercise from '../Pages/CreateExercise';
+import { exerciseCreation } from '../Controllers/ExerciseEntry.Controller';
+import { uploadVideo } from '../Controllers/VideoEntry.Controller';
+import { upload } from '@testing-library/user-event/dist/upload';
 
 const ModalExercise = ({ open, handleClose }) => {
+  const { currentUser } = useContext(UserContext);
+
   const [exerciseData, setExerciseData] = useState({
     name: '',
-    sets: '',
-    weight: '',
     description: '',
     videoURL: '',
   });
+
+  const [selectedFile, setSelectedFile] = useState();
 
   const textFieldSpacing = {
     marginBottom: '20px',
@@ -59,9 +66,44 @@ const ModalExercise = ({ open, handleClose }) => {
     });
   };
 
-  const handleClick = () => {
-    //Logica para agregar ejercicio con backend
+  const handleClick = async () => {
+    uploadVideo();
+    createExercise();
     handleClose();
+  };
+
+  const uploadVideo = async () => {
+    try {
+      const res = await uploadVideo(selectedFile);
+
+      if (res.rdo == 0) {
+        setExerciseData({ ...exerciseData, videoURL: res.videoData.url });
+        console.log(res.message);
+      } else {
+        console.log(res.message);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const createExercise = async () => {
+    try {
+      const res = await exerciseCreation({
+        doctor: currentUser._id,
+        instructions: exerciseData.description,
+        videoTitle: exerciseData.name,
+        videoURL: exerciseData.videoURL,
+      });
+
+      if (res.rdo == 0) {
+        console.log('Se creo el ejercicio');
+      } else {
+        console.log('Fallo algo');
+      }
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (
@@ -95,6 +137,7 @@ const ModalExercise = ({ open, handleClose }) => {
               label="Video"
               sx={textFieldSpacing}
               disableUnderline
+              onChange={(e) => setSelectedFile(e.target.files[0])}
             />
             <Grid item container justifyContent="center">
               <Grid item>
