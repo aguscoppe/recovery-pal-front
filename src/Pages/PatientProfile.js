@@ -97,7 +97,7 @@ const PatientProfile = () => {
             alignItems="center"
           >
             <Grid sx={{ textAlign: "center", width: "100%" }}>
-              <Link to={`/createRoutine`} style={{ textDecoration: "none" }}>
+              <Link to={`/patient/${idPatient}/createRoutine`} style={{ textDecoration: "none" }}>
                 <Button
                   size="large"
                   variant="contained"

@@ -42,7 +42,7 @@ function VideoDisplay({ exerciseList, handleCompleteExercise }) {
         setRoutine(respuesta.routine);
         console.log(respuesta.routine);
         setExercise(
-          respuesta.routine.exercises.filter((e) => e._id === idExercise)[0]
+          respuesta.routine.exercises.filter((e) => e.exercise._id === idExercise)[0].exercise //obtener exercise
         );
       }
     };
