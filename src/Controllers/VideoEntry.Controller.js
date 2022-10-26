@@ -1,27 +1,16 @@
 import urlWebServices from './WebServices.js';
 
-export const uploadVideo = async function (file, description) {
-  //url webservices
+export const uploadVideo = async function (video, description) {
   let url = urlWebServices.uploadVideo;
-  //armo json con datos
-
-  //VER COMO MIERDA PASARLE UN VIDEO AL BODY
-
-  const formData = new URLSearchParams();
-  formData.append('video', file);
-  formData.append('description', description);
-
   try {
+    console.log(video);
     let response = await fetch(url, {
-      method: 'POST', // or 'PUT'
-      mode: 'cors',
+      method: 'POST',
+      mode: 'no-cors',
+      body: JSON.stringify({ file: video }),
       headers: {
-        Accept: 'application/x-www-form-urlencoded',
-        // 'x-access-token': WebToken.webToken,
-        Origin: 'http://localhost:3000',
-        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Type': 'application/json',
       },
-      body: formData,
     });
 
     let rdo = response.status;

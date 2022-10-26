@@ -26,6 +26,7 @@ const ModalExercise = ({ open, handleClose }) => {
   });
 
   const [selectedFile, setSelectedFile] = useState();
+  const [Base64EncodedFile, setBase64EncodedFile] = useState('');
 
   const textFieldSpacing = {
     marginBottom: '20px',
@@ -66,17 +67,34 @@ const ModalExercise = ({ open, handleClose }) => {
     });
   };
 
-  const handleClick = async () => {
-    uploadVideo();
-    createExercise();
-    handleClose();
+  const handleFileSelect = (e) => {
+    const file = e.target.files[0];
+    setSelectedFile(file);
+    EncodeFile(file);
   };
 
-  const uploadVideo = async () => {
+  const EncodeFile = (file) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setBase64EncodedFile(reader.result);
+    };
+  };
+
+  const handleClick = () => {
+    if (!selectedFile) return;
+    uploadVideoCloudinary(Base64EncodedFile);
+    //createExercise();
+    //handleClose();
+  };
+
+  const uploadVideoCloudinary = async (file) => {
     try {
-      const res = await uploadVideo(selectedFile);
+      const res = await uploadVideo(file, exerciseData.description);
 
       if (res.rdo == 0) {
+        console.log('Respuesta del server');
+        console.log(res);
         setExerciseData({ ...exerciseData, videoURL: res.videoData.url });
         console.log(res.message);
       } else {
@@ -88,21 +106,29 @@ const ModalExercise = ({ open, handleClose }) => {
   };
 
   const createExercise = async () => {
-    try {
-      const res = await exerciseCreation({
-        doctor: currentUser._id,
-        instructions: exerciseData.description,
-        videoTitle: exerciseData.name,
-        videoURL: exerciseData.videoURL,
-      });
+    if (
+      exerciseData.description != '' &&
+      exerciseData.name != '' &&
+      exerciseData.videoURL != ''
+    ) {
+      try {
+        const res = await exerciseCreation({
+          doctor: currentUser._id,
+          instructions: exerciseData.description,
+          videoTitle: exerciseData.name,
+          videoURL: exerciseData.videoURL,
+        });
 
-      if (res.rdo == 0) {
-        console.log('Se creo el ejercicio');
-      } else {
-        console.log('Fallo algo');
+        if (res.rdo == 0) {
+          console.log('Se creo el ejercicio');
+        } else {
+          console.log('Fallo algo');
+        }
+      } catch (e) {
+        console.log(e);
       }
-    } catch (e) {
-      console.log(e);
+    } else {
+      console.log('Hay campos vacios');
     }
   };
 
@@ -137,7 +163,7 @@ const ModalExercise = ({ open, handleClose }) => {
               label="Video"
               sx={textFieldSpacing}
               disableUnderline
-              onChange={(e) => setSelectedFile(e.target.files[0])}
+              onChange={handleFileSelect}
             />
             <Grid item container justifyContent="center">
               <Grid item>
