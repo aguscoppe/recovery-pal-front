@@ -116,7 +116,7 @@ const PatientProfile = () => {
                   color="primary"
                   aria-label="add"
                   sx={{
-                    position: "absolute",
+                    position: "fixed",
                     bottom: 80,
                     right: 25,
                   }}
