@@ -41,6 +41,7 @@ const ModalExercise = ({ open, handleClose }) => {
     justifyContent: 'center',
     alignItems: 'center',
     height: 'auto',
+    width: '80%',
     backgroundColor: '#FFF',
     borderRadius: '20px',
   };

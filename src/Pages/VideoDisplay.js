@@ -44,6 +44,9 @@ function VideoDisplay({ exerciseList, handleCompleteExercise }) {
       } 
 
     };
+
+
+    
     if (feedback ) {
       if(!feedback.exercisesDone.includes(idExercise)) {
         console.log("se actualzia feedback")

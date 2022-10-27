@@ -11,6 +11,8 @@ import { useContext, useState, useEffect } from "react";
 import { getDoctorById } from "../Controllers/DoctorEntry.Controller";
 import { UserContext } from "../Contexts/UserContext";
 import CircularProgress from "@mui/material/CircularProgress";
+import Fab from "@mui/material/Fab";
+import AddIcon from "@mui/icons-material/Add";
 import Progress from "./../Components/Progress";
 
 /** Esta Pagina es el perfil del paciente que el doctor puede ver, aca puede administrar las rutinas del paciente y crear nuevas  */
@@ -72,14 +74,14 @@ const PatientProfile = () => {
         >
           <Avatar
             alt="FotoPerfilPaciente"
-            src={patient.imgSrc}
+            src='https://mui.com/static/images/avatar/3.jpg'
             sx={{ width: 90, height: 90 }}
           ></Avatar>
           <Typography variant="h4" color={theme.palette.textPrimary.main}>
             {patient.name} {patient.lastName}
           </Typography>
           <Typography variant="body1" color={theme.palette.textSecondary.main}>
-            Edad: 33
+          {patient.suffering} 
           </Typography>
         </Box>
       )}
@@ -107,13 +109,24 @@ const PatientProfile = () => {
                 to={`/patient/${idPatient}/createRoutine`}
                 style={{ textDecoration: "none" }}
               >
-                <Button
+                {/**<Button
                   size="large"
                   variant="contained"
                   sx={{ marginBottom: "12px" }}
                 >
                   CREAR RUTINA
-                </Button>
+                </Button>**/}
+                <Fab
+                  color="primary"
+                  aria-label="add"
+                  sx={{
+                    position: "fixed",
+                    bottom: 80,
+                    right: 25,
+                  }}
+                >
+                  <AddIcon />
+                </Fab>
               </Link>
               <Grid container justifyContent="center" sx={{ padding: "3vh 0" }}>
                 {routines === null ? (
