@@ -13,6 +13,7 @@ import { UserContext } from "../Contexts/UserContext";
 import CircularProgress from "@mui/material/CircularProgress";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
+import Progress from "./../Components/Progress";
 
 /** Esta Pagina es el perfil del paciente que el doctor puede ver, aca puede administrar las rutinas del paciente y crear nuevas  */
 const PatientProfile = () => {
@@ -73,14 +74,14 @@ const PatientProfile = () => {
         >
           <Avatar
             alt="FotoPerfilPaciente"
-            src={patient.imgSrc}
+            src='https://mui.com/static/images/avatar/3.jpg'
             sx={{ width: 90, height: 90 }}
           ></Avatar>
           <Typography variant="h4" color={theme.palette.textPrimary.main}>
             {patient.name} {patient.lastName}
           </Typography>
           <Typography variant="body1" color={theme.palette.textSecondary.main}>
-            Edad: 33
+          {patient.suffering} 
           </Typography>
         </Box>
       )}
@@ -104,7 +105,10 @@ const PatientProfile = () => {
             alignItems="center"
           >
             <Grid sx={{ textAlign: "center", width: "100%" }}>
-              <Link to={`/createRoutine`} style={{ textDecoration: "none" }}>
+              <Link
+                to={`/patient/${idPatient}/createRoutine`}
+                style={{ textDecoration: "none" }}
+              >
                 {/**<Button
                   size="large"
                   variant="contained"
@@ -144,7 +148,9 @@ const PatientProfile = () => {
           <Typography>Coming Soon</Typography>
         </TabPanel>
         <TabPanel value="3">
-          <Typography>Coming Soon</Typography>
+          <Typography>
+            <Progress />
+          </Typography>
         </TabPanel>
       </TabContext>
       <NavBar />

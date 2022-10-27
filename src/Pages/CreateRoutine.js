@@ -2,12 +2,14 @@ import Header from '../Components/Header';
 import Navbar from '../Components/NavBar';
 import ModalAlert from '../Components/ModalAlert';
 import { Autocomplete, Grid, TextField, Button } from '@mui/material';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
 import { Link } from 'react-router-dom';
 import { exercises } from '../data';
 import ModalExercise from '../Components/ModalExercise';
-
+import { useParams } from "react-router-dom";
+import { UserContext } from "../Contexts/UserContext";
+import { createRoutine } from '../Controllers/RoutineEntry.Controller';
 const flexCenter = {
   display: 'flex',
   flexDirection: 'column',
@@ -21,12 +23,17 @@ const textFieldSpacing = {
 };
 
 const CreateRoutine = (pacinetId) => {
+  const currentUser = useContext(UserContext);
+
+  const { idPatient } = useParams();
   const [rutineData, setRutineData] = useState({
     name: '',
-    frecuency: '',
-    duration: '',
-    exercises: [],
-    imageUrl: '',
+    days: [1,3],
+    weeks: 4,
+    patient : idPatient, 
+    feedbacksDone : 0,
+    exercises :  [{set : 4, weight: "4KG", exercise : "634b10569aa4b12bc8e55dd7"}, {set : 4, weight: "4KG", exercise : "634b10719aa4b12bc8e55dd8"}] ,
+    doctor : currentUser._id
   });
   //recuperacion de los ejercicios de la base
   let listEjercicios = exercises.map((exercise) => exercise.videoTitle);
@@ -41,6 +48,8 @@ const CreateRoutine = (pacinetId) => {
     console.log(
       'Aca va la llamada al backend. Si recibo 200 OK modal success, sino otro.'
     );
+    createRoutine(rutineData)
+
     setModalAlertRoutine({ type: 'success', open: true });
   };
 
@@ -48,6 +57,20 @@ const CreateRoutine = (pacinetId) => {
     const { value } = e.target;
     const { name } = e.target;
     setRutineData({ ...rutineData, [name]: value });
+  };
+
+  const handleChangeDuration = (e) => {
+    const { value } = e.target;
+    const { name } = e.target;
+    //setRutineData({ ...rutineData, "weeks" : value} });
+  };
+
+
+  
+  const handleChangeFrecuency = (e) => {
+    const { value } = e.target;
+    const { name } = e.target;
+    //setRutineData({ ...rutineData, "days" : value} });
   };
 
   const openExerciseModal = () => {
@@ -106,7 +129,7 @@ const CreateRoutine = (pacinetId) => {
             fullWidth
             label="Frecuencia"
             variant="outlined"
-            onChange={handleChange}
+            onChange={handleChangeFrecuency}
             sx={textFieldSpacing}
           />
           <TextField
@@ -115,7 +138,7 @@ const CreateRoutine = (pacinetId) => {
             fullWidth
             label="Duracion"
             variant="outlined"
-            onChange={handleChange}
+            onChange={handleChangeDuration}
             sx={textFieldSpacing}
           />
           <Autocomplete

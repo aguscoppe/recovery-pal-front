@@ -1,6 +1,7 @@
 import { Grid, Typography, Paper, Avatar, Button } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useTheme } from '@mui/material';
+import Stack from '@mui/material/Stack';
 
 const PatientCard = ({ patient }) => {
   const theme = useTheme();
@@ -18,17 +19,22 @@ const PatientCard = ({ patient }) => {
           <Grid
             item
             container
-            direction='column'
             alignContent='space-evenly'
-            flexWrap='nowrap'
+            justifyContent="flex-end"
             xs={7}
           >
-            <Grid item xs={8.2}>
-              <Typography variant='h5' color={theme.palette.primary.main}>
+            <Grid item xs={12} >
+              <Typography variant='h5' color={theme.palette.primary.main} align="right">
                 {patient.name} {patient.lastName}
               </Typography>
             </Grid>
-            <Grid item xs={4} justifySelf='end'>
+            <Grid item xs={12}>
+              <Typography variant='subtitle2' color={theme.palette.primary.main} align="right">
+                {patient.suffering} 
+              </Typography>
+            </Grid>
+            <Grid item xs={12} align="right" >
+            
               <Link
                 to={`/patient/${patient._id}`}
                 style={{ textDecoration: 'none' }}
@@ -41,6 +47,7 @@ const PatientCard = ({ patient }) => {
                   Ver Perfil
                 </Button>
               </Link>
+
             </Grid>
           </Grid>
         </Grid>

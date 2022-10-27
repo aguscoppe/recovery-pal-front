@@ -95,8 +95,8 @@ export default function Register() {
   const pruebaPostRoutine = async function () {
     let datos = {
       name: "Rutina Final",
-      weeks: 1,
-      times: 1,
+      weeks: 2,
+      days: [0,4],
       patient: "633c97e68efef931d4597301",
       doctor: "633c98148efef931d4597302",
       exercises: [
@@ -141,7 +141,7 @@ export default function Register() {
         } else {
           setErrorMessages({});
           // pruebaGetPatient();
-          //validarRegistro();
+          //validarRegistro()
           // pruebaGetRoutine()
           pruebaPostRoutine();
         }

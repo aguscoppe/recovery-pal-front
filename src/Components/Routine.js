@@ -57,7 +57,8 @@ const Routine = ({ routine }) => {   //se recibe ya una rutina
         alert("Rutine invalida para usar esta pagina");
         window.location.href = "/";
       } else {
-        setExercise(respuesta.routine.exercises[0]);
+        setExercise(respuesta.routine.exercises[0].exercise); //Ejercicio con set y weight
+        console.log(respuesta.exercise);
       }
     };
 
