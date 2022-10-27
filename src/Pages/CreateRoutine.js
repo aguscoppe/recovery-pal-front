@@ -1,76 +1,110 @@
 import Header from '../Components/Header';
 import Navbar from '../Components/NavBar';
-import ModalAlert from '../Components/ModalAlert';
-import { Autocomplete, Grid, TextField, Button } from '@mui/material';
 import { useState, useContext } from 'react';
 import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
-import { Link } from 'react-router-dom';
-import { exercises } from '../data';
+import ModalAlert from '../Components/ModalAlert';
 import ModalExercise from '../Components/ModalExercise';
-import { useParams } from "react-router-dom";
-import { UserContext } from "../Contexts/UserContext";
+import { useParams } from 'react-router-dom';
+import { UserContext } from '../Contexts/UserContext';
 import { createRoutine } from '../Controllers/RoutineEntry.Controller';
-const flexCenter = {
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'center',
-  alignItems: 'center',
-  marginTop: '2vh',
-};
+import RoutineForm from '../Components/RoutineForm';
+import ExerciseForm from '../Components/ExerciseForm';
 
-const textFieldSpacing = {
-  marginBottom: '20px',
-};
+/*
+const routine = {
+  name: '',
+  days: [1, 3],
+  weeks: 4,
+  patient: idPatient,
+  feedbacksDone: 0,
+  exercises: [
+    { set: 4, weight: '4KG', exercise: '634b10569aa4b12bc8e55dd7' },
+    { set: 4, weight: '4KG', exercise: '634b10719aa4b12bc8e55dd8' },
+  ],
+  doctor: currentUser._id,
+}
+*/
 
 const CreateRoutine = (pacinetId) => {
   const currentUser = useContext(UserContext);
-
   const { idPatient } = useParams();
+  const [currentForm, setCurrentForm] = useState(0);
   const [rutineData, setRutineData] = useState({
     name: '',
-    days: [1,3],
-    weeks: 4,
-    patient : idPatient, 
-    feedbacksDone : 0,
-    exercises :  [{set : 4, weight: "4KG", exercise : "634b10569aa4b12bc8e55dd7"}, {set : 4, weight: "4KG", exercise : "634b10719aa4b12bc8e55dd8"}] ,
-    doctor : currentUser._id
+    frecuency: '',
+    duration: '',
+    days: {
+      0: false,
+      1: false,
+      2: false,
+      3: false,
+      4: false,
+      5: false,
+      6: false,
+    },
+    weeks: '',
+    patient: idPatient,
+    feedbacksDone: 0,
+    exercises: [],
+    doctor: currentUser._id,
+  });
+  const [modalAlert, setModalAlert] = useState({
+    open: false,
+    type: '',
+    title: '',
+    subtitle: '',
+    primaryBtnText: '',
+    primaryBtnPage: '',
+  });
+  const [modalExercise, setModalExercise] = useState({
+    open: false,
+    handleClose: () => {},
   });
   //recuperacion de los ejercicios de la base
-  let listEjercicios = exercises.map((exercise) => exercise.videoTitle);
 
-  const [modalAlertExercise, setModalAlertExercise] = useState({ type: 'success', open: false });
-  const [modalAlertRoutine, setModalAlertRoutine] = useState({ type: 'success', open: false });
-
+  const [modalAlertExercise, setModalAlertExercise] = useState({
+    type: 'success',
+    open: false,
+  });
+  const [modalAlertRoutine, setModalAlertRoutine] = useState({
+    type: 'success',
+    open: false,
+  });
   const [showExerciseModal, setShowExerciseModal] = useState(false);
 
-  
   const handleClickCrearRoutine = () => {
     console.log(
       'Aca va la llamada al backend. Si recibo 200 OK modal success, sino otro.'
     );
-    createRoutine(rutineData)
+    createRoutine(rutineData);
 
     setModalAlertRoutine({ type: 'success', open: true });
   };
 
   const handleChange = (e) => {
-    const { value } = e.target;
-    const { name } = e.target;
-    setRutineData({ ...rutineData, [name]: value });
+    const { value, name } = e.target;
+    setRutineData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleChangeDuration = (e) => {
-    const { value } = e.target;
-    const { name } = e.target;
-    //setRutineData({ ...rutineData, "weeks" : value} });
+  const handleCheckboxChange = (e) => {
+    const { value, checked } = e.target;
+    setRutineData((prev) => ({
+      ...prev,
+      days: { ...prev.days, [value]: checked },
+    }));
   };
 
-
-  
-  const handleChangeFrecuency = (e) => {
-    const { value } = e.target;
-    const { name } = e.target;
-    //setRutineData({ ...rutineData, "days" : value} });
+  const handleSelect = (e, v) => {
+    console.log('v: ', v);
+    const newExercise = {
+      exercise: v.at(-1),
+      set: '',
+      weight: '',
+    };
+    setRutineData((prev) => ({
+      ...prev,
+      exercises: [...prev.exercises, newExercise],
+    }));
   };
 
   const openExerciseModal = () => {
@@ -79,106 +113,56 @@ const CreateRoutine = (pacinetId) => {
 
   const closeExerciseModal = () => {
     setShowExerciseModal(!showExerciseModal);
-    setModalAlertExercise({...modalAlertExercise, open : true})
+    setModalAlertExercise({ ...modalAlertExercise, open: true });
   };
+
+  console.log('rutineData: ', rutineData);
+  console.log('currentForm: ', currentForm);
 
   return (
     <>
-      <Header title="Crear Rutina" icon={<AddCircleOutlineRoundedIcon />} />
-      <Grid
-        container
-        justifyContent="center"
-        alignItems="center"
-        sx={{ paddingTop: '10vh' }}
-      >
-        <ModalAlert
-          open={modalAlertExercise.open}
-          type={modalAlertExercise.type}
-          setNotOpen={() => setModalAlertExercise({...modalAlertExercise, open : false})}
-          title="Bien hecho!"
-          subtitle="El ejercicio ha sido creado con exito"
-          primaryBtnText="Continuar"
-          primaryBtnPage="/createRoutine"
+      <Header title='Crear Rutina' icon={<AddCircleOutlineRoundedIcon />} />
+      {/* 
+            <ModalAlert
+        open={modalAlertExercise.open}
+        type={modalAlertExercise.type}
+        setNotOpen={() =>
+          setModalAlertExercise({ ...modalAlertExercise, open: false })
+        }
+        title='Bien hecho!'
+        subtitle='El ejercicio ha sido creado con exito'
+        primaryBtnText='Continuar'
+        primaryBtnPage='/createRoutine'
+      />
+      <ModalAlert
+        open={modalAlertRoutine.open}
+        type={modalAlertRoutine.type}
+        setNotOpen={() =>
+          setModalAlertRoutine({ ...modalAlertRoutine, open: false })
+        }
+        title='Bien hecho!'
+        subtitle='La rutina ha sido creada con exito !'
+        primaryBtnText='Continuar'
+        primaryBtnPage='/home'
+      />
+      <ModalExercise
+        open={showExerciseModal}
+        handleClose={closeExerciseModal}
+      />
+      */}
+      {currentForm === 0 && (
+        <RoutineForm
+          rutineData={rutineData}
+          handleChange={handleChange}
+          handleCheckboxChange={handleCheckboxChange}
+          handleSelect={handleSelect}
+          openExerciseModal={openExerciseModal}
+          setCurrentForm={setCurrentForm}
         />
-        <ModalAlert
-          open={modalAlertRoutine.open}
-          type={modalAlertRoutine.type}
-          setNotOpen={() => setModalAlertRoutine({...modalAlertRoutine, open : false})}
-          title="Bien hecho!"
-          subtitle="La rutina ha sido creada con exito !"
-          primaryBtnText="Continuar"
-          primaryBtnPage="/home"
-        />
-        <ModalExercise
-          open={showExerciseModal}
-          handleClose={closeExerciseModal}
-        />
-        <Grid item xs={10} sm={6} md={4}>
-          <TextField
-            name="name"
-            value={rutineData.name}
-            fullWidth
-            label="Nombre"
-            variant="outlined"
-            onChange={handleChange}
-            sx={textFieldSpacing}
-          />
-          <TextField
-            name="frecuency"
-            value={rutineData.frecuency}
-            fullWidth
-            label="Frecuencia"
-            variant="outlined"
-            onChange={handleChangeFrecuency}
-            sx={textFieldSpacing}
-          />
-          <TextField
-            name="duration"
-            value={rutineData.duration}
-            fullWidth
-            label="Duracion"
-            variant="outlined"
-            onChange={handleChangeDuration}
-            sx={textFieldSpacing}
-          />
-          <Autocomplete
-            multiple
-            disablePortal
-            id="combo-box-demo"
-            options={listEjercicios}
-            renderInput={(params) => (
-              <TextField {...params} label="Buscar ejercicio" />
-            )}
-            sx={textFieldSpacing}
-            noOptionsText="No hay resultados"
-          />
-          <Grid item container alignItems="center" direction="column">
-            <Grid item paddingTop={3}>
-              <Button
-                size="large"
-                variant="contained"
-                onClick={openExerciseModal}
-              >
-                CREAR EJERCICIO
-              </Button>
-            </Grid>
-            <Grid item paddingTop={3}>
-              <Button
-                disabled={
-                  rutineData.name === '' ||
-                  rutineData.frecuency === '' ||
-                  rutineData.duration === ''
-                }
-                variant="contained"
-                onClick={handleClickCrearRoutine}
-                size="large"
-              >
-                FINALIZAR
-              </Button>
-            </Grid>
-          </Grid>
-        </Grid>
-      </Grid>
+      )}
+      {currentForm === 1 && (
+        <ExerciseForm rutineData={rutineData} setCurrentForm={setCurrentForm} />
+      )}
       <Navbar />
     </>
   );
