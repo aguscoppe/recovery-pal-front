@@ -67,10 +67,10 @@ const ModalExercise = ({ open, handleClose }) => {
     });
   };
 
-  const handleClick = async () => {
+  const handleClick = async (e) => {
     uploadVideo();
     createExercise();
-    handleClose();
+    handleClose(e);
   };
 
   const uploadVideo = async () => {

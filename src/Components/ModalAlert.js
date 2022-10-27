@@ -5,12 +5,12 @@ const alertValues = {
   success: {
     icon: (
       <Box
-        component="img"
+        component='img'
         sx={{
           height: 90,
           width: 90,
         }}
-        alt="Success Icon"
+        alt='Success Icon'
         src={require('../Assets/icons/SuccessIcon.png')}
       />
     ),
@@ -19,12 +19,12 @@ const alertValues = {
   error: {
     icon: (
       <Box
-        component="img"
+        component='img'
         sx={{
           height: 90,
           width: 90,
         }}
-        alt="Error Icon"
+        alt='Error Icon'
         src={require('../Assets/icons/ErrorIcon.png')}
       />
     ),
@@ -33,12 +33,12 @@ const alertValues = {
   warning: {
     icon: (
       <Box
-        component="img"
+        component='img'
         sx={{
           height: 90,
           width: 90,
         }}
-        alt="Warning Icon"
+        alt='Warning Icon'
         src={require('../Assets/icons/WarningIcon.png')}
       />
     ),
@@ -92,16 +92,30 @@ const ModalAlert = ({
       <Box sx={modalContainer}>
         <Box sx={iconContainer}>{alertValues[type].icon}</Box>
         <Box sx={modalTitleContainer}>
-          <Typography variant="h4" fontWeight="bold" marginBottom="10px">
+          <Typography variant='h4' fontWeight='bold' marginBottom='10px'>
             {title}
           </Typography>
           <Typography>{subtitle}</Typography>
         </Box>
         <Box sx={buttonContainer}>
-          <Link to={`${primaryBtnPage}`} style={{ textDecoration: 'none' }}>
+          {primaryBtnPage ? (
+            <Link to={`${primaryBtnPage}`} style={{ textDecoration: 'none' }}>
+              <Button
+                onClick={setNotOpen}
+                variant='contained'
+                fullWidth={true}
+                sx={{
+                  backgroundColor: alertValues[type].color,
+                  marginBottom: '15px',
+                }}
+              >
+                {primaryBtnText}
+              </Button>
+            </Link>
+          ) : (
             <Button
-            onClick= {setNotOpen }
-              variant="contained"
+              onClick={(e) => setNotOpen(e)}
+              variant='contained'
               fullWidth={true}
               sx={{
                 backgroundColor: alertValues[type].color,
@@ -110,12 +124,12 @@ const ModalAlert = ({
             >
               {primaryBtnText}
             </Button>
-          </Link>
+          )}
           {secondaryBtnText && (
             <Link to={`${secondaryBtnPage}`} style={{ textDecoration: 'none' }}>
               <Button
-                          onClick= {setNotOpen}
-                variant="contained"
+                onClick={setNotOpen}
+                variant='contained'
                 fullWidth={true}
                 sx={{
                   border: 1,
