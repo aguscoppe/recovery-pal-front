@@ -25,14 +25,13 @@ const routine = {
 }
 */
 
-const CreateRoutine = (pacinetId) => {
+const CreateRoutine = () => {
   const currentUser = useContext(UserContext);
   const { idPatient } = useParams();
   const [currentForm, setCurrentForm] = useState(0);
   const [rutineData, setRutineData] = useState({
     name: '',
     frecuency: '',
-    duration: '',
     days: {
       0: false,
       1: false,
@@ -55,16 +54,11 @@ const CreateRoutine = (pacinetId) => {
     subtitle: '',
     primaryBtnText: '',
     primaryBtnPage: '',
+    setNotOpen: () => {},
   });
   const [modalExercise, setModalExercise] = useState({
     open: false,
     handleClose: () => {},
-  });
-  //recuperacion de los ejercicios de la base
-
-  const [modalAlertExercise, setModalAlertExercise] = useState({
-    type: 'success',
-    open: false,
   });
 
   const handleChange = (e) => {
@@ -111,43 +105,66 @@ const CreateRoutine = (pacinetId) => {
     setModalExercise((prev) => ({ ...prev, open: true }));
   };
 
-  const closeExerciseModal = () => {
+  const closeExerciseModal = (e) => {
     setModalExercise((prev) => ({ ...prev, open: false }));
+    if (e.target.innerText !== 'CANCELAR') {
+      setModalAlert({
+        type: 'success',
+        open: true,
+        title: '¡Bien hecho!',
+        subtitle: 'Ejercicio creado correctamente',
+        primaryBtnText: 'Continuar',
+        setNotOpen: () => {
+          setModalAlert((prev) => ({ ...prev, open: false }));
+        },
+      });
+    }
   };
 
-  const handleSubmit = () => {
-    console.log(
-      'Aca va la llamada al backend. Si recibo 200 OK modal success, sino otro.'
-    );
-    // meter data de rutineData de acuerdo a lo que necesita el back en newRoutine
-    const newRoutine = {};
-    // createRoutine(newRoutine);
-    setModalAlert({
-      type: 'success',
-      open: true,
-      title: '¡Bien hecho!',
-      subtitle: 'La rutina ha sido creada con exito',
-      primaryBtnText: 'Continuar',
-      primaryBtnPage: '/home',
-    });
+  const handleSubmit = async () => {
+    const { name, weeks, days, patient, doctor, exercises } = rutineData;
+    const daysArr = [];
+    for (const [key, value] of Object.entries(days)) {
+      if (value) {
+        daysArr.push(key);
+      }
+    }
+    const newRoutine = {
+      name: name,
+      days: daysArr,
+      weeks: parseInt(weeks),
+      patient: patient,
+      doctor: doctor,
+      exercises: exercises,
+    };
+    let info = await createRoutine(newRoutine);
+    console.log('info: ', info);
+    if (info.rdo === 0) {
+      setModalAlert({
+        type: 'success',
+        open: true,
+        title: '¡Bien hecho!',
+        subtitle: 'Rutina creada correctamente',
+        primaryBtnText: 'Continuar',
+        primaryBtnPage: '/home',
+      });
+    } else {
+      setModalAlert({
+        type: 'error',
+        open: true,
+        title: 'Error',
+        subtitle: info.mensaje,
+        primaryBtnText: 'Continuar',
+        setNotOpen: () => {
+          setModalAlert((prev) => ({ ...prev, open: false }));
+        },
+      });
+    }
   };
 
   return (
     <>
       <Header title='Crear Rutina' icon={<AddCircleOutlineRoundedIcon />} />
-      {/* 
-            <ModalAlert
-        open={modalAlertExercise.open}
-        type={modalAlertExercise.type}
-        setNotOpen={() =>
-          setModalAlertExercise({ ...modalAlertExercise, open: false })
-        }
-        title='Bien hecho!'
-        subtitle='El ejercicio ha sido creado con exito'
-        primaryBtnText='Continuar'
-        primaryBtnPage='/createRoutine'
-      />
-      */}
       {modalAlert.open && (
         <ModalAlert
           open={modalAlert.open}
@@ -156,6 +173,7 @@ const CreateRoutine = (pacinetId) => {
           subtitle={modalAlert.subtitle}
           primaryBtnText={modalAlert.primaryBtnText}
           primaryBtnPage={modalAlert.primaryBtnPage}
+          setNotOpen={modalAlert.setNotOpen}
         />
       )}
       {modalExercise.open && (
