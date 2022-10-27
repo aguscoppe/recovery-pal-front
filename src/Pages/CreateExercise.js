@@ -77,11 +77,11 @@ const CreateExercise = ({ doctorId }) => {
 
   return (
     <>
-      <Header title="Crear Ejercicio" icon={<AddCircleOutlineRoundedIcon />} />
+      <Header title='Crear Ejercicio' icon={<AddCircleOutlineRoundedIcon />} />
       <Grid
         container
-        justifyContent="center"
-        alignItems="center"
+        justifyContent='center'
+        alignItems='center'
         sx={{ paddingTop: '10vh' }}
       >
         <ModalAlert
@@ -89,42 +89,42 @@ const CreateExercise = ({ doctorId }) => {
           type={modal.type}
           title={modal.title}
           subtitle={modal.subtitle}
-          primaryBtnText="Continuar"
-          primaryBtnPage="/home"
+          primaryBtnText='Continuar'
+          primaryBtnPage='/home'
         />
         <Grid item xs={10} sm={6} md={4}>
           <TextField
-            name="name"
+            name='name'
             value={exerciseData.name}
             fullWidth
-            label="Nombre"
-            variant="outlined"
+            label='Nombre'
+            variant='outlined'
             onChange={handleChange}
             sx={textFieldSpacing}
           />
           <TextField
-            name="description"
+            name='description'
             value={exerciseData.description}
             fullWidth
-            label="Descripción"
-            variant="outlined"
+            label='Descripción'
+            variant='outlined'
             onChange={handleChange}
             sx={textFieldSpacing}
           />
           <Input
-            type="file"
-            label="Video"
+            type='file'
+            label='Video'
             sx={textFieldSpacing}
             disableUnderline
           />
-          <Grid item container justifyContent="center">
+          <Grid item container justifyContent='center'>
             <Grid item>
               <Button
                 disabled={
                   exerciseData.name === '' || exerciseData.description === ''
                 }
-                size="large"
-                variant="contained"
+                size='large'
+                variant='contained'
                 onClick={handleClick}
               >
                 Finalizar
