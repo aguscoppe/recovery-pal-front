@@ -72,14 +72,14 @@ const PatientProfile = () => {
         >
           <Avatar
             alt="FotoPerfilPaciente"
-            src={patient.imgSrc}
+            src='https://mui.com/static/images/avatar/3.jpg'
             sx={{ width: 90, height: 90 }}
           ></Avatar>
           <Typography variant="h4" color={theme.palette.textPrimary.main}>
             {patient.name} {patient.lastName}
           </Typography>
           <Typography variant="body1" color={theme.palette.textSecondary.main}>
-            Edad: 33
+          {patient.suffering} 
           </Typography>
         </Box>
       )}
