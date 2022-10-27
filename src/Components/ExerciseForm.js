@@ -5,7 +5,7 @@ const textFieldSpacing = {
   marginBottom: '20px',
 };
 
-const Exercise = ({ name }) => {
+const Exercise = ({ name, handleExerciseChange, rutineData, index }) => {
   const theme = useTheme();
   return (
     <Card
@@ -24,14 +24,43 @@ const Exercise = ({ name }) => {
       >
         {name}
       </Typography>
-      <TextField label='Peso (en kg)' fullWidth sx={textFieldSpacing} />
-      <TextField label='Sets' fullWidth sx={textFieldSpacing} />
-      <TextField label='Repeticiones' fullWidth sx={textFieldSpacing} />
+      <TextField
+        label='Peso (en kg)'
+        type='number'
+        fullWidth
+        sx={textFieldSpacing}
+        name='weight'
+        value={rutineData.exercises[index].weight}
+        onChange={(e) => handleExerciseChange(e, index)}
+      />
+      <TextField
+        label='Sets'
+        type='number'
+        fullWidth
+        sx={textFieldSpacing}
+        name='set'
+        value={rutineData.exercises[index].set}
+        onChange={(e) => handleExerciseChange(e, index)}
+      />
+      <TextField
+        label='Repeticiones'
+        type='number'
+        fullWidth
+        sx={textFieldSpacing}
+        name='repeat'
+        value={rutineData.exercises[index].repeat}
+        onChange={(e) => handleExerciseChange(e, index)}
+      />
     </Card>
   );
 };
 
-const ExerciseForm = ({ setCurrentForm, rutineData }) => {
+const ExerciseForm = ({
+  rutineData,
+  handleExerciseChange,
+  handleSubmit,
+  setCurrentForm,
+}) => {
   return (
     <Grid
       container
@@ -41,8 +70,14 @@ const ExerciseForm = ({ setCurrentForm, rutineData }) => {
     >
       <Grid item container alignItems='center' direction='column'>
         <Grid item xs={10} sm={6} md={4}>
-          {rutineData.exercises.map((el) => (
-            <Exercise name={el.exercise} />
+          {rutineData.exercises.map((el, index) => (
+            <Exercise
+              key={index}
+              name={el.exercise}
+              handleExerciseChange={handleExerciseChange}
+              rutineData={rutineData}
+              index={index}
+            />
           ))}
         </Grid>
         <Grid item paddingTop={3}>
@@ -55,7 +90,7 @@ const ExerciseForm = ({ setCurrentForm, rutineData }) => {
           </Button>
         </Grid>
         <Grid item paddingTop={3}>
-          <Button variant='contained' size='large'>
+          <Button variant='contained' size='large' onClick={handleSubmit}>
             FINALIZAR
           </Button>
         </Grid>

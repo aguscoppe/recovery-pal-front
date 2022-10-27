@@ -63,8 +63,8 @@ const RoutineForm = ({
         />
         <TextField
           type='number'
-          name='duration'
-          value={rutineData.duration}
+          name='weeks'
+          value={rutineData.weeks}
           fullWidth
           label='Duracion total (semanas)'
           variant='outlined'
@@ -122,7 +122,7 @@ const RoutineForm = ({
               disabled={
                 rutineData.name === '' ||
                 rutineData.frecuency === '' ||
-                rutineData.duration === ''
+                rutineData.weeks === ''
               }
               variant='contained'
               onClick={() => setCurrentForm(1)}

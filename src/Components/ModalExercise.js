@@ -110,49 +110,55 @@ const ModalExercise = ({ open, handleClose }) => {
   return (
     <Modal open={open} onClose={handleModalClosing}>
       <Box sx={modalContainer}>
-        <Grid container justifyContent="center" alignItems="center">
+        <Grid container justifyContent='center' alignItems='center'>
           <Grid item xs={12} sm={6} m={4}>
-            <Typography variant="h3" sx={title}>
+            <Typography variant='h3' sx={title}>
               Crear Ejercicio
             </Typography>
             <TextField
-              name="name"
+              name='name'
               value={exerciseData.name}
               fullWidth
-              label="Nombre"
-              variant="outlined"
+              label='Nombre'
+              variant='outlined'
               onChange={handleChange}
               sx={textFieldSpacing}
             />
             <TextField
-              name="description"
+              name='description'
               value={exerciseData.description}
               fullWidth
-              label="Descripción"
-              variant="outlined"
+              label='Descripción'
+              variant='outlined'
               onChange={handleChange}
               sx={textFieldSpacing}
             />
             <Input
-              type="file"
-              label="Video"
+              type='file'
+              label='Video'
               sx={textFieldSpacing}
               disableUnderline
               onChange={(e) => setSelectedFile(e.target.files[0])}
             />
-            <Grid item container justifyContent="center">
-              <Grid item>
-                <Button
-                  disabled={
-                    exerciseData.name === '' || exerciseData.description === ''
-                  }
-                  size="large"
-                  variant="contained"
-                  onClick={handleClick}
-                >
-                  Finalizar
-                </Button>
-              </Grid>
+            <Grid item container justifyContent='center'>
+              <Button
+                size='large'
+                variant='outlined'
+                onClick={handleClose}
+                sx={{ marginRight: '20px' }}
+              >
+                Cancelar
+              </Button>
+              <Button
+                disabled={
+                  exerciseData.name === '' || exerciseData.description === ''
+                }
+                size='large'
+                variant='contained'
+                onClick={handleClick}
+              >
+                Finalizar
+              </Button>
             </Grid>
           </Grid>
         </Grid>
