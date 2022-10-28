@@ -13,6 +13,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import LinearProgress, {
   linearProgressClasses,
 } from "@mui/material/LinearProgress";
+import { getExerciseById } from "../Controllers/ExerciseEntry.Controller";
 
 
 //Aca esta el stylizado de la barra de progreso
@@ -40,7 +41,7 @@ const Routine = ({ routine }) => {   //se recibe ya una rutina
   const duration = routine.schedule.weeks;
   const frequency = routine.schedule.times;
   const feedbacksDone = routine.feedbacksDone;
-  const firstExercise = routine.exercises[0].exercise;
+  const [firstExercise, setFirstExercise] = useState(null)
 
 
   //todo lo siguiente esta comentado porque es otra forma de recuperar la rutina
@@ -77,6 +78,25 @@ const Routine = ({ routine }) => {   //se recibe ya una rutina
   }
 */
 
+useEffect(() => {
+
+  const getExercise = async function () {
+    const respuesta = await getExerciseById(routine.exercises[0].exercise);
+    console.log("Console log de respuesta de back ", respuesta);
+    if (respuesta.rdo === 1) {
+      alert("Rutine invalida para usar esta pagina");
+      window.location.href = "/";
+    } else {
+      setFirstExercise(respuesta.exercise); //Ejercicio con set y weight
+      console.log(respuesta.exercise);
+    }
+  };
+
+  getExercise();
+
+  
+}, [routine]);
+
   return (
     <Link to={`/routine/${_id}`} style={{ textDecoration: "none" }}>
       <Card
@@ -91,7 +111,7 @@ const Routine = ({ routine }) => {   //se recibe ya una rutina
           
           <Grid item xs={5} margin="10px">
             {//si no hay ejercicios
-              exercises === null ? (
+              firstExercise === null ? (
               <CircularProgress />
             ) : (
               <ReactPlayer url={firstExercise.videoURL} width="100%" height="100%" />
