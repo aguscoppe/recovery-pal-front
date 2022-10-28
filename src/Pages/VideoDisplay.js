@@ -129,6 +129,15 @@ function VideoDisplay({ exerciseList, handleCompleteExercise }) {
             <Typography variant="body1" marginTop="20px" marginBottom="40px">
               {exerciseRoutine.exercise.instructions}
             </Typography>
+            <Typography variant="subtitle2" sx= {{fontWeight: 'bold', fontSize : 20}} marginTop="20px" marginBottom="20px">
+              Sets: {exerciseRoutine.sets}
+            </Typography>
+            <Typography variant="subtitle2" sx= {{fontWeight: 'bold', fontSize : 20}} marginTop="20px" marginBottom="20px">
+              Repeticiones: {exerciseRoutine.repetitions}
+            </Typography>
+            <Typography variant="subtitle2" sx= {{fontWeight: 'bold', fontSize : 20}} marginTop="20px" marginBottom="20px">
+              Peso: {exerciseRoutine.weight? exerciseRoutine.weight: "Sin peso"}
+            </Typography>
             {currentUser.role === "paciente" ? (
               <Button
                 onClick={handleClick}
