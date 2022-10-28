@@ -39,7 +39,7 @@ const Routine = ({ routine }) => {   //se recibe ya una rutina
   const sessions = routine.feedbacks;
   const exercises = routine.exercises;
   const duration = routine.schedule.weeks;
-  const frequency = routine.schedule.times;
+  const frequency = routine.schedule.days.length;
   const feedbacksDone = routine.feedbacksDone;
   const [firstExercise, setFirstExercise] = useState(null)
 
