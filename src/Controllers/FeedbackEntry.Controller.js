@@ -103,7 +103,7 @@ export const feedbackUpdate = async function(datos){
 
 export const getLastFeedbackByRoutin = async function(idRoutine){
     //url webservices
-    let url = urlWebServices.getLastFeedbackByRoutine + idRoutine ;
+    let url = urlWebServices.getLastFeedbackByRoutine + "/" +  idRoutine ;
     
     try{
         let response = await fetch(url,{
