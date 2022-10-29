@@ -1,7 +1,6 @@
 import { useContext, useState, useEffect } from "react";
 import { UserContext } from "../Contexts/UserContext";
 import { Grid, Fab } from "@mui/material";
-import { Link } from "react-router-dom";
 import { getDoctorById } from "../Controllers/DoctorEntry.Controller";
 import VideocamIcon from "@mui/icons-material/Videocam";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -10,6 +9,7 @@ import NavBar from "../Components/NavBar";
 import Header from "../Components/Header";
 import Exercisev2 from "../Components/Exercisev2";
 import SearchExercise from "../Components/SearchExercise";
+import ModalExercise from "../Components/ModalExercise";
 
 const Videos = () => {
   const currentUser = useContext(UserContext);
@@ -36,6 +36,40 @@ const Videos = () => {
     };
     getDoctor();
   }, [currentUser._id]);
+
+  const [modalAlert, setModalAlert] = useState({
+    open: false,
+    type: "",
+    title: "",
+    subtitle: "",
+    primaryBtnText: "",
+    primaryBtnPage: "",
+    setNotOpen: () => {},
+  });
+
+  const [modalExercise, setModalExercise] = useState({
+    open: false,
+    handleClose: () => {},
+  });
+  const openExerciseModal = () => {
+    setModalExercise((prev) => ({ ...prev, open: true }));
+  };
+  const closeExerciseModal = (e) => {
+    setModalExercise((prev) => ({ ...prev, open: false }));
+    if (e.target.innerText !== "CANCELAR") {
+      setModalAlert({
+        type: "success",
+        open: true,
+        title: "¡Bien hecho!",
+        subtitle: "Ejercicio creado correctamente",
+        primaryBtnText: "Continuar",
+        setNotOpen: () => {
+          setModalAlert((prev) => ({ ...prev, open: false }));
+        },
+      });
+    }
+  };
+
   return (
     <>
       <Header title="Videos" icon={<VideocamIcon />} />
@@ -59,19 +93,24 @@ const Videos = () => {
           )}
         </Grid>
       </Grid>
-      <Link to={`/createExercise`} style={{ textDecoration: "none" }}>
-        <Fab
-          color="primary"
-          aria-label="add"
-          sx={{
-            position: "fixed",
-            bottom: 80,
-            right: 25,
-          }}
-        >
-          <AddIcon />
-        </Fab>
-      </Link>
+
+      <Fab
+        color="primary"
+        aria-label="add"
+        sx={{
+          position: "fixed",
+          bottom: 80,
+          right: 25,
+        }}
+        onClick={openExerciseModal}
+      >
+        <AddIcon />
+      </Fab>
+
+      <ModalExercise
+        open={modalExercise.open}
+        handleClose={closeExerciseModal}
+      />
       <NavBar />
     </>
   );
