@@ -6,50 +6,51 @@ import {
   Input,
   Box,
   Typography,
-} from '@mui/material';
-import { Link } from 'react-router-dom';
-import { useState, useContext } from 'react';
-import { UserContext } from '../Contexts/UserContext';
-import { theme } from '../theme';
-import CreateExercise from '../Pages/CreateExercise';
-import { exerciseCreation } from '../Controllers/ExerciseEntry.Controller';
-import { uploadVideo } from '../Controllers/VideoEntry.Controller';
-import { upload } from '@testing-library/user-event/dist/upload';
+} from "@mui/material";
+import { Link } from "react-router-dom";
+import { useState, useContext } from "react";
+import { UserContext } from "../Contexts/UserContext";
+import { theme } from "../theme";
+import CreateExercise from "../Pages/CreateExercise";
+import { exerciseCreation } from "../Controllers/ExerciseEntry.Controller";
+import { uploadVideo } from "../Controllers/VideoEntry.Controller";
+import { upload } from "@testing-library/user-event/dist/upload";
 
 const ModalExercise = ({ open, handleClose }) => {
   const { currentUser } = useContext(UserContext);
 
   const [exerciseData, setExerciseData] = useState({
-    name: '',
-    description: '',
-    videoURL: '',
+    name: "",
+    description: "",
+    videoURL: "",
   });
 
   const [selectedFile, setSelectedFile] = useState();
+  const [encodedFile, setEncodedFile] = useState("");
 
   const textFieldSpacing = {
-    marginBottom: '20px',
+    marginBottom: "20px",
   };
 
   const modalContainer = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 'auto',
-    backgroundColor: '#FFF',
-    borderRadius: '20px',
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "auto",
+    backgroundColor: "#FFF",
+    borderRadius: "20px",
   };
 
   const title = {
-    textAlign: 'center',
-    fontWeight: 'bold',
+    textAlign: "center",
+    fontWeight: "bold",
     color: theme.palette.primary.main,
-    marginBottom: '50px',
+    marginBottom: "50px",
   };
 
   const handleChange = (e) => {
@@ -60,23 +61,41 @@ const ModalExercise = ({ open, handleClose }) => {
 
   const handleModalClosing = () => {
     setExerciseData({
-      name: '',
-      description: '',
-      videoURL: '',
+      name: "",
+      description: "",
+      videoURL: "",
     });
   };
 
+  const handleChangeFile = (e) => {
+    const file = e.target.files[0];
+    setSelectedFile(file);
+    encodeFile(file);
+  };
+
+  const encodeFile = (file) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setEncodedFile(reader.result);
+    };
+  };
+
   const handleClick = async () => {
-    uploadVideo();
+    uploadVideoCloudinary();
     createExercise();
     handleClose();
   };
 
-  const uploadVideo = async () => {
+  const uploadVideoCloudinary = async () => {
     try {
-      const res = await uploadVideo(selectedFile);
+      const res = await uploadVideo(
+        encodedFile,
+        exerciseData.name,
+        exerciseData.description
+      );
 
-      if (res.rdo == 0) {
+      if (res.rdo === 0) {
         setExerciseData({ ...exerciseData, videoURL: res.videoData.url });
         console.log(res.message);
       } else {
@@ -96,10 +115,10 @@ const ModalExercise = ({ open, handleClose }) => {
         videoURL: exerciseData.videoURL,
       });
 
-      if (res.rdo == 0) {
-        console.log('Se creo el ejercicio');
+      if (res.rdo === 0) {
+        console.log("Se creo el ejercicio");
       } else {
-        console.log('Fallo algo');
+        console.log("Fallo algo");
       }
     } catch (e) {
       console.log(e);
@@ -137,13 +156,13 @@ const ModalExercise = ({ open, handleClose }) => {
               label="Video"
               sx={textFieldSpacing}
               disableUnderline
-              onChange={(e) => setSelectedFile(e.target.files[0])}
+              onChange={handleChangeFile}
             />
             <Grid item container justifyContent="center">
               <Grid item>
                 <Button
                   disabled={
-                    exerciseData.name === '' || exerciseData.description === ''
+                    exerciseData.name === "" || exerciseData.description === ""
                   }
                   size="large"
                   variant="contained"
