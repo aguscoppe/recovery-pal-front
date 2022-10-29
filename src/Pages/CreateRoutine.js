@@ -46,6 +46,7 @@ const CreateRoutine = () => {
     feedbacksDone: 0,
     exercises: [],
     doctor: currentUser._id,
+    autocompleteData: [],
   });
   const [modalAlert, setModalAlert] = useState({
     open: false,
@@ -74,17 +75,30 @@ const CreateRoutine = () => {
     }));
   };
 
-  const handleSelect = (e, v) => {
+  const handleSelect = (event, value, reason) => {
     const newExercise = {
-      exercise: v.at(-1),
+      exercise: value.at(-1),
       set: '',
       weight: '',
       repeat: '',
     };
-    setRutineData((prev) => ({
-      ...prev,
-      exercises: [...prev.exercises, newExercise],
-    }));
+    if (reason === 'clear') {
+      return setRutineData((prev) => ({
+        ...prev,
+        exercises: [],
+        autocompleteData: [],
+      }));
+    }
+    if (reason === 'removeOption') {
+      // add
+    }
+    if (reason === 'selectOption') {
+      return setRutineData((prev) => ({
+        ...prev,
+        exercises: [...prev.exercises, newExercise],
+        autocompleteData: [...prev.autocompleteData, newExercise.exercise],
+      }));
+    }
   };
 
   const handleExerciseChange = (e, index) => {

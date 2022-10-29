@@ -1,4 +1,4 @@
-import { Grid, Typography } from '@mui/material';
+import { Grid } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 import Header from '../Components/Header';
 import NavBar from '../Components/NavBar';
@@ -36,27 +36,29 @@ const HomeDoctor = () => {
   }, [currentUser._id]);
   return (
     <>
-      <Header title="Pacientes" icon={<HomeIcon />} />
+      <Header title='Pacientes' icon={<HomeIcon />} />
       <Grid
         container
-        direction="column"
-        justifyContent="center"
+        direction='column'
+        justifyContent='center'
         sx={{ paddingTop: '8vh' }}
       >
-        
-        <Grid item xs={11} md={6}>
-          <Typography variant="h4" fontWeight="600" align="center">
-            Mis Pacientes
-          </Typography>
+        <Grid
+          item
+          xs={11}
+          md={6}
+          display='flex'
+          flexDirection='column'
+          alignItems='center'
+          justifyContent='center'
+        >
+          <SearchPatients />
+          {patients === null ? (
+            <CircularProgress />
+          ) : (
+            patients.map((e) => <PatientCard patient={e} />)
+          )}
         </Grid>
-        <Grid item xs={11} md={6} alignSelf= "center" fullWidth sx= {{pt: 2}}>
-          <SearchPatients/>
-        </Grid>
-        {patients === null ? (
-          <CircularProgress />
-        ) : (
-          patients.map((e) => <PatientCard patient={e} />)
-        )}
       </Grid>
       <NavBar />
     </>
