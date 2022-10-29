@@ -102,10 +102,12 @@ export default function Register() {
       exercises: [
         {exercise: "6344efd0a35b582f6c5f1890",
         weight: "5 Kilos",
-        sets: 5},
+        sets: 5,
+        repetitions: 10},
         {exercise: "6344efd0a35b582f6c5f1890",
         weight: "10 Kilos",
-        sets: 10},
+        sets: 10,
+        repetitions: 15},
       ]
     };
     let info = await createRoutine(datos)

@@ -7,6 +7,7 @@ import VideoLibraryIcon from "@mui/icons-material/VideoLibrary";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import ReactPlayer from "react-player";
 import { useContext, useState, useEffect } from "react";
+import { UserContext } from "../Contexts/UserContext";
 import { getRoutineById } from "../Controllers/RoutineEntry.Controller";
 import { getFeedbackById, getLastFeedbackByRoutin } from "../Controllers/FeedbackEntry.Controller";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -14,6 +15,7 @@ import LinearProgress, {
   linearProgressClasses,
 } from "@mui/material/LinearProgress";
 import { getExerciseById } from "../Controllers/ExerciseEntry.Controller";
+import { getDoctorById } from "../Controllers/DoctorEntry.Controller";
 
 
 //Aca esta el stylizado de la barra de progreso
@@ -29,9 +31,6 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
   },
 }));
 
-
-
-
 const Routine = ({ routine }) => {   //se recibe ya una rutina
   //para mejor entendimiento del codigo se guardan en variables los valores de esta rutina
   const _id = routine._id;
@@ -41,8 +40,10 @@ const Routine = ({ routine }) => {   //se recibe ya una rutina
   const duration = routine.schedule.weeks;
   const frequency = routine.schedule.days.length;
   const feedbacksDone = routine.feedbacksDone;
+  const doctorId = routine.doctor;
+  const [doctorName,setDoctorName] = useState("");
   const [firstExercise, setFirstExercise] = useState(null)
-
+  const currentUser = useContext(UserContext);
 
   //todo lo siguiente esta comentado porque es otra forma de recuperar la rutina
   /*
@@ -92,12 +93,25 @@ useEffect(() => {
     }
   };
 
-  getExercise();
+  //Esta llamada es para traer el nombre del doctor
+  const getDoctor = async function () {
+    const respuesta = await getDoctorById(doctorId)
+    console.log("Console log de respuesta de back ", respuesta);
+    if (respuesta.rdo === 1) {
+      alert("No se pudo encontrar al doctor");
+    } else {
+      var name = "Dr. " + respuesta.doctor.name + " " + respuesta.doctor.lastName
+      setDoctorName(name)
+    }
+  };
 
+  getExercise();
+  getDoctor();
   
 }, [routine]);
 
   return (
+
     <Link to={`/routine/${_id}`} style={{ textDecoration: "none" }}>
       <Card
         sx={
@@ -128,6 +142,10 @@ useEffect(() => {
               <Typography variant="h6" sx={{ fontWeight: "500" }}>
                 {name}
               </Typography>
+              {currentUser.role !== 'doctor' ?
+              <Typography variant="h7" sx={{ fontWeight: "500", marginBottom: "1vh"}}>
+                {doctorName}
+              </Typography> : <div></div>}
               <Typography variant="body1" sx={{ fontWeight: "500" }}>
                 <CalendarTodayIcon /> {frequency} por semana
               </Typography>
