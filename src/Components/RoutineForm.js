@@ -33,7 +33,11 @@ const RoutineForm = ({
   openExerciseModal,
   setCurrentForm,
 }) => {
-  let listEjercicios = exercises.map((exercise) => exercise.videoTitle);
+  const btnDisabled =
+    rutineData.name === '' ||
+    rutineData.weeks === '' ||
+    rutineData.exercises.length === 0 ||
+    Object.values(rutineData.days).filter((val) => val).length === 0;
   return (
     <Grid
       container
@@ -93,19 +97,20 @@ const RoutineForm = ({
         <Autocomplete
           multiple
           disablePortal
-          options={listEjercicios}
+          options={exercises}
           renderInput={(params) => (
             <TextField {...params} label='Buscar ejercicio' />
           )}
+          getOptionLabel={(option) => option.exercise.videoTitle}
           onChange={handleSelect}
           sx={textFieldSpacing}
           noOptionsText='No hay resultados'
-          value={rutineData.autocompleteData}
+          value={rutineData.exercises}
         />
         <Grid item container alignItems='center' direction='column'>
           <Grid item paddingTop={3}>
             <Button
-              disabled={rutineData.name === '' || rutineData.weeks === ''}
+              disabled={btnDisabled}
               variant='contained'
               onClick={() => setCurrentForm(1)}
               size='large'
