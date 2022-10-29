@@ -14,17 +14,18 @@ const Exercisev2 = ({ exercise }) => {
         justifyContent="center"
         sx={{ padding: "10vh 0" }}>
           <Grid item xs={6} margin='10px'>
-            <ReactPlayer light url={videoURL} width='80%' height='80%' />
+            <ReactPlayer url={videoURL} width='80%' height='80%' />
           </Grid>
           <Grid item xs={4} margin='10px'>
             <Typography variant='h6' sx={{ fontWeight: '500' }}>
               {videoTitle}
             </Typography>
+          </Grid>
             <Grid item xs={1} >
               <IconButton >
                   <ExpandCircleDownIcon sx={{ color: 'lightblue' }} />
               </IconButton>
-            </Grid>
+            
           </Grid>
         </Grid>
       </Card>

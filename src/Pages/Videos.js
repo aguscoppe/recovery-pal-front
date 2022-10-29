@@ -22,6 +22,7 @@ const Videos = () => {
   const currentUser = useContext(UserContext);
   const [doctor, setDoctor] = useState(null);
   const [exercises, setExercises] = useState(null);
+  const [exercisesFiltrados, setExercisesFiltrados] = useState(null)
 
   useEffect(() => {
     const getDoctor = async function () {
@@ -37,6 +38,8 @@ const Videos = () => {
         setDoctor(respuestaDoctor.doctor);
         console.log(JSON.stringify(respuestaDoctor));
         setExercises(respuestaDoctor.doctor.exercises);
+        setExercisesFiltrados(respuestaDoctor.doctor.exercises);
+
       }
     };
     getDoctor();
@@ -50,14 +53,14 @@ const Videos = () => {
         sx={{ paddingTop: '10vh' }}>
         <Grid item xs={12} md={12} alignSelf= "center" sx= {{pt: 2}}>
 
-          <SearchExercise />
+          <SearchExercise exercises= {exercises} setExercisesFiltrados = {setExercisesFiltrados}/>
 
         </Grid>
         <Grid item xs={11} md={6} marginLeft="20px" marginRight="20px">
-        {exercises === null ? (
+        {exercisesFiltrados === null ? (
           <CircularProgress />
         ) : (
-          exercises.map((e) => (<Exercisev2 exercise={e} />))
+          exercisesFiltrados.map((e) => (<Exercisev2 exercise={e} />))
         )}
         </Grid>
       </Grid>
