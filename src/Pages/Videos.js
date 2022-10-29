@@ -1,29 +1,116 @@
-import { useContext } from 'react';
-import { UserContext } from '../Contexts/UserContext';
-import { Grid, Typography } from '@mui/material';
-import NavBar from '../Components/NavBar';
-import Header from '../Components/Header';
-import VideocamIcon from '@mui/icons-material/Videocam';
+import { useContext, useState, useEffect } from "react";
+import { UserContext } from "../Contexts/UserContext";
+import { Grid, Fab } from "@mui/material";
+import { getDoctorById } from "../Controllers/DoctorEntry.Controller";
+import VideocamIcon from "@mui/icons-material/Videocam";
+import CircularProgress from "@mui/material/CircularProgress";
+import AddIcon from "@mui/icons-material/Add";
+import NavBar from "../Components/NavBar";
+import Header from "../Components/Header";
+import Exercisev2 from "../Components/Exercisev2";
+import SearchExercise from "../Components/SearchExercise";
+import ModalExercise from "../Components/ModalExercise";
 
 const Videos = () => {
   const currentUser = useContext(UserContext);
+  const [doctor, setDoctor] = useState(null);
+  const [exercises, setExercises] = useState(null);
+  const [exercisesFiltrados, setExercisesFiltrados] = useState(null);
+
+  useEffect(() => {
+    const getDoctor = async function () {
+      const respuestaDoctor = await getDoctorById(currentUser._id);
+      console.log(
+        "Console log de respuesta de back ",
+        JSON.stringify(respuestaDoctor)
+      );
+      if (respuestaDoctor.rdo === 1) {
+        alert("No existe el doctor");
+        window.location.href = "/";
+      } else {
+        setDoctor(respuestaDoctor.doctor);
+        console.log(JSON.stringify(respuestaDoctor));
+        setExercises(respuestaDoctor.doctor.exercises);
+        setExercisesFiltrados(respuestaDoctor.doctor.exercises);
+      }
+    };
+    getDoctor();
+  }, [currentUser._id]);
+
+  const [modalAlert, setModalAlert] = useState({
+    open: false,
+    type: "",
+    title: "",
+    subtitle: "",
+    primaryBtnText: "",
+    primaryBtnPage: "",
+    setNotOpen: () => {},
+  });
+
+  const [modalExercise, setModalExercise] = useState({
+    open: false,
+    handleClose: () => {},
+  });
+  const openExerciseModal = () => {
+    setModalExercise((prev) => ({ ...prev, open: true }));
+  };
+  const closeExerciseModal = (e) => {
+    setModalExercise((prev) => ({ ...prev, open: false }));
+    if (e.target.innerText !== "CANCELAR") {
+      setModalAlert({
+        type: "success",
+        open: true,
+        title: "¡Bien hecho!",
+        subtitle: "Ejercicio creado correctamente",
+        primaryBtnText: "Continuar",
+        setNotOpen: () => {
+          setModalAlert((prev) => ({ ...prev, open: false }));
+        },
+      });
+    }
+  };
+
   return (
     <>
-      <Header title='Videos' icon={<VideocamIcon />} />
-      <Grid container justifyContent='center' sx={{ padding: '10vh 0' }}>
-        <Grid item xs={11} md={6}>
-          <Typography variant='h3'>¡Bienvenido {currentUser?.role}!</Typography>
-          <Typography variant='body1' marginTop='20px'>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </Typography>
+      <Header title="Videos" icon={<VideocamIcon />} />
+      <Grid
+        container
+        direction="column"
+        justifyContent="center"
+        sx={{ paddingTop: "10vh" }}
+      >
+        <Grid item xs={12} md={12} alignSelf="center" sx={{ pt: 2 }}>
+          <SearchExercise
+            exercises={exercises}
+            setExercisesFiltrados={setExercisesFiltrados}
+          />
+        </Grid>
+        <Grid item xs={11} md={6} marginLeft="20px" marginRight="20px">
+          {exercisesFiltrados === null ? (
+            <CircularProgress />
+          ) : (
+            exercisesFiltrados.map((e) => <Exercisev2 exercise={e} />)
+          )}
         </Grid>
       </Grid>
+
+      <Fab
+        color="primary"
+        aria-label="add"
+        sx={{
+          position: "fixed",
+          bottom: 80,
+          right: 25,
+        }}
+        onClick={openExerciseModal}
+      >
+        <AddIcon />
+      </Fab>
+
+      <ModalExercise
+        open={modalExercise.open}
+        handleClose={closeExerciseModal}
+      />
       <NavBar />
     </>
   );

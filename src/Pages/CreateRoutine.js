@@ -10,28 +10,12 @@ import { createRoutine } from '../Controllers/RoutineEntry.Controller';
 import RoutineForm from '../Components/RoutineForm';
 import ExerciseForm from '../Components/ExerciseForm';
 
-/*
-const routine = {
-  name: '',
-  days: [1, 3],
-  weeks: 4,
-  patient: idPatient,
-  feedbacksDone: 0,
-  exercises: [
-    { set: 4, weight: '4KG', exercise: '634b10569aa4b12bc8e55dd7' },
-    { set: 4, weight: '4KG', exercise: '634b10719aa4b12bc8e55dd8' },
-  ],
-  doctor: currentUser._id,
-}
-*/
-
 const CreateRoutine = () => {
   const currentUser = useContext(UserContext);
   const { idPatient } = useParams();
   const [currentForm, setCurrentForm] = useState(0);
   const [rutineData, setRutineData] = useState({
     name: '',
-    frecuency: '',
     days: {
       0: false,
       1: false,
@@ -75,28 +59,34 @@ const CreateRoutine = () => {
     }));
   };
 
-  const handleSelect = (event, value, reason) => {
-    const newExercise = {
-      exercise: value.at(-1),
-      set: '',
-      weight: '',
-      repeat: '',
-    };
+  const handleSelect = (event, value, reason, detail) => {
     if (reason === 'clear') {
       return setRutineData((prev) => ({
         ...prev,
         exercises: [],
-        autocompleteData: [],
       }));
     }
     if (reason === 'removeOption') {
-      // add
-    }
-    if (reason === 'selectOption') {
+      const selectedValue = detail.option;
       return setRutineData((prev) => ({
         ...prev,
-        exercises: [...prev.exercises, newExercise],
-        autocompleteData: [...prev.autocompleteData, newExercise.exercise],
+        exercises: prev.exercises.filter(
+          (ex) => ex.exercise._id !== selectedValue.exercise._id
+        ),
+      }));
+    }
+    if (reason === 'selectOption') {
+      /*
+      const newExercise = {
+        exercise: value.at(-1),
+        set: '',
+        weight: '',
+        repetitions: '',
+      };
+      */
+      return setRutineData((prev) => ({
+        ...prev,
+        exercises: [...prev.exercises, value.at(-1)],
       }));
     }
   };
@@ -140,17 +130,25 @@ const CreateRoutine = () => {
     const daysArr = [];
     for (const [key, value] of Object.entries(days)) {
       if (value) {
-        daysArr.push(key);
+        daysArr.push(parseInt(key));
       }
     }
+    const newExercises = exercises.map((ex) => ({
+      exercise: ex.exercise._id,
+      weight: `${ex.weight} Kilos`,
+      sets: parseInt(ex.sets),
+      repetitions: parseInt(ex.repetitions),
+    }));
     const newRoutine = {
       name: name,
       days: daysArr,
       weeks: parseInt(weeks),
       patient: patient,
       doctor: doctor,
-      exercises: exercises,
+      exercises: newExercises,
     };
+    console.log('newRoutine: ', newRoutine);
+    /*
     let info = await createRoutine(newRoutine);
     console.log('info: ', info);
     if (info.rdo === 0) {
@@ -174,6 +172,7 @@ const CreateRoutine = () => {
         },
       });
     }
+    */
   };
 
   return (

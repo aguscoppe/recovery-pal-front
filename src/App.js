@@ -16,6 +16,7 @@ import ExerciseList from './Pages/ExerciseList';
 import CreateRoutine from './Pages/CreateRoutine';
 import VideoDisplay from './Pages/VideoDisplay';
 import PatientRoutine from './Pages/PatientRoutine';
+import VideoDisplayDoctor from './Pages/VideoDisplayDoctor';
 import { exercises } from './data';
 import { Navigate } from "react-router-dom";
 
@@ -66,6 +67,12 @@ function App() {
           <Route path='/createExercise' element={<CreateExercise />} />
           <Route path='/chat' element={<Chat />} />
           <Route path='/videos' element={<Videos />} />
+          <Route
+            path='/videos/:idExercise'
+            element={
+              <VideoDisplayDoctor exerciseList={exerciseList} />
+            }
+          />
           </>}
         </Routes>
       </UserContext.Provider>
