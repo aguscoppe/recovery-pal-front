@@ -85,7 +85,7 @@ const ModalExercise = ({ open, handleClose }) => {
   const handleClick = async () => {
     uploadVideoCloudinary();
     createExercise();
-    handleClose(e);
+    handleClose();
   };
 
   const uploadVideoCloudinary = async () => {
