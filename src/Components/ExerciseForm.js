@@ -38,8 +38,8 @@ const Exercise = ({ name, handleExerciseChange, rutineData, index }) => {
         type='number'
         fullWidth
         sx={textFieldSpacing}
-        name='set'
-        value={rutineData.exercises[index].set}
+        name='sets'
+        value={rutineData.exercises[index].sets}
         onChange={(e) => handleExerciseChange(e, index)}
       />
       <TextField
@@ -47,8 +47,8 @@ const Exercise = ({ name, handleExerciseChange, rutineData, index }) => {
         type='number'
         fullWidth
         sx={textFieldSpacing}
-        name='repeat'
-        value={rutineData.exercises[index].repeat}
+        name='repetitions'
+        value={rutineData.exercises[index].repetitions}
         onChange={(e) => handleExerciseChange(e, index)}
       />
     </Card>
@@ -61,6 +61,10 @@ const ExerciseForm = ({
   handleSubmit,
   setCurrentForm,
 }) => {
+  const btnDisabled =
+    rutineData.exercises.filter(
+      (ex) => ex.set === '' || ex.repetitions === '' || ex.weight === ''
+    ).length > 0;
   return (
     <Grid
       container
@@ -73,7 +77,7 @@ const ExerciseForm = ({
           {rutineData.exercises.map((el, index) => (
             <Exercise
               key={index}
-              name={el.exercise}
+              name={el.exercise.videoTitle}
               handleExerciseChange={handleExerciseChange}
               rutineData={rutineData}
               index={index}
@@ -90,7 +94,12 @@ const ExerciseForm = ({
           </Button>
         </Grid>
         <Grid item paddingTop={3}>
-          <Button variant='contained' size='large' onClick={handleSubmit}>
+          <Button
+            variant='contained'
+            size='large'
+            onClick={handleSubmit}
+            disabled={btnDisabled}
+          >
             FINALIZAR
           </Button>
         </Grid>

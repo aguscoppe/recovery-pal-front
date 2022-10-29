@@ -16,38 +16,58 @@ export const doctor = {
   surname: 'González',
   role: 'doctor',
   imgSrc: 'https://mui.com/static/images/avatar/1.jpg',
-  _id : "6344f9393a24686318707f3f"
+  _id: '6344f9393a24686318707f3f',
 };
 
 export const exercises = [
   {
-    _id: 'ex1',
-    doctor: 'do1',
-    instructions: 'Caminar Recto durante 5 cuadras',
-    videoTitle: 'Caminar Recto 5 Cuadras',
-    videoURL: 'http://127.0.0.1:8080/videos/Caminar_Recto.mp4',
+    exercise: {
+      _id: 'ex1',
+      doctor: 'do1',
+      instructions: 'Caminar Recto durante 5 cuadras',
+      videoTitle: 'Caminar Recto 5 Cuadras',
+      videoURL: 'http://127.0.0.1:8080/videos/Caminar_Recto.mp4',
+    },
+    repetitions: '',
+    sets: '',
+    weight: '',
   },
   {
-    _id: 'ex2',
-    doctor: 'do1',
-    instructions: 'Flexiones con pesas',
-    videoTitle: 'Flexiones con pesas',
-    videoURL: 'http://127.0.0.1:8080/videos/Flexiones_Peso.mp4',
+    exercise: {
+      _id: 'ex2',
+      doctor: 'do1',
+      instructions: 'Flexiones con pesas',
+      videoTitle: 'Flexiones con pesas',
+      videoURL: 'http://127.0.0.1:8080/videos/Flexiones_Peso.mp4',
+    },
+    repetitions: '',
+    sets: '',
+    weight: '',
   },
   {
-    _id: 'ex3',
-    doctor: 'do1',
-    instructions: 'Girar las muñecas',
-    videoTitle: 'Girar Muñecas',
-    videoURL: 'http://127.0.0.1:8080/videos/Girar_Muñecas.mp4',
+    exercise: {
+      _id: 'ex3',
+      doctor: 'do1',
+      instructions: 'Girar las muñecas',
+      videoTitle: 'Girar Muñecas',
+      videoURL: 'http://127.0.0.1:8080/videos/Girar_Muñecas.mp4',
+    },
+    repetitions: '',
+    sets: '',
+    weight: '',
   },
 
   {
-    _id: 'ex4',
-    doctor: 'do1',
-    instructions: 'Dominadas con agarre prono',
-    videoTitle: 'Dominadas',
-    videoURL: 'http://127.0.0.1:8080/videos/Dominadas.mp4',
+    exercise: {
+      _id: 'ex4',
+      doctor: 'do1',
+      instructions: 'Dominadas con agarre prono',
+      videoTitle: 'Dominadas',
+      videoURL: 'http://127.0.0.1:8080/videos/Dominadas.mp4',
+    },
+    repetitions: '',
+    sets: '',
+    weight: '',
   },
 ];
 
