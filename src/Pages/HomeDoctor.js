@@ -7,6 +7,7 @@ import { useContext, useState, useEffect } from 'react';
 import { getDoctorById } from '../Controllers/DoctorEntry.Controller';
 import { UserContext } from '../Contexts/UserContext';
 import CircularProgress from '@mui/material/CircularProgress';
+import SearchPatients from '../Components/SearchPatients';
 
 /* Esta pagina es el home que deberia ver el doctor con la lista de sus pacientes aun no conectada con el back */
 const HomeDoctor = () => {
@@ -42,10 +43,14 @@ const HomeDoctor = () => {
         justifyContent="center"
         sx={{ paddingTop: '8vh' }}
       >
+        
         <Grid item xs={11} md={6}>
           <Typography variant="h4" fontWeight="600" align="center">
             Mis Pacientes
           </Typography>
+        </Grid>
+        <Grid item xs={11} md={6} alignSelf= "center" fullWidth sx= {{pt: 2}}>
+          <SearchPatients/>
         </Grid>
         {patients === null ? (
           <CircularProgress />

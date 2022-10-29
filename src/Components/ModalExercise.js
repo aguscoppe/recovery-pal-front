@@ -42,6 +42,7 @@ const ModalExercise = ({ open, handleClose }) => {
     justifyContent: "center",
     alignItems: "center",
     height: "auto",
+    width: "80%",
     backgroundColor: "#FFF",
     borderRadius: "20px",
   };
@@ -84,7 +85,7 @@ const ModalExercise = ({ open, handleClose }) => {
   const handleClick = async () => {
     uploadVideoCloudinary();
     createExercise();
-    handleClose();
+    handleClose(e);
   };
 
   const uploadVideoCloudinary = async () => {
@@ -159,18 +160,24 @@ const ModalExercise = ({ open, handleClose }) => {
               onChange={handleChangeFile}
             />
             <Grid item container justifyContent="center">
-              <Grid item>
-                <Button
-                  disabled={
-                    exerciseData.name === "" || exerciseData.description === ""
-                  }
-                  size="large"
-                  variant="contained"
-                  onClick={handleClick}
-                >
-                  Finalizar
-                </Button>
-              </Grid>
+              <Button
+                size="large"
+                variant="outlined"
+                onClick={handleClose}
+                sx={{ marginRight: "20px" }}
+              >
+                Cancelar
+              </Button>
+              <Button
+                disabled={
+                  exerciseData.name === "" || exerciseData.description === ""
+                }
+                size="large"
+                variant="contained"
+                onClick={handleClick}
+              >
+                Finalizar
+              </Button>
             </Grid>
           </Grid>
         </Grid>
