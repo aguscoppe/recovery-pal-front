@@ -10,28 +10,12 @@ import { createRoutine } from '../Controllers/RoutineEntry.Controller';
 import RoutineForm from '../Components/RoutineForm';
 import ExerciseForm from '../Components/ExerciseForm';
 
-/*
-const routine = {
-  name: '',
-  days: [1, 3],
-  weeks: 4,
-  patient: idPatient,
-  feedbacksDone: 0,
-  exercises: [
-    { set: 4, weight: '4KG', exercise: '634b10569aa4b12bc8e55dd7' },
-    { set: 4, weight: '4KG', exercise: '634b10719aa4b12bc8e55dd8' },
-  ],
-  doctor: currentUser._id,
-}
-*/
-
 const CreateRoutine = () => {
   const currentUser = useContext(UserContext);
   const { idPatient } = useParams();
   const [currentForm, setCurrentForm] = useState(0);
   const [rutineData, setRutineData] = useState({
     name: '',
-    frecuency: '',
     days: {
       0: false,
       1: false,
