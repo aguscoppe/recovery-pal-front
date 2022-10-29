@@ -53,16 +53,6 @@ const RoutineForm = ({
         />
         <TextField
           type='number'
-          name='frecuency'
-          value={rutineData.frecuency}
-          fullWidth
-          label='Frecuencia (ejercicios por día)'
-          variant='outlined'
-          onChange={handleChange}
-          sx={textFieldSpacing}
-        />
-        <TextField
-          type='number'
           name='weeks'
           value={rutineData.weeks}
           fullWidth
@@ -110,25 +100,22 @@ const RoutineForm = ({
           onChange={handleSelect}
           sx={textFieldSpacing}
           noOptionsText='No hay resultados'
+          value={rutineData.autocompleteData}
         />
         <Grid item container alignItems='center' direction='column'>
           <Grid item paddingTop={3}>
-            <Button size='large' variant='outlined' onClick={openExerciseModal}>
-              CREAR EJERCICIO
-            </Button>
-          </Grid>
-          <Grid item paddingTop={3}>
             <Button
-              disabled={
-                rutineData.name === '' ||
-                rutineData.frecuency === '' ||
-                rutineData.weeks === ''
-              }
+              disabled={rutineData.name === '' || rutineData.weeks === ''}
               variant='contained'
               onClick={() => setCurrentForm(1)}
               size='large'
             >
               CONTINUAR
+            </Button>
+          </Grid>
+          <Grid item paddingTop={3}>
+            <Button size='large' variant='outlined' onClick={openExerciseModal}>
+              CREAR EJERCICIO
             </Button>
           </Grid>
         </Grid>
