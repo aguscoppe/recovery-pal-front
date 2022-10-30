@@ -15,6 +15,7 @@ const HomeDoctor = () => {
 
   const [doctor, setDoctor] = useState(null);
   const [patients, setPatients] = useState(null);
+  const [patientsFiltered, setPatientsFiltered] = useState(null)
 
   useEffect(() => {
     const getDoctor = async function () {
@@ -30,6 +31,7 @@ const HomeDoctor = () => {
         setDoctor(respuestaDoctor.doctor);
         console.log(JSON.stringify(respuestaDoctor));
         setPatients(respuestaDoctor.doctor.patients);
+        setPatientsFiltered(respuestaDoctor.doctor.patients);
       }
     };
     getDoctor();
@@ -41,8 +43,19 @@ const HomeDoctor = () => {
         container
         direction='column'
         justifyContent='center'
-        sx={{ paddingTop: '8vh' }}
+        sx={{ paddingTop: '10vh' }}
       >
+        <Grid
+          item
+          xs={12}
+          md={12}
+          display='flex'
+          flexDirection='column'
+          alignItems='center'
+          justifyContent='center'
+        >
+                  <SearchPatients setPatientsFiltered= {setPatientsFiltered} patients={patients}/>
+                  </Grid>
         <Grid
           item
           xs={11}
@@ -52,11 +65,10 @@ const HomeDoctor = () => {
           alignItems='center'
           justifyContent='center'
         >
-          <SearchPatients />
-          {patients === null ? (
+          {patientsFiltered === null ? (
             <CircularProgress />
           ) : (
-            patients.map((e) => <PatientCard patient={e} />)
+            patientsFiltered.map((e) => <PatientCard patient={e} />)
           )}
         </Grid>
       </Grid>

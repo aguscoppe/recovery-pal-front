@@ -7,7 +7,7 @@ const PatientCard = ({ patient }) => {
   const theme = useTheme();
   return (
     <Grid item xs={10} md={5}>
-      <Paper elevation={3} sx={{ margin: '2vh' }}>
+      <Paper elevation={3} sx={{ margin: '1vh' }}>
         <Grid container padding={'3vh'}>
           <Grid item xs={4.7}>
             <Avatar
