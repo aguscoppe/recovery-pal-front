@@ -1,4 +1,4 @@
-import { TextField, Fab } from "@mui/material";
+import { TextField, Fab, Grid } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { useState } from "react";
 
@@ -22,6 +22,7 @@ function SearchExercise(props) {
 
   return (
     <>
+    <Grid container justifyContent="center" sx={{ padding: "10vh 0" }}>
       <TextField
         name="searchExercise"
         value={exerciseBuscado}
@@ -34,6 +35,7 @@ function SearchExercise(props) {
       <Fab color="primary" aria-label="search" sx={{ ml: 2 }} onClick={buscar}>
         <SearchIcon />
       </Fab>
+      </Grid>
     </>
   );
 }

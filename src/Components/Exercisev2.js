@@ -10,9 +10,9 @@ const Exercisev2 = ({ exercise }) => {
   return (
     <Link to={`${_id}`} style={{ textDecoration: "none" }}>
       <Card sx={{ marginTop: "12px" }}>
-        <Grid container justifyContent="center" sx={{ padding: "10vh 0" }}>
+        <Grid container alignItems="center" >
           <Grid item xs={6} margin="10px">
-            <ReactPlayer url={videoURL} width="80%" height="80%" />
+            <ReactPlayer url={videoURL} width="100%" height="100%" />
           </Grid>
           <Grid item xs={4} margin="10px">
             <Typography variant="h6" sx={{ fontWeight: "500" }}>
