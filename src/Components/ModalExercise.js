@@ -189,3 +189,24 @@ const ModalExercise = ({ open, handleClose }) => {
 };
 
 export default ModalExercise;
+
+
+/* LABEL DE BOTON PARA SUBIR ARCHIVOS (IDEA)
+
+<Grid item container justifyContent="center"> 
+            <Button variant= "contained"
+              component="label"
+              
+              >
+            <input
+              type="file"
+              hidden
+              label="video"
+              sx={textFieldSpacing}
+              disableUnderline
+              onChange={handleChangeFile}
+            />
+            Subir video
+            </Button>
+            </Grid>
+            */
