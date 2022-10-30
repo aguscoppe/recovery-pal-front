@@ -7,10 +7,19 @@ function SearchPatients(props) {
 
   const [patientFilter, setPatientFilter] = useState(null)
 
+  function onChange(e) {
+    setPatientFilter(e.target.value)
+    if (e.target.value === "") {
+      props.setPatientsFiltered(props.patients)
+    }
+  }
+
   function buscarPatients() {
     props.setPatientsFiltered(
       props.patients.filter((e) =>
-        `${e.name} ${e.lastName}`.toLowerCase().includes(patientFilter.toLowerCase())
+        `${e.name} ${e.lastName}`.toLowerCase().normalize('NFD')
+        .replace(/([aeio])\u0301|(u)[\u0301\u0308]/gi,"$1$2")
+        .normalize().includes(patientFilter.toLowerCase())
       )
     );
     
@@ -27,9 +36,9 @@ function SearchPatients(props) {
         name='searchPatient'
         value={null}
         style={{ width: 300 }}
-        label='Ingrese mail del paciente'
+        label='Nombre del paciente'
         variant='outlined'
-        onChange={(e) => setPatientFilter(e.target.value)}
+        onChange={onChange}
         sx={null}
       />
       <Fab color='primary' aria-label='search' sx={{ ml: 2 }} onClick={buscarPatients}>
