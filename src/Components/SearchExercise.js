@@ -22,7 +22,7 @@ function SearchExercise(props) {
 
   return (
     <>
-    <Grid container justifyContent="center" sx={{ padding: "10vh 0" }}>
+    <Grid container justifyContent="center" sx={{ padding: "10vh 0", marginBottom: "12px"  }}>
       <TextField
         name="searchExercise"
         value={exerciseBuscado}

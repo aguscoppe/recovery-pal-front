@@ -77,8 +77,8 @@ const Videos = () => {
         container
         fullWidth
         justifyContent="center"
-        sx={{ paddingTop: "10vh" }}
-      >
+        sx={{ paddingTop: "10vh" , marginBottom: "50px"  }}
+      > {/* Added some white space at bottom to show the entire card */}
         <Grid item xs={12} md={12} alignSelf="center" sx={{ pt: 2 }}>
           <SearchExercise
             exercises={exercises}
