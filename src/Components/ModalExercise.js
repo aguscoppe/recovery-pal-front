@@ -164,10 +164,11 @@ const ModalExercise = ({ open, handleClose }) => {
                 size="large"
                 variant="outlined"
                 onClick={handleClose}
-                sx={{ marginRight: "20px" }}
               >
                 Cancelar
               </Button>
+            </Grid>
+            <Grid item container justifyContent="center">
               <Button
                 disabled={
                   exerciseData.name === "" || exerciseData.description === ""
@@ -175,6 +176,7 @@ const ModalExercise = ({ open, handleClose }) => {
                 size="large"
                 variant="contained"
                 onClick={handleClick}
+                sx= {{mt: 3}}
               >
                 Finalizar
               </Button>
