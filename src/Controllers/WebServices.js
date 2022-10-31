@@ -25,7 +25,9 @@ const urlWebServices = {
 
   uploadVideo: urlApi + 'api/files/uploadVideo',
 
-  achievements: urlApi + 'api/achievements'
+  achievements: urlApi + 'api/achievements',
+  achievementsRoutine: urlApi + 'api/achievements/routine',
+  achievementsReport: urlApi + 'api/achievements/report'
 };
 
 export default urlWebServices;
