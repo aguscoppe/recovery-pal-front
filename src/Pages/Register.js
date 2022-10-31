@@ -13,6 +13,7 @@ import { patientRegistration } from '../Controllers/PatientEntry.Controller';
 import { doctorRegistration } from '../Controllers/DoctorEntry.Controller';
 import { getPatientById } from '../Controllers/PatientEntry.Controller';
 import { createRoutine, getRoutineById } from '../Controllers/RoutineEntry.Controller';
+import { achievements } from '../Controllers/AchievementEntry.Controller';
 
 const style = {
   container: {
@@ -92,6 +93,11 @@ export default function Register() {
     console.log('Soy la routine del Back:', routine.routine);
   };
 
+  const pruebaAchievements = async function () {
+    var report = await achievements("633c97e68efef931d4597301")
+    console.log('Soy achievements del Back:', report.data.Achievements);
+  };
+
   const pruebaPostRoutine = async function () {
     let datos = {
       name: "Rutina Final",
@@ -145,7 +151,8 @@ export default function Register() {
           // pruebaGetPatient();
           //validarRegistro()
           // pruebaGetRoutine()
-          pruebaPostRoutine();
+          //pruebaPostRoutine();
+          pruebaAchievements()
         }
       }
     }
