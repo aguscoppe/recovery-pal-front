@@ -148,7 +148,7 @@ const CreateRoutine = () => {
       exercises: newExercises,
     };
     console.log('newRoutine: ', newRoutine);
-    /*
+    
     let info = await createRoutine(newRoutine);
     console.log('info: ', info);
     if (info.rdo === 0) {
@@ -172,7 +172,7 @@ const CreateRoutine = () => {
         },
       });
     }
-    */
+    
   };
 
   return (

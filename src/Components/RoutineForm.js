@@ -56,16 +56,36 @@ const RoutineForm = ({
         window.location.href = "/";
       } else {
         var exercisesReturned = respuestaDoctor.doctor.exercises
-        const structure = { repetitions: '',
-        sets: '',
-        weight: ''}
+        const structure = {
+          
+          repetitions: '',
+          sets: '',
+          weight: '',
+        }
+        var exercisesList = []
+
+        for(var i=0; i<exercisesReturned.length; i++) {
+          exercisesList.push(
+
+            {
+              ...structure,
+              exercise: exercisesReturned[i]
+            }
+
+          )
+
+        }
+
+        setExercises(exercisesList)
+
+
 
 
 
 
         //setExercises(exercisesReturned.map((e) => {"exercise": e}));
-        console.log(JSON.stringify(respuestaDoctor));
-        console.log("Soy el consol log de prueba", exercisesReturned.map((e) => {exercise: e}))
+        console.log(JSON.stringify(respuestaDoctor))
+
         /*
         {
           exercise: {
@@ -81,7 +101,7 @@ const RoutineForm = ({
         }
         */
       }
-    };
+    }
     getDoctor();
   }, [currentUser._id]);
   return (
