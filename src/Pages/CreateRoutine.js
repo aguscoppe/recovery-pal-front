@@ -76,14 +76,13 @@ const CreateRoutine = () => {
       }));
     }
     if (reason === 'selectOption') {
-      /*
+ 
       const newExercise = {
         exercise: value.at(-1),
         set: '',
         weight: '',
         repetitions: '',
       };
-      */
       return setRutineData((prev) => ({
         ...prev,
         exercises: [...prev.exercises, value.at(-1)],
@@ -148,7 +147,7 @@ const CreateRoutine = () => {
       exercises: newExercises,
     };
     console.log('newRoutine: ', newRoutine);
-    /*
+
     let info = await createRoutine(newRoutine);
     console.log('info: ', info);
     if (info.rdo === 0) {
@@ -172,7 +171,7 @@ const CreateRoutine = () => {
         },
       });
     }
-    */
+
   };
 
   return (

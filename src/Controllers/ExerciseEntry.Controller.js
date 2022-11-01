@@ -244,6 +244,46 @@ export const getExerciseByVideoTitleMatch = async function(videoTitleToMatch, do
     catch(error){
         console.log("error",error);
     };
+}
+
+export const getAllExcercises = async function(){
+    //url webservices
+    let url = urlWebServices.getAllExcercises + "/" ;
+    //armo json con datos
+    const formData = new URLSearchParams();
+
+    try{
+        let response = await fetch(url,{
+            method: 'GET',
+            mode: "cors",
+            headers:{
+                'Accept':'application/x-www-form-urlencoded',
+               // 'x-access-token': WebToken.webToken,
+                'Origin':'http://localhost:3000',
+                'Content-Type': 'application/x-www-form-urlencoded'},
+            body: formData,
+            
+        });
+        
+        let rdo = response.status;
+        console.log("response",response);
+        let data = await response.json();
+        console.log("jsonresponse",data);
+            switch(rdo){
+                case 200:
+                {
+                    return ({rdo:0, exercise:data.exercise});//correcto
+                }
+                default:
+                {
+                    //otro error
+                    return ({rdo:1,mensaje:data.message});                
+                }
+            }
+    }
+    catch(error){
+        console.log("error",error);
+    };
 
     
 }

@@ -9,6 +9,8 @@ import {
   FormLabel,
   Checkbox,
 } from '@mui/material';
+import { useContext, useState, useEffect } from 'react';
+//import { getAllExcercises } from '../Controllers/ExerciseEntry.Controller';
 import { exercises } from '../data';
 
 const daysList = [
@@ -24,6 +26,10 @@ const daysList = [
 const textFieldSpacing = {
   marginBottom: '20px',
 };
+/*
+const handleAutocompleteChange = () => {
+  {handleSelect}
+}*/
 
 const RoutineForm = ({
   rutineData,
@@ -33,11 +39,46 @@ const RoutineForm = ({
   openExerciseModal,
   setCurrentForm,
 }) => {
+  const [excerciseList, setExerciseList] = useState ([
+    {
+      exercise: { //esta parte viene del back
+        _id: null,
+        doctor: null ,
+        instructions: null,
+        videoTitle: null,
+        videoURL: null,
+      },
+      repetitions: '',
+      sets: '',
+      weight: '',
+    },
+  ]);
+
   const btnDisabled =
     rutineData.name === '' ||
     rutineData.weeks === '' ||
     rutineData.exercises.length === 0 ||
     Object.values(rutineData.days).filter((val) => val).length === 0;
+
+  useEffect(()=> {
+     const getExcerciseList = async () => {
+      const respuesta = await getAllExcercises();
+      const data = await respuesta.json();
+      setExerciseList({
+        exercise: {
+          _id: data._id,
+          doctor: data.doctor,
+          instructions: data.instructions,
+          videoTitle: data.videoTitle,
+          videoURL: data.videoURL,
+        },
+        repetitions: '',
+        sets: '',
+        weight: '',
+      } );
+    }
+  getExcerciseList();}, []);
+
   return (
     <Grid
       container
@@ -97,7 +138,7 @@ const RoutineForm = ({
         <Autocomplete
           multiple
           disablePortal
-          options={exercises}
+          options={excerciseList} //useState
           renderInput={(params) => (
             <TextField {...params} label='Buscar ejercicio' />
           )}
