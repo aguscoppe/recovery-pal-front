@@ -29,6 +29,7 @@ const ModalExercise = ({ open, handleClose }) => {
   const [selectedFile, setSelectedFile] = useState();
   const [encodedFile, setEncodedFile] = useState("");
   const [showCircularProgress, setShowCircularProgress] = useState(false);
+  const [disableButton, setDisableButton] = useState(false);
 
   const textFieldSpacing = {
     marginBottom: "20px",
@@ -85,6 +86,7 @@ const ModalExercise = ({ open, handleClose }) => {
   };
 
   const handleClick = async () => {
+    setDisableButton(true);
     setShowCircularProgress(true);
     uploadVideoCloudinary();
   };
@@ -143,7 +145,7 @@ const ModalExercise = ({ open, handleClose }) => {
       <Box sx={modalContainer}>
         <Grid container justifyContent="center" alignItems="center">
           <Grid item xs={12} sm={6} m={4}>
-            <Typography variant="h3" sx={title}>
+            <Typography variant="h5" sx={title}>
               Crear Ejercicio
             </Typography>
             <TextField
@@ -172,7 +174,12 @@ const ModalExercise = ({ open, handleClose }) => {
               onChange={handleChangeFile}
             />
             <Grid item container justifyContent="center">
-              <Button size="large" variant="outlined" onClick={handleClose}>
+              <Button
+                size="large"
+                variant="outlined"
+                onClick={handleClose}
+                disabled={disableButton}
+              >
                 Cancelar
               </Button>
             </Grid>
