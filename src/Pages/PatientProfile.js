@@ -165,7 +165,7 @@ const PatientProfile = () => {
                 ) : (
                   routines.map((routine) => {
                     // TODO: borrar la rutina con este id + sacar este condicional
-                    if (routine._id !== "635b0fb2e04f9321d8e5926c") {
+                    if (routine._id !== "63610df792805f55e4398918") {
                       return (
                         <Grid item xs={12} md={6}>
                           <Routine routine={routine} />
