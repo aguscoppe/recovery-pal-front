@@ -86,11 +86,12 @@ function VideoDisplay({ exerciseList, handleCompleteExercise }) {
             (e) => e.exercise._id === idExercise
           )[0] //obtener exercise
         );
-        getFeedback();
+        if (currentUser.role === "paciente")
+          getFeedback();
       }
     };
     getRoutine();
-  }, [idRoutine, idExercise]);
+  }, [idRoutine, idExercise, currentUser.role]);
 
   return (
     <>
