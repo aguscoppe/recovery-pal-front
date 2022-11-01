@@ -225,9 +225,7 @@ export const getExerciseByVideoTitleMatch = async function (
 
 export const getAllExcercises = async function(){
     //url webservices
-    let url = urlWebServices.getAllExcercises + "/" ;
-    //armo json con datos
-    const formData = new URLSearchParams();
+    let url = urlWebServices.getAllExcercises;
 
     try{
         let response = await fetch(url,{
@@ -238,8 +236,6 @@ export const getAllExcercises = async function(){
                // 'x-access-token': WebToken.webToken,
                 'Origin':'http://localhost:3000',
                 'Content-Type': 'application/x-www-form-urlencoded'},
-            body: formData,
-            
         });
         
         let rdo = response.status;
@@ -249,7 +245,7 @@ export const getAllExcercises = async function(){
             switch(rdo){
                 case 200:
                 {
-                    return ({rdo:0, exercise:data.exercise});//correcto
+                    return ({rdo:0, exercises:data.exercise});//correcto
                 }
                 default:
                 {

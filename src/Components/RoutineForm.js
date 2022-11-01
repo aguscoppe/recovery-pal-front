@@ -10,7 +10,7 @@ import {
   Checkbox,
 } from '@mui/material';
 import { useContext, useState, useEffect } from 'react';
-//import { getAllExcercises } from '../Controllers/ExerciseEntry.Controller';
+import { getAllExcercises } from '../Controllers/ExerciseEntry.Controller';
 import { exercises } from '../data';
 
 const daysList = [
@@ -26,10 +26,8 @@ const daysList = [
 const textFieldSpacing = {
   marginBottom: '20px',
 };
-/*
-const handleAutocompleteChange = () => {
-  {handleSelect}
-}*/
+
+
 
 const RoutineForm = ({
   rutineData,
@@ -63,22 +61,32 @@ const RoutineForm = ({
   useEffect(()=> {
      const getExcerciseList = async () => {
       const respuesta = await getAllExcercises();
-      const data = await respuesta.json();
-      setExerciseList({
-        exercise: {
-          _id: data._id,
-          doctor: data.doctor,
-          instructions: data.instructions,
-          videoTitle: data.videoTitle,
-          videoURL: data.videoURL,
-        },
-        repetitions: '',
-        sets: '',
-        weight: '',
-      } );
+      if(respuesta.rdo === 0){
+        const {exercises} = respuesta;
+        exercises.map((e)=> { 
+          setExerciseList((prev) => [...prev, {
+            exercise: {
+              _id: e._id,
+              doctor: e.doctor,
+              instructions: e.instructions,
+              videoTitle: e.videoTitle,
+              videoURL: e.videoURL,
+            },
+            repetitions: '',
+            sets: '',
+            weight: '',
+          } ]);
+        })
+      }else {
+        console.log(respuesta.mensaje);
+      }
     }
   getExcerciseList();}, []);
 
+  const handleAutocompleteChange = () => {
+    handleSelect()
+  }
+  
   return (
     <Grid
       container

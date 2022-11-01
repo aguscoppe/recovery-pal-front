@@ -15,9 +15,10 @@ import CreateExercise from "../Pages/CreateExercise";
 import { exerciseCreation } from "../Controllers/ExerciseEntry.Controller";
 import { uploadVideo } from "../Controllers/VideoEntry.Controller";
 import { upload } from "@testing-library/user-event/dist/upload";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const ModalExercise = ({ open, handleClose }) => {
-  const { currentUser } = useContext(UserContext);
+  const currentUser = useContext(UserContext);
 
   const [exerciseData, setExerciseData] = useState({
     name: "",
@@ -27,6 +28,8 @@ const ModalExercise = ({ open, handleClose }) => {
 
   const [selectedFile, setSelectedFile] = useState();
   const [encodedFile, setEncodedFile] = useState("");
+  const [showCircularProgress, setShowCircularProgress] = useState(false);
+  const [disableButton, setDisableButton] = useState(false);
 
   const textFieldSpacing = {
     marginBottom: "20px",
@@ -83,9 +86,9 @@ const ModalExercise = ({ open, handleClose }) => {
   };
 
   const handleClick = async () => {
+    setDisableButton(true);
+    setShowCircularProgress(true);
     uploadVideoCloudinary();
-    createExercise();
-    handleClose();
   };
 
   const uploadVideoCloudinary = async () => {
@@ -97,8 +100,14 @@ const ModalExercise = ({ open, handleClose }) => {
       );
 
       if (res.rdo === 0) {
-        setExerciseData({ ...exerciseData, videoURL: res.videoData.url });
+        console.log("video data", res.videoData);
+        console.log("video URL", res.videoData.url);
+        const name = "videoURL";
+        const value = res.videoData.url;
+        setExerciseData({ ...exerciseData, [name]: value });
         console.log(res.message);
+        console.log("Creando el ejercicio...");
+        createExercise(value);
       } else {
         console.log(res.message);
       }
@@ -107,13 +116,14 @@ const ModalExercise = ({ open, handleClose }) => {
     }
   };
 
-  const createExercise = async () => {
+  const createExercise = async (value) => {
+    console.log("value", value);
     try {
       const res = await exerciseCreation({
         doctor: currentUser._id,
         instructions: exerciseData.description,
         videoTitle: exerciseData.name,
-        videoURL: exerciseData.videoURL,
+        videoURL: value,
       });
 
       if (res.rdo === 0) {
@@ -121,8 +131,12 @@ const ModalExercise = ({ open, handleClose }) => {
       } else {
         console.log("Fallo algo");
       }
+
+      setShowCircularProgress(false);
+      handleClose(res.rdo);
     } catch (e) {
       console.log(e);
+      handleClose(1);
     }
   };
 
@@ -131,7 +145,7 @@ const ModalExercise = ({ open, handleClose }) => {
       <Box sx={modalContainer}>
         <Grid container justifyContent="center" alignItems="center">
           <Grid item xs={12} sm={6} m={4}>
-            <Typography variant="h3" sx={title}>
+            <Typography variant="h5" sx={title}>
               Crear Ejercicio
             </Typography>
             <TextField
@@ -164,22 +178,27 @@ const ModalExercise = ({ open, handleClose }) => {
                 size="large"
                 variant="outlined"
                 onClick={handleClose}
+                disabled={disableButton}
               >
                 Cancelar
               </Button>
             </Grid>
             <Grid item container justifyContent="center">
-              <Button
-                disabled={
-                  exerciseData.name === "" || exerciseData.description === ""
-                }
-                size="large"
-                variant="contained"
-                onClick={handleClick}
-                sx= {{mt: 3}}
-              >
-                Finalizar
-              </Button>
+              {showCircularProgress ? (
+                <CircularProgress sx={{ marginTop: "10px" }} />
+              ) : (
+                <Button
+                  disabled={
+                    exerciseData.name === "" || exerciseData.description === ""
+                  }
+                  size="large"
+                  variant="contained"
+                  onClick={handleClick}
+                  sx={{ mt: 3 }}
+                >
+                  Finalizar
+                </Button>
+              )}
             </Grid>
           </Grid>
         </Grid>
