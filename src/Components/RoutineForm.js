@@ -8,21 +8,23 @@ import {
   FormControlLabel,
   FormLabel,
   Checkbox,
-} from '@mui/material';
-import { exercises } from '../data';
+} from "@mui/material";
 
+import { useContext, useState, useEffect } from "react";
+import { getDoctorById } from "../Controllers/DoctorEntry.Controller";
+import { UserContext } from "../Contexts/UserContext";
 const daysList = [
-  { label: 'DO' },
-  { label: 'LU' },
-  { label: 'MA' },
-  { label: 'MI' },
-  { label: 'JU' },
-  { label: 'VI' },
-  { label: 'SA' },
+  { label: "DO" },
+  { label: "LU" },
+  { label: "MA" },
+  { label: "MI" },
+  { label: "JU" },
+  { label: "VI" },
+  { label: "SA" },
 ];
 
 const textFieldSpacing = {
-  marginBottom: '20px',
+  marginBottom: "20px",
 };
 
 const RoutineForm = ({
@@ -33,51 +35,95 @@ const RoutineForm = ({
   openExerciseModal,
   setCurrentForm,
 }) => {
+  const currentUser = useContext(UserContext);
+  const [exercises, setExercises] = useState([]);
+
   const btnDisabled =
-    rutineData.name === '' ||
-    rutineData.weeks === '' ||
+    rutineData.name === "" ||
+    rutineData.weeks === "" ||
     rutineData.exercises.length === 0 ||
     Object.values(rutineData.days).filter((val) => val).length === 0;
+
+  useEffect(() => {
+    const getDoctor = async function () {
+      const respuestaDoctor = await getDoctorById(currentUser._id);
+      console.log(
+        "Console log de respuesta de back ",
+        JSON.stringify(respuestaDoctor)
+      );
+      if (respuestaDoctor.rdo === 1) {
+        alert("No existe el doctor");
+        window.location.href = "/";
+      } else {
+        var exercisesReturned = respuestaDoctor.doctor.exercises
+        const structure = { repetitions: '',
+        sets: '',
+        weight: ''}
+
+
+
+
+        //setExercises(exercisesReturned.map((e) => {"exercise": e}));
+        console.log(JSON.stringify(respuestaDoctor));
+        console.log("Soy el consol log de prueba", exercisesReturned.map((e) => {exercise: e}))
+        /*
+        {
+          exercise: {
+            _id: 'ex1',
+            doctor: 'do1',
+            instructions: 'Caminar Recto durante 5 cuadras',
+            videoTitle: 'Caminar Recto 5 Cuadras',
+            videoURL: 'http://127.0.0.1:8080/videos/Caminar_Recto.mp4',
+          },
+          repetitions: '',
+          sets: '',
+          weight: '',
+        }
+        */
+      }
+    };
+    getDoctor();
+  }, [currentUser._id]);
   return (
     <Grid
       container
-      justifyContent='center'
-      alignItems='center'
-      sx={{ paddingTop: '10vh' }}
+      justifyContent="center"
+      alignItems="center"
+      sx={{ paddingTop: "10vh" }}
     >
       <Grid item xs={10} sm={6} md={4}>
         <TextField
-          name='name'
+          name="name"
           value={rutineData.name}
           fullWidth
-          label='Nombre'
-          variant='outlined'
+          label="Nombre"
+          variant="outlined"
           onChange={handleChange}
           sx={textFieldSpacing}
         />
         <TextField
-          type='number'
-          name='weeks'
+          type="number"
+          name="weeks"
           value={rutineData.weeks}
           fullWidth
-          label='Duracion total (semanas)'
-          variant='outlined'
+          label="Duracion total (semanas)"
+          variant="outlined"
           onChange={handleChange}
           sx={textFieldSpacing}
         />
         <Box sx={textFieldSpacing}>
           <FormLabel
-            component='legend'
-            color='primary'
-            sx={{ marginLeft: '10px' }}
+            component="legend"
+            color="primary"
+            sx={{ marginLeft: "10px" }}
           >
             Días de ejercicios
           </FormLabel>
           <FormGroup
             sx={{
-              display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'space-evenly',
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-evenly",
             }}
           >
             {daysList.map((day, index) => (
@@ -85,7 +131,7 @@ const RoutineForm = ({
                 key={index}
                 control={<Checkbox />}
                 label={day.label}
-                labelPlacement='top'
+                labelPlacement="top"
                 value={index}
                 onChange={handleCheckboxChange}
                 checked={rutineData.days[index]}
@@ -99,27 +145,27 @@ const RoutineForm = ({
           disablePortal
           options={exercises}
           renderInput={(params) => (
-            <TextField {...params} label='Buscar ejercicio' />
+            <TextField {...params} label="Buscar ejercicio" />
           )}
           getOptionLabel={(option) => option.exercise.videoTitle}
           onChange={handleSelect}
           sx={textFieldSpacing}
-          noOptionsText='No hay resultados'
+          noOptionsText="No hay resultados"
           value={rutineData.exercises}
         />
-        <Grid item container alignItems='center' direction='column'>
+        <Grid item container alignItems="center" direction="column">
           <Grid item paddingTop={3}>
             <Button
               disabled={btnDisabled}
-              variant='contained'
+              variant="contained"
               onClick={() => setCurrentForm(1)}
-              size='large'
+              size="large"
             >
               CONTINUAR
             </Button>
           </Grid>
           <Grid item paddingTop={3}>
-            <Button size='large' variant='outlined' onClick={openExerciseModal}>
+            <Button size="large" variant="outlined" onClick={openExerciseModal}>
               CREAR EJERCICIO
             </Button>
           </Grid>
