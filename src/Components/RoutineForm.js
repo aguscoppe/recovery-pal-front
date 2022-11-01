@@ -138,7 +138,7 @@ const RoutineForm = ({
         <Autocomplete
           multiple
           disablePortal
-          options={excerciseList} //useState
+          options={excerciseList}
           renderInput={(params) => (
             <TextField {...params} label='Buscar ejercicio' />
           )}
