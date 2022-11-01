@@ -100,7 +100,11 @@ const PatientProfile = () => {
             src="https://mui.com/static/images/avatar/3.jpg"
             sx={{ width: 90, height: 90 }}
           ></Avatar>
-          <Typography variant="h4" color={theme.palette.textPrimary.main}>
+          <Typography
+            variant="h4"
+            color={theme.palette.textPrimary.main}
+            fontWeight="900"
+          >
             {patient.name} {patient.lastName}
           </Typography>
           <Typography variant="body1" color={theme.palette.textSecondary.main}>
