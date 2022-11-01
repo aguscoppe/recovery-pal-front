@@ -179,7 +179,10 @@ const PatientProfile = () => {
         </TabPanel>
         <TabPanel value="3">
           <Typography>
-            <Progress />
+            <Progress
+              patient={patient}
+              routineId={"635b0fb2e04f9321d8e5926c"}
+            />
           </Typography>
         </TabPanel>
       </TabContext>
