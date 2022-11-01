@@ -75,10 +75,10 @@ const Videos = () => {
       <Header title="Videos" icon={<VideocamIcon />} />
       <Grid
         container
-        direction="column"
+        fullWidth
         justifyContent="center"
-        sx={{ paddingTop: "10vh" }}
-      >
+        sx={{ paddingTop: "10vh" , marginBottom: "50px"  }}
+      > {/* Added some white space at bottom to show the entire card */}
         <Grid item xs={12} md={12} alignSelf="center" sx={{ pt: 2 }}>
           <SearchExercise
             exercises={exercises}
@@ -92,9 +92,7 @@ const Videos = () => {
             exercisesFiltrados.map((e) => <Exercisev2 exercise={e} />)
           )}
         </Grid>
-      </Grid>
-
-      <Fab
+        <Fab
         color="primary"
         aria-label="add"
         sx={{
@@ -106,12 +104,17 @@ const Videos = () => {
       >
         <AddIcon />
       </Fab>
+      </Grid>
 
+
+
+      <NavBar />
+
+      
       <ModalExercise
         open={modalExercise.open}
         handleClose={closeExerciseModal}
       />
-      <NavBar />
     </>
   );
 };

@@ -13,8 +13,6 @@ const urlWebServices = {
   completeExerciseInFeedback: urlApi + "api/feedbacks/completeExerciseInFeedback",
 
 
-
-
   getExerciseById: urlApi + 'api/exercises',
   getExerciseByVideoTitleMatch:
     urlApi + 'exercises/getExercisesByVideoTitleMatch',
@@ -26,6 +24,10 @@ const urlWebServices = {
   getRoutineById: urlApi + 'api/routines/getRoutine',
 
   uploadVideo: urlApi + 'api/files/uploadVideo',
+
+  achievements: urlApi + 'api/achievements',
+  achievementsRoutine: urlApi + 'api/achievements/routine',
+  achievementsReport: urlApi + 'api/achievements/report'
 };
 
 export default urlWebServices;

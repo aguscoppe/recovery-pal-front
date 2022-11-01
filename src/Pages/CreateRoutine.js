@@ -1,21 +1,21 @@
-import Header from '../Components/Header';
-import Navbar from '../Components/NavBar';
-import { useState, useContext } from 'react';
-import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
-import ModalAlert from '../Components/ModalAlert';
-import ModalExercise from '../Components/ModalExercise';
-import { useParams } from 'react-router-dom';
-import { UserContext } from '../Contexts/UserContext';
-import { createRoutine } from '../Controllers/RoutineEntry.Controller';
-import RoutineForm from '../Components/RoutineForm';
-import ExerciseForm from '../Components/ExerciseForm';
+import Header from "../Components/Header";
+import Navbar from "../Components/NavBar";
+import { useState, useContext } from "react";
+import AddCircleOutlineRoundedIcon from "@mui/icons-material/AddCircleOutlineRounded";
+import ModalAlert from "../Components/ModalAlert";
+import ModalExercise from "../Components/ModalExercise";
+import { useParams } from "react-router-dom";
+import { UserContext } from "../Contexts/UserContext";
+import { createRoutine } from "../Controllers/RoutineEntry.Controller";
+import RoutineForm from "../Components/RoutineForm";
+import ExerciseForm from "../Components/ExerciseForm";
 
 const CreateRoutine = () => {
   const currentUser = useContext(UserContext);
   const { idPatient } = useParams();
   const [currentForm, setCurrentForm] = useState(0);
   const [rutineData, setRutineData] = useState({
-    name: '',
+    name: "",
     days: {
       0: false,
       1: false,
@@ -25,7 +25,7 @@ const CreateRoutine = () => {
       5: false,
       6: false,
     },
-    weeks: '',
+    weeks: "",
     patient: idPatient,
     feedbacksDone: 0,
     exercises: [],
@@ -34,11 +34,11 @@ const CreateRoutine = () => {
   });
   const [modalAlert, setModalAlert] = useState({
     open: false,
-    type: '',
-    title: '',
-    subtitle: '',
-    primaryBtnText: '',
-    primaryBtnPage: '',
+    type: "",
+    title: "",
+    subtitle: "",
+    primaryBtnText: "",
+    primaryBtnPage: "",
     setNotOpen: () => {},
   });
   const [modalExercise, setModalExercise] = useState({
@@ -60,13 +60,13 @@ const CreateRoutine = () => {
   };
 
   const handleSelect = (event, value, reason, detail) => {
-    if (reason === 'clear') {
+    if (reason === "clear") {
       return setRutineData((prev) => ({
         ...prev,
         exercises: [],
       }));
     }
-    if (reason === 'removeOption') {
+    if (reason === "removeOption") {
       const selectedValue = detail.option;
       return setRutineData((prev) => ({
         ...prev,
@@ -75,7 +75,7 @@ const CreateRoutine = () => {
         ),
       }));
     }
-    if (reason === 'selectOption') {
+    if (reason === "selectOption") {
       /*
       const newExercise = {
         exercise: value.at(-1),
@@ -109,15 +109,15 @@ const CreateRoutine = () => {
     setModalExercise((prev) => ({ ...prev, open: true }));
   };
 
-  const closeExerciseModal = (e) => {
+  const closeExerciseModal = (rdo) => {
     setModalExercise((prev) => ({ ...prev, open: false }));
-    if (e.target.innerText !== 'CANCELAR') {
+    if (rdo === 0) {
       setModalAlert({
-        type: 'success',
+        type: "success",
         open: true,
-        title: '¡Bien hecho!',
-        subtitle: 'Ejercicio creado correctamente',
-        primaryBtnText: 'Continuar',
+        title: "¡Bien hecho!",
+        subtitle: "Ejercicio creado correctamente",
+        primaryBtnText: "Continuar",
         setNotOpen: () => {
           setModalAlert((prev) => ({ ...prev, open: false }));
         },
@@ -147,8 +147,8 @@ const CreateRoutine = () => {
       doctor: doctor,
       exercises: newExercises,
     };
-    console.log('newRoutine: ', newRoutine);
-    
+    console.log("newRoutine: ", newRoutine);
+
     let info = await createRoutine(newRoutine);
     console.log('info: ', info);
     if (info.rdo === 0) {
@@ -177,7 +177,7 @@ const CreateRoutine = () => {
 
   return (
     <>
-      <Header title='Crear Rutina' icon={<AddCircleOutlineRoundedIcon />} />
+      <Header title="Crear Rutina" icon={<AddCircleOutlineRoundedIcon />} />
       {modalAlert.open && (
         <ModalAlert
           open={modalAlert.open}

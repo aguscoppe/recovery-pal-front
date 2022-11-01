@@ -1,12 +1,13 @@
 import { Box, Card, Grid, CardContent, Typography } from "@mui/material";
 
-const Achievements = () => {
+const Achievements = ({ achievements }) => {
   return (
     <Card sx={{ marginBottom: "12px" }}>
       <Grid
         sx={{ p: "20px" }}
         container
-        justifyContent="space-between"
+        justifyContent="center"
+        alignItems="center"
         columnSpacing={2}
       >
         <Grid

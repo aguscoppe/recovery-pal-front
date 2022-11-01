@@ -34,7 +34,7 @@ function VideoDisplayDoctor({ exerciseList }) {
         setDoctor(respuestaDoctor.doctor);
         console.log(JSON.stringify(respuestaDoctor));
         setExercises(respuestaDoctor.doctor.exercises.filter(
-          (e) => e.exercise._id === idExercise
+          (e) => e._id === idExercise
         )[0] //obtener exercise);
         );
       }
