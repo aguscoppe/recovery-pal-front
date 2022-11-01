@@ -245,7 +245,7 @@ export const getAllExcercises = async function(){
             switch(rdo){
                 case 200:
                 {
-                    return ({rdo:0, exercises:data.exercise});//correcto
+                    return ({rdo:0, exercises:data.data});//correcto
                 }
                 default:
                 {

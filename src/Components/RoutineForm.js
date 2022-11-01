@@ -63,6 +63,7 @@ const RoutineForm = ({
       const respuesta = await getAllExcercises();
       if(respuesta.rdo === 0){
         const {exercises} = respuesta;
+        console.log(respuesta);
         exercises.map((e)=> { 
           setExerciseList((prev) => [...prev, {
             exercise: {
@@ -86,7 +87,7 @@ const RoutineForm = ({
   const handleAutocompleteChange = () => {
     handleSelect()
   }
-  
+
   return (
     <Grid
       container
