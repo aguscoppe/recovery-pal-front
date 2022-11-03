@@ -50,7 +50,12 @@ function App() {
                   )
                 }
               />
-              <Route path="/profile" element={<PatientProfile />} />
+              <Route path="/profile" element={
+                currentUser.role === "doctor" ? (
+                    <Profile />
+                  ) : (
+                    <PatientProfile />
+                  )} />
               <Route path="/patient/:idPatient" element={<PatientProfile />} />
               <Route
                 path="/routine/:idRoutine"
