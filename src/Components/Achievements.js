@@ -10,11 +10,13 @@ const Achievements = ({ achievements }) => {
         {exerciseAchievement > 0 && (
           <Grid
             sx={{
+              display: "flex",
               justifyContent: "center",
               alignItems: "center",
               marginBottom: "10px",
               marginTop: "10px",
             }}
+            flexDirection="column"
             item
             xs={4}
             xl={4}
@@ -41,11 +43,13 @@ const Achievements = ({ achievements }) => {
             return (
               <Grid
                 sx={{
+                  display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
                   marginBottom: "10px",
                   marginTop: "10px",
                 }}
+                flexDirection="column"
                 item
                 xs={4}
                 xl={4}
@@ -70,12 +74,14 @@ const Achievements = ({ achievements }) => {
         {feedBackAchievement > 0 && (
           <Grid
             sx={{
+              display: "flex",
               justifyContent: "center",
               alignItems: "center",
               marginBottom: "10px",
               marginTop: "10px",
             }}
             item
+            flexDirection="column"
             xs={4}
             xl={4}
             lg={4}
@@ -101,11 +107,13 @@ const Achievements = ({ achievements }) => {
             return (
               <Grid
                 sx={{
+                  display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
                   marginBottom: "10px",
                   marginTop: "10px",
                 }}
+                flexDirection="column"
                 item
                 xs={4}
                 xl={4}
@@ -130,11 +138,13 @@ const Achievements = ({ achievements }) => {
         {routineAchievement > 0 && (
           <Grid
             sx={{
+              display: "flex",
               justifyContent: "center",
               alignItems: "center",
               marginBottom: "10px",
               marginTop: "10px",
             }}
+            flexDirection="column"
             item
             xs={4}
             xl={4}
@@ -161,11 +171,13 @@ const Achievements = ({ achievements }) => {
             return (
               <Grid
                 sx={{
+                  display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
                   marginBottom: "10px",
                   marginTop: "10px",
                 }}
+                flexDirection="column"
                 item
                 xs={4}
                 xl={4}

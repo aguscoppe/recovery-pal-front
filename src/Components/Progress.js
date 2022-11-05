@@ -44,10 +44,10 @@ const Progress = ({ patient, routineId }) => {
     setReport(report);
   };
 
-  const Banner = (role) => {
+  const Banner = ({ role }) => {
     return (
       <Typography variant="h5" sx={{ fontWeight: "700" }}>
-        {role === "doctor"
+        {role !== "paciente"
           ? `¡${patient.name} ${patient.lastName} tiene una racha de `
           : `¡Tienes una racha de `}
         <Typography
@@ -60,14 +60,14 @@ const Progress = ({ patient, routineId }) => {
     );
   };
 
+  if (!report) {
+    return <CircularProgress />;
+  }
+
   return (
     <Grid justifyContent="center" alignItems="center" container>
       <Grid sx={{ textAlign: "center" }} item xs={12}>
-        {report === null ? (
-          <CircularProgress />
-        ) : (
-          <Banner role={currentUser.role} />
-        )}
+        <Banner role={currentUser.role} />
       </Grid>
       {currentUser.role === "doctor" && (
         <Grid item xs={12} marginTop="20px">
