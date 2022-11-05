@@ -1,11 +1,18 @@
 import { Box, Card, Grid, CardContent, Typography } from "@mui/material";
 
-const Statistics = () => {
+const Statistics = ({ report, routineAchievements }) => {
+  const stylesStatistics = {
+    fontWeight: "600",
+  };
+
   return (
     <Card sx={{ marginBottom: "12px" }}>
       <Grid sx={{ p: "20px" }} container columnSpacing={2}>
         <Grid
-          sx={{ justifyContent: "center", alignItems: "center" }}
+          sx={{
+            justifyContent: "center",
+            alignItems: "center",
+          }}
           item
           xs={3}
           xl={3}
@@ -26,8 +33,19 @@ const Statistics = () => {
         </Grid>
         <Grid item xs={9} xl={6} lg={6} md={6}>
           <CardContent>
-            <Typography>70% rutinas completadas</Typography>
-            <Typography>30% rutinas incompletas</Typography>
+            <Typography sx={stylesStatistics}>
+              -{report.timesComplete} veces completó una rutina
+            </Typography>
+            <Typography sx={stylesStatistics}>
+              -{report.timesPain} indico que sintió dolor
+            </Typography>
+            <Typography sx={stylesStatistics}>
+              -{report.timesImprove} indico que notó una mejora
+            </Typography>
+            <Typography sx={stylesStatistics}>
+              -{(report.feedbacksDone / report.totalFeedbacks) * 100}% de
+              sesiones completadas
+            </Typography>
           </CardContent>
         </Grid>
       </Grid>
