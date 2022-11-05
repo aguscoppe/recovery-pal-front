@@ -137,13 +137,6 @@ const PatientProfile = () => {
                   to={`/patient/${idPatient}/createRoutine`}
                   style={{ textDecoration: "none" }}
                 >
-                  {/**<Button
-                  size="large"
-                  variant="contained"
-                  sx={{ marginBottom: "12px" }}
-                >
-                  CREAR RUTINA
-                </Button>**/}
                   <Fab
                     color="primary"
                     aria-label="add"
@@ -164,14 +157,11 @@ const PatientProfile = () => {
                   </Grid>
                 ) : (
                   routines.map((routine) => {
-                    // TODO: borrar la rutina con este id + sacar este condicional
-                    if (routine._id !== "63610df792805f55e4398918") {
-                      return (
-                        <Grid item xs={12} md={6}>
-                          <Routine routine={routine} />
-                        </Grid>
-                      );
-                    }
+                    return (
+                      <Grid item xs={12} md={6}>
+                        <Routine routine={routine} />
+                      </Grid>
+                    );
                   })
                 )}
               </Grid>
@@ -185,7 +175,7 @@ const PatientProfile = () => {
           <Typography>
             <Progress
               patient={patient}
-              routineId={"635b0fb2e04f9321d8e5926c"}
+              routineId={"636195d0892e6224d4585318"} //por que se le pasaria el id de una rutina??
             />
           </Typography>
         </TabPanel>
