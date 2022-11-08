@@ -1,55 +1,213 @@
 import { Box, Card, Grid, CardContent, Typography } from "@mui/material";
+import { CChart } from "@coreui/react-chartjs";
+import { theme } from "../theme";
+import Carousel from "react-material-ui-carousel";
 
 const Statistics = ({ report, routineAchievements }) => {
-  const stylesStatistics = {
-    fontWeight: "600",
-  };
-
   return (
-    <Card sx={{ marginBottom: "12px" }}>
-      <Grid sx={{ p: "20px" }} container columnSpacing={2}>
+    <>
+      <Grid sx={{ p: "20px", zIndex: 1 }} container columnSpacing={2}>
         <Grid
+          item
+          xs={12}
           sx={{
+            display: "flex",
+            flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
           }}
-          item
-          xs={3}
-          xl={3}
-          lg={3}
-          md={3}
         >
-          <Box
-            component="img"
-            sx={{
-              justifyContent: "center",
-              alignItems: "center",
-              height: 72,
-              width: 72,
-            }}
-            alt="CakeGraph"
-            src={require("../Assets/piechart.png")}
-          />
-        </Grid>
-        <Grid item xs={9} xl={6} lg={6} md={6}>
-          <CardContent>
-            <Typography sx={stylesStatistics}>
-              -{report.timesComplete} veces completó una rutina
-            </Typography>
-            <Typography sx={stylesStatistics}>
-              -{report.timesPain} indico que sintió dolor
-            </Typography>
-            <Typography sx={stylesStatistics}>
-              -{report.timesImprove} indico que notó una mejora
-            </Typography>
-            <Typography sx={stylesStatistics}>
-              -{(report.feedbacksDone / report.totalFeedbacks) * 100}% de
-              sesiones completadas
-            </Typography>
-          </CardContent>
+          <Carousel
+            indicators={false}
+            animation="slide"
+            sx={{ width: "100%", minHeight: "400px" }}
+            navButtonsAlwaysVisible={true}
+          >
+            <Grid
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+              item
+              xs={12}
+            >
+              <Card
+                sx={{
+                  marginBottom: "12px",
+                  padding: "20px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Typography color={theme.palette.primary.main} fontWeight="700">
+                  Cumplimiento de ejercicios
+                </Typography>
+                <CChart
+                  type="doughnut"
+                  data={{
+                    labels: ["Completo", "No Completo"],
+                    datasets: [
+                      {
+                        backgroundColor: [
+                          theme.palette.primary.main,
+                          theme.palette.secondary.main,
+                        ],
+                        data: [40, 20],
+                      },
+                    ],
+                  }}
+                />
+              </Card>
+            </Grid>
+            <Grid
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+              item
+              xs={12}
+            >
+              <Card
+                sx={{
+                  marginBottom: "12px",
+                  padding: "20px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Typography color={theme.palette.primary.main} fontWeight="700">
+                  Estado de ánimo
+                </Typography>
+                <CChart
+                  type="doughnut"
+                  data={{
+                    labels: ["N/C", "Negativo", "Regular", "Positivo"],
+                    datasets: [
+                      {
+                        backgroundColor: [
+                          theme.palette.secondary.main,
+                          "red",
+                          theme.palette.primary.main,
+                          "green",
+                        ],
+                        data: [
+                          report.timesFeeling_0,
+                          report.timesFeeling_1,
+                          report.timesFeeling_2,
+                          report.timesFeeling_3,
+                        ],
+                      },
+                    ],
+                  }}
+                />
+              </Card>
+            </Grid>
+            <Grid
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+              item
+              xs={12}
+            >
+              <Card
+                sx={{
+                  marginBottom: "12px",
+                  padding: "20px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Typography color={theme.palette.primary.main} fontWeight="700">
+                  Dolor físico
+                </Typography>
+                <CChart
+                  type="doughnut"
+                  data={{
+                    labels: ["N/C", "Poco", "Regular", "Mucho"],
+                    datasets: [
+                      {
+                        backgroundColor: [
+                          theme.palette.secondary.main,
+                          theme.palette.primary.main,
+                          "orange",
+                          "red",
+                        ],
+                        data: [
+                          report.timesPain_0,
+                          report.timesPain_1,
+                          report.timesPain_2,
+                          report.timesPain_3,
+                        ],
+                      },
+                    ],
+                  }}
+                />
+              </Card>
+            </Grid>
+            <Grid
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+              item
+              xs={12}
+            >
+              <Card
+                sx={{
+                  marginBottom: "12px",
+                  padding: "20px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Typography color={theme.palette.primary.main} fontWeight="700">
+                  Evolución del tratamiento
+                </Typography>
+                <CChart
+                  type="doughnut"
+                  data={{
+                    labels: ["N/C", "Poco", "Regular", "Mucho"],
+                    datasets: [
+                      {
+                        backgroundColor: [
+                          theme.palette.secondary.main,
+                          theme.palette.primary.main,
+                          "orange",
+                          "green",
+                        ],
+                        data: [
+                          report.timesImprove_0,
+                          report.timesImprove_1,
+                          report.timesImprove_2,
+                          report.timesImprove_3,
+                        ],
+                      },
+                    ],
+                  }}
+                />
+              </Card>
+            </Grid>
+          </Carousel>
         </Grid>
       </Grid>
-    </Card>
+    </>
   );
 };
 
