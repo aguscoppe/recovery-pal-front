@@ -6,7 +6,7 @@ import Carousel from "react-material-ui-carousel";
 const Statistics = ({ report, routineAchievements }) => {
   return (
     <>
-      <Grid sx={{ p: "20px" }} container columnSpacing={2}>
+      <Grid sx={{ p: "20px", zIndex: 1 }} container columnSpacing={2}>
         <Grid
           item
           xs={12}
