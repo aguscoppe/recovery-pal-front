@@ -46,7 +46,10 @@ const isFromThisWeek = (date) => {
   const today = new Date();
   const firstDay = new Date(today.setDate(today.getDate() - today.getDay()));
   const lastDay = new Date(today.setDate(today.getDate() - today.getDay() + 6));
-  return new Date(date) >= firstDay && new Date(date) > lastDay;
+  return (
+    new Date(date).toDateString() >= new Date(date).toDateString(firstDay) &&
+    new Date(date).toDateString() <= new Date(date).toDateString(lastDay)
+  );
 };
 
 const Header = ({ title, icon, routineData = null }) => {
@@ -68,6 +71,7 @@ const Header = ({ title, icon, routineData = null }) => {
     const completedDays = routineData.feedbacks.filter(
       (el) => isFromThisWeek(el.date) && el.exercisesDone.length !== 0
     );
+
     const completedDayNumber = completedDays.map((el) =>
       new Date(el.date).getDay()
     );
