@@ -9,6 +9,8 @@ export const exerciseCreation = async function (datos) {
   formData.append("instructions", datos.instructions);
   formData.append("videoTitle", datos.videoTitle);
   formData.append("videoURL", datos.videoURL);
+  formData.append("description", datos.description);
+
   //console.log("dato",formData);
   //console.log("url",url);
   try {
@@ -136,6 +138,7 @@ export const exerciseUpdate = async function (datos) {
   formData.append("instructions", datos.instructions);
   formData.append("videoTitle", datos.videoTitle);
   formData.append("videoURL", datos.videoURL);
+  formData.append("description", datos.description);
   //console.log("dato",formData);
   //console.log("url",url);
   try {
