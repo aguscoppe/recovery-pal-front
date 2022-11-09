@@ -186,13 +186,16 @@ export const completeExerciseInFeedback = async function(idExercise, idFeedback)
     
 }
 
-export const addUserFeedback = async function(idExercise, idFeedback){
+export const addUserFeedback = async function(idFeedback,userInfo){
     //url webservices
-    let url = urlWebServices.completeExerciseInFeedback + "/";
+    let url = urlWebServices.addUserFeedback;
+    //let url = urlWebServices.completeExerciseInFeedback + "/";
     const formData = new URLSearchParams();
     formData.append('idFeedback', idFeedback);
-
-    
+    formData.append('pain', userInfo.pain);
+    formData.append('improve', userInfo.improve);
+    formData.append('comment', userInfo.comment);
+    formData.append('feeling', userInfo.feeling);
     
     try{
         let response = await fetch(url,{
