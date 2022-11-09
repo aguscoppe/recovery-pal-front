@@ -85,7 +85,7 @@ const Progress = ({ patient, routineId }) => {
         </Grid>
       )}
 
-      <Grid item xs={12} marginTop="20px">
+      <Grid item xs={12} marginTop="30px" marginBottom="30px">
         <Typography
           color={theme.palette.primary.main}
           fontWeight="700"
