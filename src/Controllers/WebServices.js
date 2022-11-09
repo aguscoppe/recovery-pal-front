@@ -12,7 +12,7 @@ const urlWebServices = {
   getLastFeedbackByRoutine: urlApi + 'api/feedbacks/getLastFeedbackByRoutine',
   feedbackUpdate: urlApi + 'api/feedbacks',
   completeExerciseInFeedback: urlApi + "api/feedbacks/completeExerciseInFeedback",
-
+  addUserFeedback: urlApi + "api/feedbacks/addUserFeedback",
 
   getExerciseById: urlApi + 'api/exercises',
   getExerciseByVideoTitleMatch:

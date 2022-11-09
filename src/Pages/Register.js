@@ -14,6 +14,7 @@ import { doctorRegistration } from '../Controllers/DoctorEntry.Controller';
 import { getPatientById } from '../Controllers/PatientEntry.Controller';
 import { createRoutine, getRoutineById } from '../Controllers/RoutineEntry.Controller';
 import { achievements, achievementsRoutine, routineReport } from '../Controllers/AchievementEntry.Controller';
+import { addUserFeedback } from '../Controllers/FeedbackEntry.Controller';
 
 const style = {
   container: {
@@ -136,6 +137,17 @@ export default function Register() {
     }
   };
 
+  const pruebaAddUserFeedback = async function () {
+    var userInfo = {
+      pain : 2,
+      improve: 1,
+      feeling : 2,
+      comment : "Por ahora todo bien"
+    }
+    var feedback = await addUserFeedback("63680481ca22a01a3c0a9765",userInfo)//IdFeedback
+    console.log('Soy feedback del Back:', feedback);
+  };
+
   const handleSubmit = () => {
     console.log(radioValue);
 
@@ -164,7 +176,8 @@ export default function Register() {
           //pruebaPostRoutine();
           //pruebaAchievements()
           //pruebaAchievementsRoutine()
-          pruebaRoutineReport()
+          //pruebaRoutineReport()
+          pruebaAddUserFeedback()
         }
       }
     }
