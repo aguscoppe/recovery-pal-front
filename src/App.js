@@ -19,6 +19,7 @@ import PatientRoutine from "./Pages/PatientRoutine";
 import VideoDisplayDoctor from "./Pages/VideoDisplayDoctor";
 import { exercises } from "./data";
 import { Navigate } from "react-router-dom";
+import Survey from "./Pages/Survey";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({ name: "", password: "" });
@@ -36,7 +37,7 @@ function App() {
         <Routes>
           <Route path="/register" element={<Register />} />
           <Route path="/" element={<Login setCurrentUser={setCurrentUser} />} />
-          {!currentUser._id ? (
+          {currentUser._id ? (
             <Route path="/*" element={<Navigate to="/" />} />
           ) : (
             <>
@@ -82,6 +83,7 @@ function App() {
                 path="/videos/:idExercise"
                 element={<VideoDisplayDoctor exerciseList={exerciseList} />}
               />
+              <Route path="/encuesta" element={<Survey />} />
             </>
           )}
         </Routes>
