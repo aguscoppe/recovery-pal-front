@@ -33,7 +33,7 @@ const CreateExercise = ({ doctorId }) => {
   });
 
   const handleClick = async () => {
-    createExercise();
+      createExercise();
   };
 
   const createExercise = async () => {
@@ -45,7 +45,7 @@ const CreateExercise = ({ doctorId }) => {
         videoURL: exerciseData.videoURL,
       });
 
-      if (res.rdo == 0) {
+      if (res.rdo === 0) {
         setModal({
           type: 'success',
           open: true,

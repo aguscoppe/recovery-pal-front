@@ -228,7 +228,7 @@ function VideoDisplay({ exerciseList, handleCompleteExercise }) {
             ? null
             : routine.exercises.length - 1 ===
               routine.exercises.indexOf(exerciseRoutine)
-            ? `/routine/${idRoutine}`
+            ? `/encuesta/${idRoutine}`
             : `/routine/${idRoutine}/exercise/${
                 routine.exercises[
                   routine.exercises.indexOf(exerciseRoutine) + 1
@@ -238,6 +238,7 @@ function VideoDisplay({ exerciseList, handleCompleteExercise }) {
       />
     </>
   );
+  //{/** / `/routine/${idRoutine}` */}
 }
 
 export default VideoDisplay;
