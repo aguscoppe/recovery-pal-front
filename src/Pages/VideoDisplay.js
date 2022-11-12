@@ -13,12 +13,11 @@ import { getRoutineById } from "../Controllers/RoutineEntry.Controller";
 import { useTheme } from "@emotion/react";
 import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
-import { Card } from '@mui/material';
+import { Card } from "@mui/material";
 import { Container } from "@mui/system";
-import CardLabelExercise from './../Components/CardLabelExercise';
-import AddTaskIcon from '@mui/icons-material/AddTask';
-import RepeatIcon from '@mui/icons-material/Repeat';
-
+import CardLabelExercise from "./../Components/CardLabelExercise";
+import AddTaskIcon from "@mui/icons-material/AddTask";
+import RepeatIcon from "@mui/icons-material/Repeat";
 
 import {
   completeExerciseInFeedback,
@@ -27,7 +26,7 @@ import {
 } from "./../Controllers/FeedbackEntry.Controller";
 
 function VideoDisplay({ exerciseList, handleCompleteExercise }) {
-  const theme = useTheme()
+  const theme = useTheme();
   const { idRoutine, idExercise } = useParams();
   const [routine, setRoutine] = useState(null);
   const [feedback, setFeedback] = useState(null);
@@ -36,33 +35,32 @@ function VideoDisplay({ exerciseList, handleCompleteExercise }) {
   const [modal, setModal] = useState({ type: "success", open: false });
   const [exerciseRoutine, setExerciseRoutine] = useState(null);
 
-
   const handleClick = () => {
     console.log(
       "Aca va la llamada al backend. Si recibo 200 OK modal success, sino otro."
     );
-    
+
     const updateFeedback = async function () {
       //const feedbackUpdated = {...feedback, "exercisesDone" : [...feedback.exercisesDone, idExercise]}
-      const respuesta = await completeExerciseInFeedback(idExercise ,feedback._id)
+      const respuesta = await completeExerciseInFeedback(
+        idExercise,
+        feedback._id
+      );
       console.log("Feedback: ", respuesta);
       console.log("Console log de respuesta de back ", respuesta);
       if (respuesta.rdo === 1) {
         alert("Rutine invalida para usar esta pagina");
         window.location.href = "/";
-      } 
-
+      }
     };
 
-
-    
-    if (feedback ) {
-      if(!feedback.exercisesDone.includes(idExercise)) {
-        console.log("se actualzia feedback")
-        updateFeedback()
+    if (feedback) {
+      if (!feedback.exercisesDone.includes(idExercise)) {
+        console.log("se actualzia feedback");
+        updateFeedback();
       }
     }
-    setModal({ type: 'success', open: true });
+    setModal({ type: "success", open: true });
     setOpen(true);
 
     //handleCompleteExercise(idExercise);
@@ -95,8 +93,7 @@ function VideoDisplay({ exerciseList, handleCompleteExercise }) {
             (e) => e.exercise._id === idExercise
           )[0] //obtener exercise
         );
-        if (currentUser.role === "paciente")
-          getFeedback();
+        if (currentUser.role === "paciente") getFeedback();
       }
     };
     getRoutine();
@@ -105,7 +102,9 @@ function VideoDisplay({ exerciseList, handleCompleteExercise }) {
   return (
     <>
       <Header
-        title={routine === null ? "Cargando..." : exerciseRoutine.exercise.videoTitle}
+        title={
+          routine === null ? "Cargando..." : exerciseRoutine.exercise.videoTitle
+        }
         icon={<FitnessCenterIcon />}
       />
       <Grid container justifyContent="center" sx={{ padding: "10vh 0" }}>
@@ -117,7 +116,9 @@ function VideoDisplay({ exerciseList, handleCompleteExercise }) {
           </Grid>
         ) : (
           <Grid item xs={11} md={6}>
-            <Typography variant="h3">{exerciseRoutine.exercise.videoTitle}</Typography>
+            <Typography variant="h3">
+              {exerciseRoutine.exercise.videoTitle}
+            </Typography>
             <div
               style={{
                 justifyContent: "center",
@@ -136,45 +137,61 @@ function VideoDisplay({ exerciseList, handleCompleteExercise }) {
                 onError={(e) => console.log(e)}
               />
             </div>
-            <Grid container sx={{pt: 2, mb: 2}} spacing = {2} justify="space-between">
+            <Grid
+              container
+              sx={{ pt: 2, mb: 2 }}
+              spacing={2}
+              justify="space-between"
+            >
+              <CardLabelExercise
+                title={"Instrucciones"}
+                details={exerciseRoutine.exercise.instructions}
+                type={"text"}
+                icon={null}
+              />
+              <CardLabelExercise
+                title={"Series:"}
+                details={exerciseRoutine.sets}
+                type={"numeric"}
+                icon={<AddTaskIcon sx={{ fontSize: "1rem", width: "15px" }} />}
+              />
 
-              <CardLabelExercise title={"Instrucciones"} details= {exerciseRoutine.exercise.instructions} type = {"text"} icon = {null}/>
-              <CardLabelExercise 
-              title={"Series:"} 
-              details= {exerciseRoutine.sets} type = {"numeric"} 
-              icon = {<AddTaskIcon sx={{ fontSize: '1rem', width : "15px" }} />}/>
+              <CardLabelExercise
+                title={"Repeticiones:"}
+                details={exerciseRoutine.repetitions}
+                type={"numeric"}
+                icon={<RepeatIcon sx={{ fontSize: "1rem", width: "15px" }} />}
+              />
 
-              <CardLabelExercise 
-              title={"Repeticiones:"} 
-              details= {exerciseRoutine.repetitions} 
-              type = {"numeric"}
-              icon = {<RepeatIcon sx={{ fontSize: '1rem', width : "15px" }} />}/>
+              <CardLabelExercise
+                title={"Peso:"}
+                details={
+                  exerciseRoutine.weight ? exerciseRoutine.weight : "Sin peso"
+                }
+                type={"numeric"}
+                icon={
+                  <FitnessCenterIcon sx={{ fontSize: "1rem", width: "15px" }} />
+                }
+              />
 
-              <CardLabelExercise 
-              title={"Peso:"} 
-              details= {exerciseRoutine.weight? exerciseRoutine.weight: "Sin peso"} 
-              type = {"numeric"}
-              icon = {<FitnessCenterIcon sx={{ fontSize: '1rem', width : "15px" }} />}/>
+              <CardLabelExercise
+                title={"Información adicional"}
+                details={exerciseRoutine.exercise.description}
+                type={"text"}
+                icon={null}
+              />
 
-              <CardLabelExercise 
-              title={"Información adicional"} 
-              details= {exerciseRoutine.exercise.description} 
-              type = {"text"}
-              icon = {null}/>
-
-        
-            {currentUser.role === "paciente" ? (
-              <Button
-                onClick={handleClick}
-                fullWidth
-                variant="contained"
-                size="large"
-                sx= {{mt: 2}}
-              >
-                Completado
-              </Button>
-              
-            ) : null}
+              {currentUser.role === "paciente" ? (
+                <Button
+                  onClick={handleClick}
+                  fullWidth
+                  variant="contained"
+                  size="large"
+                  sx={{ mt: 2 }}
+                >
+                  Completado
+                </Button>
+              ) : null}
             </Grid>
           </Grid>
         )}
@@ -184,19 +201,39 @@ function VideoDisplay({ exerciseList, handleCompleteExercise }) {
         open={open}
         type={modal.type}
         title="¡Felicitaciones!"
-        subtitle={`Has completado ${true ? "el ejercicio" : "la rutina"} `}
+        subtitle={
+          !routine
+            ? null
+            : routine.exercises.length - 1 ===
+              routine.exercises.indexOf(exerciseRoutine)
+            ? `¡Has completado tu rutina de ejercicios diaria!`
+            : `¡Has completado el ejercicio!`
+        }
         primaryBtnText="Continuar"
         setNotOpen={() => {
           setOpen(false);
           console.log(modal);
         }}
         secondaryBtnPage={`/routine/${idRoutine}`}
-        secondaryBtnText="Volver"
+        secondaryBtnText={
+          !routine
+            ? null
+            : routine.exercises.length - 1 ===
+              routine.exercises.indexOf(exerciseRoutine)
+            ? null
+            : "Volver"
+        }
         primaryBtnPage={
-          !routine ? null:
-          routine.exercises.length-1 === routine.exercises.indexOf(exerciseRoutine)? `/encuesta/${idRoutine}` :
-          `/routine/${idRoutine}/exercise/${routine.exercises[routine.exercises.indexOf(exerciseRoutine) + 1].exercise._id}`
-
+          !routine
+            ? null
+            : routine.exercises.length - 1 ===
+              routine.exercises.indexOf(exerciseRoutine)
+            ? `/encuesta/${idRoutine}`
+            : `/routine/${idRoutine}/exercise/${
+                routine.exercises[
+                  routine.exercises.indexOf(exerciseRoutine) + 1
+                ].exercise._id
+              }`
         }
       />
     </>

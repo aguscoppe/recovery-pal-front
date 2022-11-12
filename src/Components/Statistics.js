@@ -49,14 +49,15 @@ const Statistics = ({ report, routineAchievements }) => {
                 <CChart
                   type="doughnut"
                   data={{
-                    labels: ["Completo", "No Completo"],
+                    labels: ["N/C", "Completo", "No Completo"],
                     datasets: [
                       {
-                        backgroundColor: [
-                          theme.palette.primary.main,
-                          theme.palette.secondary.main,
+                        backgroundColor: ["gray", "green", "red"],
+                        data: [
+                          report.timesComplete_0,
+                          report.timesComplete_1,
+                          report.timesComplete_2,
                         ],
-                        data: [40, 20],
                       },
                     ],
                   }}
@@ -89,15 +90,10 @@ const Statistics = ({ report, routineAchievements }) => {
                 <CChart
                   type="doughnut"
                   data={{
-                    labels: ["N/C", "Negativo", "Regular", "Positivo"],
+                    labels: ["N/C", "Positivo", "Negativo", "Regular"],
                     datasets: [
                       {
-                        backgroundColor: [
-                          theme.palette.secondary.main,
-                          "red",
-                          theme.palette.primary.main,
-                          "green",
-                        ],
+                        backgroundColor: ["gray", "green", "red", "orange"],
                         data: [
                           report.timesFeeling_0,
                           report.timesFeeling_1,
@@ -136,15 +132,10 @@ const Statistics = ({ report, routineAchievements }) => {
                 <CChart
                   type="doughnut"
                   data={{
-                    labels: ["N/C", "Poco", "Regular", "Mucho"],
+                    labels: ["N/C", "Poco", "Mucho", "Regular"],
                     datasets: [
                       {
-                        backgroundColor: [
-                          theme.palette.secondary.main,
-                          theme.palette.primary.main,
-                          "orange",
-                          "red",
-                        ],
+                        backgroundColor: ["gray", "green", "red", "orange"],
                         data: [
                           report.timesPain_0,
                           report.timesPain_1,
@@ -183,15 +174,10 @@ const Statistics = ({ report, routineAchievements }) => {
                 <CChart
                   type="doughnut"
                   data={{
-                    labels: ["N/C", "Poco", "Regular", "Mucho"],
+                    labels: ["N/C", "Positivo", "Negativo", "Regular"],
                     datasets: [
                       {
-                        backgroundColor: [
-                          theme.palette.secondary.main,
-                          theme.palette.primary.main,
-                          "orange",
-                          "green",
-                        ],
+                        backgroundColor: ["gray", "green", "red", "orange"],
                         data: [
                           report.timesImprove_0,
                           report.timesImprove_1,
