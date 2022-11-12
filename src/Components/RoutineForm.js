@@ -115,6 +115,15 @@ const RoutineForm = ({
           onChange={handleChange}
           sx={textFieldSpacing}
         />
+        <TextField
+          name='description'
+          value={rutineData.description}
+          fullWidth
+          label='Descripcion'
+          variant='outlined'
+          onChange={handleChange}
+          sx={textFieldSpacing}
+        />
         <Box sx={textFieldSpacing}>
           <FormLabel
             component='legend'

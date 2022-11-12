@@ -1,5 +1,6 @@
-import { Grid } from '@mui/material';
+import { Grid, Fab } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
+import AddIcon from '@mui/icons-material/Add';
 import Header from '../Components/Header';
 import NavBar from '../Components/NavBar';
 import PatientCard from '../Components/PatientCard';
@@ -8,6 +9,7 @@ import { getDoctorById } from '../Controllers/DoctorEntry.Controller';
 import { UserContext } from '../Contexts/UserContext';
 import CircularProgress from '@mui/material/CircularProgress';
 import SearchPatients from '../Components/SearchPatients';
+
 
 /* Esta pagina es el home que deberia ver el doctor con la lista de sus pacientes aun no conectada con el back */
 const HomeDoctor = () => {
@@ -71,6 +73,18 @@ const HomeDoctor = () => {
             patientsFiltered.map((e) => <PatientCard patient={e} />)
           )}
         </Grid>
+        <Fab
+        color="primary"
+        aria-label="add"
+        sx={{
+          position: "fixed",
+          bottom: 80,
+          right: 25,
+        }}
+        onClick={() => {}}
+      >
+        <AddIcon />
+      </Fab>
       </Grid>
       <NavBar />
     </>
