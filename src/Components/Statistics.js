@@ -49,11 +49,15 @@ const Statistics = ({ report, routineAchievements }) => {
                 <CChart
                   type="doughnut"
                   data={{
-                    labels: ["Completo", "No Completo"],
+                    labels: ["N/C", "Completo", "No Completo"],
                     datasets: [
                       {
-                        backgroundColor: ["green", "red"],
-                        data: [40, 20],
+                        backgroundColor: ["gray", "green", "red"],
+                        data: [
+                          report.timesComplete_0,
+                          report.timesComplete_1,
+                          report.timesComplete_2,
+                        ],
                       },
                     ],
                   }}
