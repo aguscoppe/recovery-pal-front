@@ -12,26 +12,42 @@ export default function CardLabelExercise(props) {
   const theme = useTheme();
   return (
     <Grid item xs={12} md={12} lg={12} xl={12} >
-      <Card sx={{ borderRadius: "16px", minHeight: 40 }} component={Stack} direction="column" justifyContent="center">
-        <Box sx={{ mx: 2 }} justify="space-between">
+      <Card sx={{ borderRadius: "16px", minHeight: 40  }}>
+        <Box sx={{ mx: 2, pl: props.icon? 0: "15px" }} >
+        <Stack direction="row" alignItems="center" gap={1}>
+            {props.icon}
+
           <Typography
             variant="body1"
             marginTop="5px"
             sx={{ fontWeight: "bold", color: theme.palette.primary.main }}
-            display={type === "numeric" ? "inline" : null}
+            display={type === "numeric" ? "inline" : "block"}
           >
-            <span>{title}</span>
+            {title}
           </Typography>
+        { type === "numeric"?
           <Typography
             variant="body1"
             marginTop="5px"
-            marginBottom="3px"
-            display={type === "numeric" ? "inline" : null}
-            sx= {{mr: type === "numeric" ? 2 : 0 }}
+            align ="right"
+            display="inline"
             
           >
-            <span style={{ float: type === "numeric" ? "right" : "left"}} >{details}</span>
+            <span style ={{float: "right"}}>{details}</span>
           </Typography>
+          : null}
+          
+          </Stack>
+          { type !== "numeric"?
+          <Typography
+            variant="body1"
+            marginTop="5px"
+            align ="left"
+            marginBottom="3px"
+          >
+            {details}
+          </Typography>
+          : null}
         </Box>
       </Card>
     </Grid>
