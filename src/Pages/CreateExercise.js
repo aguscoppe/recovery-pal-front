@@ -33,7 +33,7 @@ const CreateExercise = ({ doctorId }) => {
   });
 
   const handleClick = async () => {
-    createExercise();
+      createExercise();
   };
 
   const createExercise = async () => {

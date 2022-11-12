@@ -19,6 +19,7 @@ import Header from '../Components/Header';
 import NavBar from '../Components/NavBar';
 import { addUserFeedback, getLastFeedbackByRoutin } from '../Controllers/FeedbackEntry.Controller';
 import { useEffect } from "react";
+import { Functions } from "@mui/icons-material";
 
 
 //estilos para el modal container
@@ -39,37 +40,96 @@ const modalContainer = {
 
 const ModalComment = (props) =>{
 
-    const handleComment = props.stateComment
-    const handleClose = props.handleClose
+  //obtencion de rutina por parte de los params en url
+      const {idRoutine} = useParams()
+
+      const [idFeedback,setFeedback]= useState(0)
+  
+  
+      //obtencion de feedback por parte de llamada al back
+  
+  useEffect(()=>{
+      const obtenerFeed = async () =>{
+          try {
+              const respuesta = await getLastFeedbackByRoutin(idRoutine)
+              const idFeedback = respuesta.feedback._id
+              if (respuesta.rdo === 1) {
+                  alert("No se pudo encontrar el Feedback");
+                } else {
+                  setFeedback(idFeedback);
+                }
+            } catch (e) {
+              console.log(e);
+            }
+      }
+      obtenerFeed()
+  },[idRoutine])
+
+
+    const {pain,feeling,improve} = props.info
+
+    const [comment,setComment]= useState("")
+
+
+    function handleComment (e){
+      setComment(e.target.value)
+    }
+
+    //llamada al back para que guarde los datos de la encuesta
+    const callAtBackend = async () => {
+      let infoFeed = {
+        pain:pain,
+          feeling:feeling,
+          improve:improve,
+          comment:comment
+      }
+      try {
+        const res = await addUserFeedback(idFeedback,infoFeed);
+        if (res.rdo === 1) {
+          alert("No se pudo guardar el feedback");
+        } else {
+          console.log(res)
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    };
+
+
+   const handleFinal= async ()=>{
+    await callAtBackend()
+   }
+
+
     return(
     <Modal open={props.open}>
       <Box sx={modalContainer}>
         <Grid container justifyContent="center" alignItems="center">
           <Grid item xs={12} sm={6} m={4}>
-            <Typography variant="h5">
+            <Typography variant="h4" align="center" marginBottom={"1vh"}>
              ¡Bien Hecho! 
             </Typography>
-            <Typography variant="body2" >
+            <Typography variant="body2" align="center" marginBottom={"1vh"}>
              Si tienes comentarios para tu fisioterapeuta, escríbelos aquí:
             </Typography>
             <TextField
-              name="Comentario"
+              maxRows={4}
+              multiline
+              name="comment"
               fullWidth
               label="Escribe tu comentario (opcional)"
               variant="filled"
-              onChange={()=>{
-                handleComment()
-              }}
+              onChange={handleComment}
             />
 
             <Grid item container justifyContent="center">
-            <Link to={`/routine/${props.idRoutine}`} style={{ textDecoration: "none"}}>
+            <Link to={`/routine/${idRoutine}`} style={{ textDecoration: "none"}}>
                 <Button
                   size="large"
                   variant="contained"
-                  onClick={()=>{
-                    handleClose()
-                }}
+                  onClick={()=>{ 
+                    handleFinal()
+                  }}
                   sx={{ mt: 3 }}
                 >
                   Finalizar
@@ -153,30 +213,7 @@ const Question = (props) => {
 
 const Survey = () => {
     const currentUser = useContext(UserContext)
-    //obtencion de rutina por parte de los params en url
-    const {idRoutine} = useParams()
 
-    const [idFeedback,setFeedback]= useState(0)
-
-
-    //obtencion de feedback por parte de llamada al back
-
-useEffect(()=>{
-    const obtenerFeed = async () =>{
-        try {
-            const respuesta = await getLastFeedbackByRoutin(idRoutine)
-            const idFeedback = respuesta.feedback._id
-            if (respuesta.rdo === 1) {
-                alert("No se pudo encontrar el Feedback");
-              } else {
-                setFeedback(idFeedback);
-              }
-          } catch (e) {
-            console.log(e);
-          }
-    }
-    obtenerFeed()
-},[idRoutine])
     
 
 //usestate's para poder pasar a la base de datos cuando se termine
@@ -187,7 +224,7 @@ useEffect(()=>{
 
     const [improve,setImprove] = useState(0)
 
-    const [comment,setComment]= useState(0)
+    
 
 //handles para poder cambiar los state individualmente desde el componente Question
     const handleFeeling = (e)=>{
@@ -199,67 +236,15 @@ useEffect(()=>{
     const handleImprove = (e)=>{
         setImprove(e)
     }
-    const handleComment = (e)=>{
-        setComment(e)
-    }
-
-//llamada al back para que guarde los datos de la encuesta
-    const addUserFeedback = async () => {
-        try {
-          const res = await addUserFeedback(idFeedback,{
-            pain: pain,
-            feeling: feeling,
-            improve: improve,
-            comment: comment
-          });
-          if (res.rdo === 1) {
-            alert("No se pudo guardar el feedback");
-          } else {
-            console.log(res.data)
-          }
-        } catch (e) {
-          console.log(e);
-        }
-      };
 
 
-    //state para abrir el modal de comentario
-    const [modalAlert, setModalAlert] = useState({
-        open: false,
-        type: "",
-        title: "",
-        subtitle: "",
-        primaryBtnText: "",
-        primaryBtnPage: "",
-        setNotOpen: () => {},
-      });
+
 
     const [openModal,setOpenModal]= useState(false)
 
     const handleOpenModal= ()=>{
         setOpenModal(true)
     }
-
-    const handleCloseModal=()=>{
-        setOpenModal(false)
-    }
-
-    const closeExerciseModal = (rdo) => {
-        setOpenModal((prev) => ({ ...prev, open: false }));
-        if (rdo === 0) {
-          setModalAlert({
-            type: "success",
-            open: true,
-            title: "¡Bien hecho!",
-            subtitle: "Ejercicio creado correctamente",
-            primaryBtnText: "Continuar",
-            setNotOpen: () => {
-              setModalAlert((prev) => ({ ...prev, open: false }));
-            },
-          });
-        }
-      };
-
     return (
       <>
         <Header title="Encuesta" icon={<AssignmentIcon />} />
@@ -293,7 +278,7 @@ useEffect(()=>{
                 }}
                 sx={{ color: "white" }}
             >
-            ENVIAR
+            SIGUIENTE
             </Button>
          
         </Grid>
@@ -301,8 +286,11 @@ useEffect(()=>{
         {openModal && (
         <ModalComment
           open={openModal}
-          stateComment={handleComment}
-          idRoutine={idRoutine}
+          info={{
+            pain: pain,
+            feeling: feeling,
+            improve: improve
+          }}
         />
       )}
       </>
