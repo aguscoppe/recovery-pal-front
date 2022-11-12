@@ -33,7 +33,7 @@ const Achievements = ({ achievements }) => {
               src={require("../Assets/icons/trophy_firstExercise.png")}
             />
             <Typography sx={{ fontWeight: "700" }}>
-              First Exercise Completed
+              1° Ejercicio Completado
             </Typography>
           </Grid>
         )}
@@ -66,7 +66,7 @@ const Achievements = ({ achievements }) => {
                   src={require("../Assets/icons/trophy_firstExercise.png")}
                 />
                 <Typography sx={{ fontWeight: "700" }}>
-                  {5 * (index + 1)} Exercises Completed
+                  {5 * (index + 1)} Ejercicios Completados
                 </Typography>
               </Grid>
             );
@@ -97,7 +97,7 @@ const Achievements = ({ achievements }) => {
               src={require("../Assets/icons/trophy_firstweek.png")}
             />
             <Typography sx={{ fontWeight: "700" }}>
-              First Session Completed
+              1° Sesion Completada
             </Typography>
           </Grid>
         )}
@@ -130,7 +130,7 @@ const Achievements = ({ achievements }) => {
                   src={require("../Assets/icons/trophy_firstweek.png")}
                 />
                 <Typography sx={{ fontWeight: "700" }}>
-                  {5 * (index + 1)} Sessions Completed
+                  {5 * (index + 1)} Sesiones Completadas
                 </Typography>
               </Grid>
             );
@@ -161,7 +161,7 @@ const Achievements = ({ achievements }) => {
               src={require("../Assets/icons/trophy_firstRoutine.png")}
             />
             <Typography sx={{ fontWeight: "700" }}>
-              First Routine Completed
+              1° Rutina Completada
             </Typography>
           </Grid>
         )}
@@ -194,7 +194,7 @@ const Achievements = ({ achievements }) => {
                   src={require("../Assets/icons/trophy_firstRoutine.png")}
                 />
                 <Typography sx={{ fontWeight: "700" }}>
-                  {5 * (index + 1)} Routines completed
+                  {5 * (index + 1)} Rutinas Completadas
                 </Typography>
               </Grid>
             );
