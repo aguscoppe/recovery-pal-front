@@ -17,6 +17,10 @@ import CreateRoutine from "./Pages/CreateRoutine";
 import VideoDisplay from "./Pages/VideoDisplay";
 import PatientRoutine from "./Pages/PatientRoutine";
 import VideoDisplayDoctor from "./Pages/VideoDisplayDoctor";
+import InicioDoctor from "./Pages/InicioDoctor";
+import InicioPaciente from "./Pages/InicioPaciente";
+import AddPatient from "./Pages/AddPatient";
+import MyDoctors from "./Pages/MyDoctors";
 import { exercises } from "./data";
 import { Navigate } from "react-router-dom";
 
@@ -35,13 +39,20 @@ function App() {
       <UserContext.Provider value={currentUser}>
         <Routes>
           <Route path="/register" element={<Register />} />
+
           <Route path="/" element={<Login setCurrentUser={setCurrentUser} />} />
           {!currentUser._id ? (
             <Route path="/*" element={<Navigate to="/" />} />
           ) : (
             <>
+                      <Route path="/home" element={
+                  currentUser.role === "doctor" ? (
+                    <InicioDoctor />
+                  ) : (
+                    <InicioPaciente />
+                  )} />
               <Route
-                path="/home"
+                path="/inicio"
                 element={
                   currentUser.role === "doctor" ? (
                     <HomeDoctor />
@@ -56,7 +67,11 @@ function App() {
                   ) : (
                     <PatientProfile />
                   )} />
+              <Route path="/patient" element={<HomeDoctor />} />    
+              <Route path="/addpatient" element={<AddPatient />} />
+              <Route path="/doctor" element={<MyDoctors />} />
               <Route path="/patient/:idPatient" element={<PatientProfile />} />
+              <Route path="/routine" element={<PatientRoutine />} />
               <Route
                 path="/routine/:idRoutine"
                 element={<ExerciseList exerciseList={exerciseList} />}
