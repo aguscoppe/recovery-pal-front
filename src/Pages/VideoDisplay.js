@@ -167,14 +167,14 @@ function VideoDisplay({ exerciseList, handleCompleteExercise }) {
         secondaryBtnText="Volver"
         primaryBtnPage={
           !routine ? null:
-          routine.exercises.length-1 === routine.exercises.indexOf(exerciseRoutine)? `/routine/${idRoutine}`:
+          routine.exercises.length-1 === routine.exercises.indexOf(exerciseRoutine)? `/encuesta/${idRoutine}` :
           `/routine/${idRoutine}/exercise/${routine.exercises[routine.exercises.indexOf(exerciseRoutine) + 1].exercise._id}`
-
 
         }
       />
     </>
   );
+  //{/** / `/routine/${idRoutine}` */}
 }
 
 export default VideoDisplay;

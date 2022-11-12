@@ -37,7 +37,7 @@ function App() {
         <Routes>
           <Route path="/register" element={<Register />} />
           <Route path="/" element={<Login setCurrentUser={setCurrentUser} />} />
-          {currentUser._id ? (
+          {!currentUser._id ? (
             <Route path="/*" element={<Navigate to="/" />} />
           ) : (
             <>
@@ -83,7 +83,7 @@ function App() {
                 path="/videos/:idExercise"
                 element={<VideoDisplayDoctor exerciseList={exerciseList} />}
               />
-              <Route path="/encuesta" element={<Survey />} />
+              <Route path="/encuesta/:idRoutine" element={<Survey />} />
             </>
           )}
         </Routes>
