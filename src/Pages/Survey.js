@@ -63,6 +63,7 @@ const ModalComment = (props) =>{
             />
 
             <Grid item container justifyContent="center">
+            <Link to={`/routine/${props.idRoutine}`} style={{ textDecoration: "none"}}>
                 <Button
                   size="large"
                   variant="contained"
@@ -73,6 +74,7 @@ const ModalComment = (props) =>{
                 >
                   Finalizar
                 </Button>
+                </Link>
             </Grid>
           </Grid>
         </Grid>
@@ -300,7 +302,7 @@ useEffect(()=>{
         <ModalComment
           open={openModal}
           stateComment={handleComment}
-          handleClose={handleCloseModal}
+          idRoutine={idRoutine}
         />
       )}
       </>
