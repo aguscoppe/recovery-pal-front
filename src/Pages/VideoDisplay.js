@@ -10,8 +10,13 @@ import ModalAlert from "../Components/ModalAlert";
 import { useContext } from "react";
 import { UserContext } from "../Contexts/UserContext";
 import { getRoutineById } from "../Controllers/RoutineEntry.Controller";
+import { useTheme } from "@emotion/react";
 import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
+import { Card } from '@mui/material';
+import { Container } from "@mui/system";
+import CardLabelExercise from './../Components/CardLabelExercise';
+
 import {
   completeExerciseInFeedback,
   feedbackUpdate,
@@ -19,6 +24,7 @@ import {
 } from "./../Controllers/FeedbackEntry.Controller";
 
 function VideoDisplay({ exerciseList, handleCompleteExercise }) {
+  const theme = useTheme()
   const { idRoutine, idExercise } = useParams();
   const [routine, setRoutine] = useState(null);
   const [feedback, setFeedback] = useState(null);
@@ -127,28 +133,28 @@ function VideoDisplay({ exerciseList, handleCompleteExercise }) {
                 onError={(e) => console.log(e)}
               />
             </div>
-            <Typography variant="body1" marginTop="20px" marginBottom="40px">
-              {exerciseRoutine.exercise.instructions}
-            </Typography>
-            <Typography variant="subtitle2" sx= {{fontWeight: 'bold', fontSize : 20}} marginTop="20px" marginBottom="20px">
-              Sets: {exerciseRoutine.sets}
-            </Typography>
-            <Typography variant="subtitle2" sx= {{fontWeight: 'bold', fontSize : 20}} marginTop="20px" marginBottom="20px">
-              Repeticiones: {exerciseRoutine.repetitions}
-            </Typography>
-            <Typography variant="subtitle2" sx= {{fontWeight: 'bold', fontSize : 20}} marginTop="20px" marginBottom="20px">
-              Peso: {exerciseRoutine.weight? exerciseRoutine.weight: "Sin peso"}
-            </Typography>
+            <Grid container sx={{pt: 2, mb: 2}} spacing = {2} justify="space-between">
+
+              <CardLabelExercise title={"Instrucciones"} details= {exerciseRoutine.exercise.instructions} type = {"text"}/>
+              <CardLabelExercise title={"Sets"} details= {exerciseRoutine.sets} type = {"numeric"}/>
+              <CardLabelExercise title={"Repeticiones"} details= {exerciseRoutine.repetitions} type = {"numeric"}/>
+              <CardLabelExercise title={"Peso"} details= {exerciseRoutine.weight? exerciseRoutine.weight: "Sin peso"} type = {"numeric"}/>
+              <CardLabelExercise title={"Información adicional"} details= {exerciseRoutine.exercise.description} type = {"text"}/>
+
+        
             {currentUser.role === "paciente" ? (
               <Button
                 onClick={handleClick}
                 fullWidth
                 variant="contained"
                 size="large"
+                sx= {{mt: 2}}
               >
                 Completado
               </Button>
+              
             ) : null}
+            </Grid>
           </Grid>
         )}
       </Grid>
