@@ -28,7 +28,9 @@ const urlWebServices = {
 
   achievements: urlApi + 'api/achievements',
   achievementsRoutine: urlApi + 'api/achievements/routine',
-  achievementsReport: urlApi + 'api/achievements/report'
+  achievementsReport: urlApi + 'api/achievements/report',
+
+  getAllCommentsByDoctor: urlApi + 'api/doctors/getAllCommentsByDoctor'
 };
 
 export default urlWebServices;

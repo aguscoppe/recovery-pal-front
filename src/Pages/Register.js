@@ -10,7 +10,7 @@ import {
   Typography,
 } from '@mui/material';
 import { patientRegistration } from '../Controllers/PatientEntry.Controller';
-import { doctorRegistration } from '../Controllers/DoctorEntry.Controller';
+import { doctorRegistration, getAllCommentsByDoctor } from '../Controllers/DoctorEntry.Controller';
 import { getPatientById } from '../Controllers/PatientEntry.Controller';
 import { createRoutine, getRoutineById } from '../Controllers/RoutineEntry.Controller';
 import { achievements, achievementsRoutine, routineReport } from '../Controllers/AchievementEntry.Controller';
@@ -148,6 +148,11 @@ export default function Register() {
     console.log('Soy feedback del Back:', feedback);
   };
 
+  const pruebaGetAllCommentsDoctor = async function () {
+    var comments = await getAllCommentsByDoctor("633c98148efef931d4597302")//IdDoctor
+    console.log('Soy feedback del Back:', comments.res);
+  };
+
   const handleSubmit = () => {
     console.log(radioValue);
 
@@ -177,7 +182,8 @@ export default function Register() {
           //pruebaAchievements()
           //pruebaAchievementsRoutine()
           //pruebaRoutineReport()
-          pruebaAddUserFeedback()
+          //pruebaAddUserFeedback()
+          pruebaGetAllCommentsDoctor()
         }
       }
     }
