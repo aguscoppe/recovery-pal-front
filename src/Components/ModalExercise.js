@@ -158,10 +158,19 @@ const ModalExercise = ({ open, handleClose }) => {
               sx={textFieldSpacing}
             />
             <TextField
+              name="instructions"
+              value={exerciseData.instructions}
+              fullWidth
+              label="Instrucciones"
+              variant="outlined"
+              onChange={handleChange}
+              sx={textFieldSpacing}
+            />
+            <TextField
               name="description"
               value={exerciseData.description}
               fullWidth
-              label="Descripción"
+              label="Información adicional"
               variant="outlined"
               onChange={handleChange}
               sx={textFieldSpacing}
