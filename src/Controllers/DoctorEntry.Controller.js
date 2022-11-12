@@ -100,7 +100,7 @@ export const addPatientToDoctor = async function(datos){
     //armo json con datos
     const formData = new URLSearchParams();
     formData.append('idDoctor', datos.idDoctor);
-    formData.append('idPatient', datos.idPatient);
+    formData.append('email', datos.email);
     //console.log("dato",formData);
     //console.log("url",url);
     try{
