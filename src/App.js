@@ -51,16 +51,6 @@ function App() {
                   ) : (
                     <InicioPaciente />
                   )} />
-              <Route
-                path="/inicio"
-                element={
-                  currentUser.role === "doctor" ? (
-                    <HomeDoctor />
-                  ) : (
-                    <PatientRoutine />
-                  )
-                }
-              />
               <Route path="/profile" element={
                 currentUser.role === "doctor" ? (
                     <Profile />
