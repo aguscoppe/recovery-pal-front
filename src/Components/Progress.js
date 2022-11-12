@@ -61,7 +61,13 @@ const Progress = ({ patient, routineId }) => {
   };
 
   if (!report) {
-    return <CircularProgress />;
+    return (
+      <Grid justifyContent="center" alignItems="center" container>
+        <Grid sx={{ textAlign: "center" }} item xs={12}>
+          <CircularProgress />
+        </Grid>
+      </Grid>
+    );
   }
 
   return (

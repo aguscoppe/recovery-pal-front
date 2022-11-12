@@ -34,7 +34,7 @@ const Exercise = ({ name, handleExerciseChange, rutineData, index }) => {
         onChange={(e) => handleExerciseChange(e, index)}
       />
       <TextField
-        label='Sets'
+        label='Series'
         type='number'
         fullWidth
         sx={textFieldSpacing}
