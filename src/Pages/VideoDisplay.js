@@ -16,6 +16,9 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { Card } from '@mui/material';
 import { Container } from "@mui/system";
 import CardLabelExercise from './../Components/CardLabelExercise';
+import AddTaskIcon from '@mui/icons-material/AddTask';
+import RepeatIcon from '@mui/icons-material/Repeat';
+
 
 import {
   completeExerciseInFeedback,
@@ -135,11 +138,29 @@ function VideoDisplay({ exerciseList, handleCompleteExercise }) {
             </div>
             <Grid container sx={{pt: 2, mb: 2}} spacing = {2} justify="space-between">
 
-              <CardLabelExercise title={"Instrucciones"} details= {exerciseRoutine.exercise.instructions} type = {"text"}/>
-              <CardLabelExercise title={"Sets"} details= {exerciseRoutine.sets} type = {"numeric"}/>
-              <CardLabelExercise title={"Repeticiones"} details= {exerciseRoutine.repetitions} type = {"numeric"}/>
-              <CardLabelExercise title={"Peso"} details= {exerciseRoutine.weight? exerciseRoutine.weight: "Sin peso"} type = {"numeric"}/>
-              <CardLabelExercise title={"Información adicional"} details= {exerciseRoutine.exercise.description} type = {"text"}/>
+              <CardLabelExercise title={"Instrucciones"} details= {exerciseRoutine.exercise.instructions} type = {"text"} icon = {null}/>
+              <CardLabelExercise 
+              title={"Series:"} 
+              details= {exerciseRoutine.sets} type = {"numeric"} 
+              icon = {<AddTaskIcon sx={{ fontSize: '1rem', width : "15px" }} />}/>
+
+              <CardLabelExercise 
+              title={"Repeticiones:"} 
+              details= {exerciseRoutine.repetitions} 
+              type = {"numeric"}
+              icon = {<RepeatIcon sx={{ fontSize: '1rem', width : "15px" }} />}/>
+
+              <CardLabelExercise 
+              title={"Peso:"} 
+              details= {exerciseRoutine.weight? exerciseRoutine.weight: "Sin peso"} 
+              type = {"numeric"}
+              icon = {<FitnessCenterIcon sx={{ fontSize: '1rem', width : "15px" }} />}/>
+
+              <CardLabelExercise 
+              title={"Información adicional"} 
+              details= {exerciseRoutine.exercise.description} 
+              type = {"text"}
+              icon = {null}/>
 
         
             {currentUser.role === "paciente" ? (
