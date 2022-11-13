@@ -16,7 +16,8 @@ import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import Progress from "./../Components/Progress";
 import { getPatientById } from "../Controllers/PatientEntry.Controller";
-import MoreVertIcon from '@mui/icons-material/MoreVert';;
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 
 /** Esta Pagina es el perfil del paciente que el doctor puede ver, aca puede administrar las rutinas del paciente y crear nuevas  */
 const PatientProfile = () => {
@@ -156,7 +157,10 @@ const PatientProfile = () => {
                     }}
                     onClick={handleAnimation}
                   >
-                    <MoreVertIcon />
+                    {checked ? (
+                    <ArrowBackIosNewIcon />):(
+                      <MoreVertIcon/>
+                    )}
                   </Fab>
                   <Link
                   to={`/patient/${idPatient}/createRoutine`}
