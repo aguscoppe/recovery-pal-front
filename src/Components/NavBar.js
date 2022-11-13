@@ -25,9 +25,9 @@ const NavBar = () => {
             icon={<PersonIcon />}
           />
         </Link>
-        <Link to="/chat">
+        <Link to="/comentarios">
           <BottomNavigationAction
-            label="Chat"
+            label="Comentarios"
             sx={{ color: "white" }}
             icon={<SmsIcon />}
           />

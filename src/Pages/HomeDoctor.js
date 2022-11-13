@@ -58,12 +58,17 @@ const HomeDoctor = () => {
                   </Grid>
         <Grid
           item
+          container
           xs={11}
           md={6}
           display='flex'
           flexDirection='column'
           alignItems='center'
           justifyContent='center'
+          spacing = {2}
+          sx= {{mt: 2}}
+
+
         >
           {patientsFiltered === null ? (
             <CircularProgress />
