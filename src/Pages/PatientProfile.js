@@ -183,7 +183,7 @@ const PatientProfile = () => {
                 </Zoom>
                   </Link>
                   <Link
-                   to={`/chat`}
+                   to={`/comentarios`}
                   style={{ textDecoration: "none" }}
                 >
                 <Zoom in={checked}>
