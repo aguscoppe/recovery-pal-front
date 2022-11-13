@@ -165,7 +165,7 @@ export const getAllCommentsByDoctor = async function(idDoctor){
                 case 200:
                 {
                  
-                    return ({rdo:0,res:data.comments});//correcto
+                    return ({rdo:0, comments:data.comments});//correcto
                 }
                 default:
                 {

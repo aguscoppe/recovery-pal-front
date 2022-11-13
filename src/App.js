@@ -6,7 +6,7 @@ import { theme } from "./theme";
 import "./App.css";
 import HomeDoctor from "./Pages/HomeDoctor";
 import Profile from "./Pages/Profile";
-import Chat from "./Pages/Chat";
+import Comentarios from "./Pages/Comentarios";
 import Videos from "./Pages/Videos";
 import Register from "./Pages/Register";
 import Login from "./Pages/Login";
@@ -82,7 +82,7 @@ function App() {
                 element={<CreateRoutine />}
               />
               <Route path="/createExercise" element={<CreateExercise />} />
-              <Route path="/chat" element={<Chat />} />
+              <Route path="/comentarios" element={<Comentarios />} />
               <Route path="/videos" element={<Videos />} />
               <Route
                 path="/videos/:idExercise"
