@@ -1,4 +1,4 @@
-import { Box, Grid, Typography, Avatar, Button, Tab } from "@mui/material";
+import { Box, Grid, Typography, Avatar, Button, Tab, Zoom } from "@mui/material";
 import { useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
 import TabContext from "@mui/lab/TabContext";
@@ -7,6 +7,7 @@ import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import Routine from "../Components/Routine";
 import NavBar from "../Components/NavBar";
+import SmsIcon from "@mui/icons-material/Sms";
 import { useContext, useState, useEffect } from "react";
 import { getDoctorById } from "../Controllers/DoctorEntry.Controller";
 import { UserContext } from "../Contexts/UserContext";
@@ -15,6 +16,8 @@ import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import Progress from "./../Components/Progress";
 import { getPatientById } from "../Controllers/PatientEntry.Controller";
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 
 /** Esta Pagina es el perfil del paciente que el doctor puede ver, aca puede administrar las rutinas del paciente y crear nuevas  */
 const PatientProfile = () => {
@@ -81,6 +84,14 @@ const PatientProfile = () => {
     getUser();
   }, [currentUser._id, idPatient]);
 
+  //states usados para la animacion
+
+  const [checked, setChecked] = useState(false);
+
+  const handleAnimation = () => {
+    setChecked((prev) => !prev);
+  };
+
   return (
     <>
       {patient === null ? (
@@ -133,45 +144,78 @@ const PatientProfile = () => {
           >
             <Grid sx={{ textAlign: "center", width: "100%" }}>
               {currentUser.role === "doctor" && (
-                <Link
-                  to={`/patient/${idPatient}/createRoutine`}
-                  style={{ textDecoration: "none" }}
-                >
-                  {/**<Button
-                  size="large"
-                  variant="contained"
-                  sx={{ marginBottom: "12px" }}
-                >
-                  CREAR RUTINA
-                </Button>**/}
+                <>
                   <Fab
                     color="primary"
                     aria-label="add"
                     sx={{
                       position: "fixed",
-                      bottom: 80,
+                      bottom: 70,
                       right: 25,
+                      height: 70,
+                      width: 70
                     }}
+                    onClick={handleAnimation}
                   >
-                    <AddIcon />
+                    {checked ? (
+                    <ArrowBackIosNewIcon />):(
+                      <MoreVertIcon/>
+                    )}
                   </Fab>
-                </Link>
+                  <Link
+                  to={`/patient/${idPatient}/createRoutine`}
+                  style={{ textDecoration: "none" }}
+                >
+                <Zoom in={checked}>
+                <Fab
+                      color="secondary"
+                      aria-label="add"
+                      sx={{
+                        position: "fixed",
+                        bottom: 150,
+                        right: 32,
+                        height: 56,
+                        width: 56
+                      }}
+                    >
+                      <AddIcon />
+                    </Fab>
+                </Zoom>
+                  </Link>
+                  <Link
+                   to={`/comentarios`}
+                  style={{ textDecoration: "none" }}
+                >
+                <Zoom in={checked}>
+                <Fab
+                      color="secondary"
+                      aria-label="add"
+                      sx={{
+                        position: "fixed",
+                        bottom: 220,
+                        right: 32,
+                        height: 56,
+                        width: 56
+                      }}
+                    >
+                      <SmsIcon />
+                    </Fab>
+                </Zoom>
+                  </Link>
+                  </>
               )}
-              <Grid container justifyContent="center" sx={{ padding: "3vh 0" }}>
+              <Grid container justifyContent="center" marginBottom={10} sx={{ padding: "3vh 0" }}>
                 {routines === null ? (
                   <Grid item xs={12} md={6}>
                     <CircularProgress />
                   </Grid>
                 ) : (
                   routines.map((routine) => {
-                    // TODO: borrar la rutina con este id + sacar este condicional
-                    if (routine._id !== "635b0fb2e04f9321d8e5926c") {
-                      return (
-                        <Grid item xs={12} md={6}>
-                          <Routine routine={routine} />
-                        </Grid>
-                      );
-                    }
+                    return (
+                      <Grid item xs={12} md={6} marginBottom>
+                        <Routine routine={routine} />
+                      </Grid>
+                    );
                   })
                 )}
               </Grid>
@@ -185,12 +229,12 @@ const PatientProfile = () => {
           <Typography>
             <Progress
               patient={patient}
-              routineId={"635b0fb2e04f9321d8e5926c"}
+              routineId={"636195d0892e6224d4585318"} //por que se le pasaria el id de una rutina??
             />
           </Typography>
         </TabPanel>
       </TabContext>
-      <NavBar />
+      <NavBar/>
     </>
   );
 };

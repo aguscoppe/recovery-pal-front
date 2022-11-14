@@ -12,12 +12,13 @@ import { UserContext } from "../Contexts/UserContext";
 import { getDoctorById } from '../Controllers/DoctorEntry.Controller';
 import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
+import CardLabelExercise from './../Components/CardLabelExercise';
 
 
 function VideoDisplayDoctor({ exerciseList }) {
   const { idExercise } = useParams();
   const [doctor, setDoctor] = useState(null);
-  const [exercises, setExercises] = useState(null);
+  const [exercise, setExercise] = useState(null);
   const currentUser = useContext(UserContext);
 
   useEffect(() => {
@@ -33,7 +34,7 @@ function VideoDisplayDoctor({ exerciseList }) {
       } else {
         setDoctor(respuestaDoctor.doctor);
         console.log(JSON.stringify(respuestaDoctor));
-        setExercises(respuestaDoctor.doctor.exercises.filter(
+        setExercise(respuestaDoctor.doctor.exercises.filter(
           (e) => e._id === idExercise
         )[0] //obtener exercise);
         );
@@ -45,11 +46,11 @@ function VideoDisplayDoctor({ exerciseList }) {
   return (
     <>
       <Header
-        title={exercises === null ? "Cargando..." : exercises.videoTitle}
+        title={exercise === null ? "Cargando..." : exercise.videoTitle}
         icon={<FitnessCenterIcon />}
       />
       <Grid container justifyContent="center" sx={{ padding: "10vh 0" }}>
-        {exercises === null ? (
+        {exercise === null ? (
           <Grid item xs={12} md={12}>
             <Box display="flex" justifyContent="center">
               <CircularProgress />
@@ -57,7 +58,7 @@ function VideoDisplayDoctor({ exerciseList }) {
           </Grid>
         ) : (
           <Grid item xs={11} md={6}>
-            <Typography variant="h3">{exercises.videoTitle}</Typography>
+            <Typography variant="h3">{exercise.videoTitle}</Typography>
             <div
               style={{
                 justifyContent: "center",
@@ -68,7 +69,7 @@ function VideoDisplayDoctor({ exerciseList }) {
               <ReactPlayer
                 height="auto"
                 controls
-                url={exercises.videoURL}
+                url={exercise.videoURL}
                 onReady={() => console.log("onReady callback")}
                 onStart={() => console.log("onStart callback")}
                 onPause={() => console.log("onPause callback")}
@@ -76,12 +77,15 @@ function VideoDisplayDoctor({ exerciseList }) {
                 onError={(e) => console.log(e)}
               />
             </div>
-            <Typography variant="body1" marginTop="20px" marginBottom="40px">
-              {exercises.instructions}
-            </Typography>
-          </Grid>
-        )}
+            <Grid container sx={{pt: 2, mb: 2}} spacing = {2} justify="space-between">
+
+              <CardLabelExercise title={"Instrucciones"} details= {exercise.instructions} type = {"text"}/>
+              <CardLabelExercise title={"Información adicional"} details= {exercise.description} type = {"text"}/>
+            </Grid>
+
       </Grid>
+      )}
+    </Grid>
       <NavBar />
 
     </>

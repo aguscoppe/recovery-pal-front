@@ -10,10 +10,10 @@ import {
   Checkbox,
 } from '@mui/material';
 import { useContext, useState, useEffect } from 'react';
-import { getAllExcercises } from '../Controllers/ExerciseEntry.Controller';
-import { exercises } from '../data';
+import { getDoctorById } from '../Controllers/DoctorEntry.Controller';
+import { UserContext } from '../Contexts/UserContext';
 
-const daysList = [
+export const daysList = [
   { label: 'DO' },
   { label: 'LU' },
   { label: 'MA' },
@@ -52,6 +52,9 @@ const RoutineForm = ({
     },
   ]);
 
+  const currentUser = useContext(UserContext);
+  const [exercises, setExercises] = useState([]);
+
   const btnDisabled =
     rutineData.name === '' ||
     rutineData.weeks === '' ||
@@ -88,6 +91,56 @@ const RoutineForm = ({
     handleSelect()
   }
 
+
+  useEffect(() => {
+    const getDoctor = async function () {
+      const respuestaDoctor = await getDoctorById(currentUser._id);
+      console.log(
+        'Console log de respuesta de back ',
+        JSON.stringify(respuestaDoctor)
+      );
+      if (respuestaDoctor.rdo === 1) {
+        alert('No existe el doctor');
+        window.location.href = '/';
+      } else {
+        var exercisesReturned = respuestaDoctor.doctor.exercises;
+        const structure = {
+          repetitions: '',
+          sets: '',
+          weight: '',
+        };
+        var exercisesList = [];
+
+        for (var i = 0; i < exercisesReturned.length; i++) {
+          exercisesList.push({
+            ...structure,
+            exercise: exercisesReturned[i],
+          });
+        }
+
+        setExercises(exercisesList);
+
+        //setExercises(exercisesReturned.map((e) => {"exercise": e}));
+        console.log(JSON.stringify(respuestaDoctor));
+
+        /*
+        {
+          exercise: {
+            _id: 'ex1',
+            doctor: 'do1',
+            instructions: 'Caminar Recto durante 5 cuadras',
+            videoTitle: 'Caminar Recto 5 Cuadras',
+            videoURL: 'http://127.0.0.1:8080/videos/Caminar_Recto.mp4',
+          },
+          repetitions: '',
+          sets: '',
+          weight: '',
+        }
+        */
+      }
+    };
+    getDoctor();
+  }, [currentUser._id]);
   return (
     <Grid
       container

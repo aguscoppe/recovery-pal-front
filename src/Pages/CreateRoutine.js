@@ -147,7 +147,7 @@ const CreateRoutine = () => {
       doctor: doctor,
       exercises: newExercises,
     };
-    console.log('newRoutine: ', newRoutine);
+    console.log("newRoutine: ", newRoutine);
 
     let info = await createRoutine(newRoutine);
     console.log('info: ', info);
@@ -172,7 +172,7 @@ const CreateRoutine = () => {
         },
       });
     }
-
+    
   };
 
   return (
