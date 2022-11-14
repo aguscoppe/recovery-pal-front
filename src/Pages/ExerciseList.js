@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { Grid } from '@mui/material';
+import { Grid, Modal, Tab } from '@mui/material';
 import Header from '../Components/Header';
 import NavBar from '../Components/NavBar';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
@@ -10,12 +10,25 @@ import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
 import { getLastFeedbackByRoutin } from './../Controllers/FeedbackEntry.Controller';
 import { UserContext } from "../Contexts/UserContext";
+import Routine from "../Components/Routine";
+import TabContext from "@mui/lab/TabContext";
+import TabList from "@mui/lab/TabList";
+import TabPanel from "@mui/lab/TabPanel";
+
+
+
 const ExerciseList = ({ exerciseList }) => {
   const currentUser = useContext(UserContext);
+  
 
   const { idRoutine } = useParams();
   const [routine, setRoutine] = useState(null)
   const [feedback, setFeedback] = useState(null)
+  const [value, setValue] = useState("1");
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
 
 
 
@@ -66,22 +79,41 @@ const ExerciseList = ({ exerciseList }) => {
   return (
     <>
       <Header title={routine === null? "Cargando...": routine.name} icon={<CalendarMonthIcon />} />
-      <Grid container justifyContent='center' sx={{ padding: '10vh 0' }}>
-      {routine === null || (feedback === null && currentUser.role === "paciente") ? (
-          <Grid item xs={12} md={12}>
-            <Box  display="flex" justifyContent="center">
-              <CircularProgress />
-            </Box>
+      <Grid container justifyContent="center" sx={{ padding: "10vh 0" }}>
+      <TabContext value={value}>
+        <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+          <TabList
+            onChange={handleChange}
+            aria-label="lab API tabs example"
+            centered
+          >
+            <Tab label="Rutina" value="1" />
+            <Tab label="Descripcion" value="2" />
+          </TabList>
+        </Box>
+      <TabPanel value="1">
+          <Grid container justifyContent='center' sx={{ padding: '10vh 0' }}>
+            {routine === null || (feedback === null && currentUser.role === "paciente") ? (
+              <Grid item xs={12} md={12}>
+                <Box  display="flex" justifyContent="center">
+                  <CircularProgress />
+                </Box>
+              </Grid>
+            ) : (
+              routine.exercises.map((e) => (//obtener excercise
+                <Grid item xs={11} md={6}>
+                <Exercise exercise={e} /> 
+                </Grid>
+              ))
+            )}
           </Grid>
-        ) : (
-          routine.exercises.map((e) => (//obtener excercise
-            <Grid item xs={11} md={6}>
-            <Exercise exercise={e} /> 
-            </Grid>
-          ))
-        )}
-        
-      </Grid>
+      </TabPanel>
+      <TabPanel value="2">
+        <Grid container justifyContent='center' sx={{ padding: '10vh 0' }}>
+        </Grid>
+      </TabPanel>
+    </TabContext>
+    </Grid>
       <NavBar />
     </>
   );
