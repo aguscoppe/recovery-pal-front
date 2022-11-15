@@ -15,12 +15,15 @@ const flexCenter = {
 const textFieldSpacing = {
   marginBottom: '20px',
 };
+
+//---------------------DEPRECATED----------------------------------
 //create debe saber desde donde es llamado
 const CreateExercise = ({ doctorId }) => {
   const [exerciseData, setExerciseData] = useState({
     name: '',
     description: '',
     videoURL: '',
+    instructions: ""
   });
 
   const [modal, setModal] = useState({
@@ -40,11 +43,10 @@ const CreateExercise = ({ doctorId }) => {
     try {
       const res = await exerciseCreation({
         doctor: doctorId,
-        instructions: exerciseData.description,
+        instructions: exerciseData.instructions,
         videoTitle: exerciseData.name,
         videoURL: exerciseData.videoURL,
       });
-
       if (res.rdo === 0) {
         setModal({
           type: 'success',
@@ -103,10 +105,10 @@ const CreateExercise = ({ doctorId }) => {
             sx={textFieldSpacing}
           />
           <TextField
-            name='description'
-            value={exerciseData.description}
+            name='instructions'
+            value={exerciseData.instrunctions}
             fullWidth
-            label='Descripción'
+            label='instructions'
             variant='outlined'
             onChange={handleChange}
             sx={textFieldSpacing}
