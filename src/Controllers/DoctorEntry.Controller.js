@@ -90,14 +90,17 @@ export const getDoctorById = async function(id){
     catch(error){
         console.log("error",error);
     };
+
+    
 }
-export const addPatient = async function(idDoctor, email){
+
+export const addPatient = async function(datos){
     //url webservices
     let url = urlWebServices.addPatientToDoctor;
     //armo json con datos
     const formData = new URLSearchParams();
-    formData.append('email', email);
-    formData.append('idDoctor', idDoctor);
+    formData.append('idDoctor', datos.idDoctor);
+    formData.append('email', datos.email);
     //console.log("dato",formData);
     //console.log("url",url);
     try{
@@ -118,9 +121,10 @@ export const addPatient = async function(idDoctor, email){
         let data = await response.json();
         console.log("jsonresponse",data);
             switch(rdo){
-                case 201:
+                case 202:
                 {
-                    return ({rdo:0, patient:data.patient});//correcto
+                 
+                    return ({rdo:0,mensaje:"Ok"});//correcto
                 }
                 default:
                 {
@@ -132,7 +136,8 @@ export const addPatient = async function(idDoctor, email){
     catch(error){
         console.log("error",error);
     };
-};
+}
+
 export const getAllCommentsByDoctor = async function(idDoctor){
     //url webservices
     let url = urlWebServices.getAllCommentsByDoctor;
