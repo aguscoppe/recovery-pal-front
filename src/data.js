@@ -21,7 +21,7 @@ export const doctor = {
 
 export const exercises = [
   {
-    exercise: { //esta parte viene del back
+    exercise: {
       _id: 'ex1',
       doctor: 'do1',
       instructions: 'Caminar Recto durante 5 cuadras',
