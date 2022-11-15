@@ -28,6 +28,7 @@ const CreateRoutine = () => {
     weeks: "",
     patient: idPatient,
     feedbacksDone: 0,
+    description: "",
     exercises: [],
     doctor: currentUser._id,
     autocompleteData: [],
@@ -126,7 +127,7 @@ const CreateRoutine = () => {
   };
 
   const handleSubmit = async () => {
-    const { name, weeks, days, patient, doctor, exercises } = rutineData;
+    const { name, weeks, days, description, patient, doctor, exercises } = rutineData;
     const daysArr = [];
     for (const [key, value] of Object.entries(days)) {
       if (value) {
@@ -143,6 +144,7 @@ const CreateRoutine = () => {
       name: name,
       days: daysArr,
       weeks: parseInt(weeks),
+      description: description,
       patient: patient,
       doctor: doctor,
       exercises: newExercises,
