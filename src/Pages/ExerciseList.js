@@ -114,11 +114,11 @@ const ExerciseList = ({ exerciseList }) => {
           </TabPanel>
           <TabPanel value="2">
             <Grid container justifyContent='center' sx={{ padding: '10vh 0' }}>
-              <Typography>{routine === null ? 'Cargando...' : routine.description}
-                       {/*  Despues de realizar los ejercicios, la aplicación de hielo puede ayudar a prevenir o minimizar
+              <Typography>{/* {routine === null ? 'Cargando...' : routine.description} */}
+                         Despues de realizar los ejercicios, la aplicación de hielo puede ayudar a prevenir o minimizar
                         la inflamación o el dolor después de una sesión de ejercicios.                                
                         Asegúrate de colocar una toalla debajo de la bolsa de hielo cuando te apliques la crioterapia en la zona lesionada.                      
-                        La terapia de frío no debe durar más de 20 minutos, sin embargo, puedes realizarla de 4 a 8 veces al día */}
+                        La terapia de frío no debe durar más de 20 minutos, sin embargo, puedes realizarla de 4 a 8 veces al día para obtener los mejores resultados.
               </Typography>
             </Grid>
           </TabPanel>
