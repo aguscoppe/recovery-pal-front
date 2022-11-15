@@ -27,8 +27,6 @@ const textFieldSpacing = {
   marginBottom: '20px',
 };
 
-
-
 const RoutineForm = ({
   rutineData,
   handleChange,
@@ -37,60 +35,15 @@ const RoutineForm = ({
   openExerciseModal,
   setCurrentForm,
 }) => {
-  const [excerciseList, setExerciseList] = useState ([
-    {
-      exercise: { //esta parte viene del back
-        _id: null,
-        doctor: null ,
-        instructions: null,
-        videoTitle: null,
-        videoURL: null,
-      },
-      repetitions: '',
-      sets: '',
-      weight: '',
-    },
-  ]);
-
   const currentUser = useContext(UserContext);
   const [exercises, setExercises] = useState([]);
 
   const btnDisabled =
     rutineData.name === '' ||
     rutineData.weeks === '' ||
+    rutineData.description === '' ||
     rutineData.exercises.length === 0 ||
     Object.values(rutineData.days).filter((val) => val).length === 0;
-
-  useEffect(()=> {
-     const getExcerciseList = async () => {
-      const respuesta = await getAllExcercises();
-      if(respuesta.rdo === 0){
-        const {exercises} = respuesta;
-        console.log(respuesta);
-        exercises.map((e)=> { 
-          setExerciseList((prev) => [...prev, {
-            exercise: {
-              _id: e._id,
-              doctor: e.doctor,
-              instructions: e.instructions,
-              videoTitle: e.videoTitle,
-              videoURL: e.videoURL,
-            },
-            repetitions: '',
-            sets: '',
-            weight: '',
-          } ]);
-        })
-      }else {
-        console.log(respuesta.mensaje);
-      }
-    }
-  getExcerciseList();}, []);
-
-  const handleAutocompleteChange = () => {
-    handleSelect()
-  }
-
 
   useEffect(() => {
     const getDoctor = async function () {
@@ -168,15 +121,6 @@ const RoutineForm = ({
           onChange={handleChange}
           sx={textFieldSpacing}
         />
-        <TextField
-          name='description'
-          value={rutineData.description}
-          fullWidth
-          label='Descripcion'
-          variant='outlined'
-          onChange={handleChange}
-          sx={textFieldSpacing}
-        />
         <Box sx={textFieldSpacing}>
           <FormLabel
             component='legend'
@@ -206,10 +150,19 @@ const RoutineForm = ({
             ))}
           </FormGroup>
         </Box>
+        <TextField
+          name='description'
+          value={rutineData.description}
+          fullWidth
+          label='Descripción'
+          variant='outlined'
+          onChange={handleChange}
+          sx={textFieldSpacing}
+        />
         <Autocomplete
           multiple
           disablePortal
-          options={excerciseList}
+          options={exercises}
           renderInput={(params) => (
             <TextField {...params} label='Buscar ejercicio' />
           )}
