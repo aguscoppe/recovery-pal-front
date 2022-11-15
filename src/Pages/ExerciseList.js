@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { Grid, Modal, Tab } from '@mui/material';
+import { Grid,Tab, Typography } from '@mui/material';
 import Header from '../Components/Header';
 import NavBar from '../Components/NavBar';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
@@ -20,7 +20,7 @@ import TabPanel from "@mui/lab/TabPanel";
 
 const ExerciseList = ({ exerciseList }) => {
   const currentUser = useContext(UserContext);
-  
+
   const { idRoutine } = useParams();
   const [routine, setRoutine] = useState(null)
   const [feedback, setFeedback] = useState(null)
@@ -81,32 +81,48 @@ const ExerciseList = ({ exerciseList }) => {
         icon={<CalendarMonthIcon />}
         routineData={currentUser.role === 'paciente' ? routine : null}
       />
-      <Grid
-        container
-        justifyContent='center'
-        sx={{
-          padding:
-            routine && currentUser.role === 'paciente' ? '22vh 0' : '10vh 0',
-        }}
-      >
-        {routine === null ||
-        (feedback === null && currentUser.role === 'paciente') ? (
-          <Grid item xs={12} md={12}>
-            <Box display='flex' justifyContent='center'>
-              <CircularProgress />
-            </Box>
-          </Grid>
-        ) : (
-          routine.exercises.map(
-            (
-              e //obtener excercise
-            ) => (
-              <Grid item xs={8} sm={5} md={4} lg={3}>
-                <Exercise exercise={e} />
-              </Grid>
-            )
-          )
-        )}
+
+      
+    <Grid container justifyContent="center" sx={{ padding: "20vh 0" }}>
+      <TabContext value={value}>
+        <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+          <TabList
+            onChange={handleChange}
+            aria-label="lab API tabs example"
+            centered
+          >
+            <Tab label="Rutina" value="1" />
+            <Tab label="Descripción" value="2" />
+          </TabList>
+        </Box>
+          <TabPanel value="1">
+            <Grid container justifyContent='center' sx={{ padding: '10vh 0' }}>
+              {routine === null || (feedback === null && currentUser.role === "paciente") ? (
+                <Grid item xs={12} md={12}>
+                  <Box display="flex" justifyContent="center">
+                    <CircularProgress />
+                  </Box>
+                </Grid>
+              ) : (
+                routine.exercises.map((e) => (//obtener excercise
+                  <Grid item xs={11} md={6}>
+                    <Exercise exercise={e} />
+                  </Grid>
+                ))
+              )}
+            </Grid>
+          </TabPanel>
+          <TabPanel value="2">
+            <Grid container justifyContent='center' sx={{ padding: '10vh 0' }}>
+              <Typography>{routine === null ? 'Cargando...' : routine.description}
+                       {/*  Despues de realizar los ejercicios, la aplicación de hielo puede ayudar a prevenir o minimizar
+                        la inflamación o el dolor después de una sesión de ejercicios.                                
+                        Asegúrate de colocar una toalla debajo de la bolsa de hielo cuando te apliques la crioterapia en la zona lesionada.                      
+                        La terapia de frío no debe durar más de 20 minutos, sin embargo, puedes realizarla de 4 a 8 veces al día */}
+              </Typography>
+            </Grid>
+          </TabPanel>
+        </TabContext>
       </Grid>
       <NavBar />
     </>
@@ -114,3 +130,4 @@ const ExerciseList = ({ exerciseList }) => {
 };
 
 export default ExerciseList;
+
