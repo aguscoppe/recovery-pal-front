@@ -20,7 +20,6 @@ const urlWebServices = {
   exerciseCreation: urlApi + 'api/exercises',
   exerciseUpdate: urlApi + 'api/exercises',
   deleteExerciseById: urlApi + 'api/exercises',
-  getAllExcercises: urlApi + 'api/exercises/allExcercises/',
 
   createRoutine: urlApi + 'api/routines',
   getRoutineById: urlApi + 'api/routines/getRoutine',
