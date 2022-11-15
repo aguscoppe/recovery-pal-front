@@ -56,7 +56,7 @@ const ModalPatient = ({ open, handleClose }) => {
   const addPatientToDoctor = async () => {
     try {
       const res = await addPatient({
-        doctorId: currentUser.id,
+        idDoctor: currentUser._id,
         email: patientEmail,
       });
       if (res.rdo === 0) {

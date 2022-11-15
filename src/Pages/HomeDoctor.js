@@ -1,4 +1,4 @@
-import { Grid, Fab, TextField, Typography, Modal, Box } from "@mui/material";
+import { Grid, Fab, Modal} from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 import Header from "../Components/Header";
 import NavBar from "../Components/NavBar";
@@ -10,46 +10,9 @@ import { UserContext } from "../Contexts/UserContext";
 import CircularProgress from "@mui/material/CircularProgress";
 import SearchPatients from "../Components/SearchPatients";
 import * as React from "react";
-import Button from "@mui/material/Button";
-import { theme } from "../theme";
 import ModalPatient from "../Components/ModalPatient";
 import ModalAlert from "../Components/ModalAlert";
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  pt: 2,
-  px: 4,
-  pb: 3,
-};
-const modalContainer = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "center",
-  alignItems: "center",
-  height: "auto",
-  width: "80%",
-  backgroundColor: "#FFF",
-  borderRadius: "20px",
-};
-const textFieldSpacing = {
-  marginBottom: "20px",
-};
-const title = {
-  textAlign: "center",
-  fontWeight: "bold",
-  color: theme.palette.primary.main,
-  marginBottom: "50px",
-};
+
 /* Esta pagina es el home que deberia ver el doctor con la lista de sus pacientes aun no conectada con el back */
 const HomeDoctor = () => {
   const currentUser = useContext(UserContext);
