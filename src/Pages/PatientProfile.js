@@ -108,7 +108,7 @@ const PatientProfile = () => {
         >
           <Avatar
             alt="FotoPerfilPaciente"
-            src="https://mui.com/static/images/avatar/3.jpg"
+            src={"Maria"=== patient.name ? 'https://mui.com/static/images/avatar/3.jpg': 'https://mui.com/static/images/avatar/4.jpg'}
             sx={{ width: 90, height: 90 }}
           ></Avatar>
           <Typography
@@ -229,7 +229,7 @@ const PatientProfile = () => {
           <Typography>
             <Progress
               patient={patient}
-              routineId={"637414942ae5be28ec4651b4"} //por que se le pasaria el id de una rutina??
+              routineId={"63750e050403e1073c19fc93"} //por que se le pasaria el id de una rutina??
             />
           </Typography>
         </TabPanel>

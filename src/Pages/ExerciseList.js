@@ -91,7 +91,7 @@ const ExerciseList = ({ exerciseList }) => {
         routineData={currentUser.role === 'paciente' ? routine : null}
       />
       <TabContext value={value}>
-      <Grid container justifyContent="center" sx={{ padding: "20vh 0" }}>
+      <Grid container justifyContent="center" sx={currentUser.role === "paciente" ? { padding: "20vh 0" }:{ padding: "8vh 0" }}>
       <Grid item xs={12}> 
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
           <TabList
@@ -100,7 +100,7 @@ const ExerciseList = ({ exerciseList }) => {
             centered
           >
             <Tab label="Rutina" value="1" />
-            <Tab label="Descripción" value="2" />
+            <Tab label="Comentarios" value="2" />
           </TabList>
         </Box>
         </Grid>
@@ -127,8 +127,7 @@ const ExerciseList = ({ exerciseList }) => {
           <TabPanel value="2">
             
           
-              <Typography align= "center"> {routine === null ? 'Cargando...' : routine.comment} 
-                         
+              <Typography align= "center" fontSize={'1.5em'}> {routine === null ? 'Cargando...' : routine.comment} 
               </Typography>
             
           </TabPanel>

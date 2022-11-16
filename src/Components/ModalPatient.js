@@ -81,7 +81,6 @@ const ModalPatient = ({ open, handleClose }) => {
             Añadir paciente
           </Typography>
           <TextField
-            error={error.state}
             helperText={error.state ? error.message : ""}
             name="email"
             value={patientEmail}

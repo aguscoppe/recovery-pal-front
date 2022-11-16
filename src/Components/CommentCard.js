@@ -17,7 +17,7 @@ const CommentCard = ({ comment }) => {
   };
 
   //TO DO: Esto deberia traerse desde el back, para facilitar las cosas.
-  const idRoutine = 'idRoutine';
+  const idRoutine = '63750e050403e1073c19fc93';
   const patientEmail = 'fdgerstner@gmail.com';
 
   const text = {

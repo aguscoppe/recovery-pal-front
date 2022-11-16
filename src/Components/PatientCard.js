@@ -2,9 +2,37 @@ import { Grid, Typography, Paper, Avatar, Button } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useTheme } from '@mui/material';
 import Stack from '@mui/material/Stack';
+import { useEffect, useState } from 'react';
+
+
 
 const PatientCard = ({ patient }) => {
   const theme = useTheme();
+
+   //solo para cambiar la foto no dar mucha bola full codeado como mono
+   const [foto,setFoto]= useState("")
+   useEffect(()=>{
+    cambioFoto()
+   })
+   const cambioFoto = () =>{
+    switch (patient.name) {
+      case "Maria":
+        setFoto('https://mui.com/static/images/avatar/3.jpg')
+        break;
+      case "Susana":
+        setFoto('https://mui.com/static/images/avatar/4.jpg')
+        break;
+      case "Esteban":
+        setFoto('https://mui.com/static/images/avatar/2.jpg')
+        break;
+      case "David":
+        setFoto('https://mui.com/static/images/avatar/1.jpg')
+        break;  
+      default:
+        break;
+   }
+  }
+
   return (
     <Grid item xs={10} md={5}>
       <Paper elevation={3} sx={{ margin: '1vh' }}>
@@ -12,7 +40,7 @@ const PatientCard = ({ patient }) => {
           <Grid item xs={4.7}>
             <Avatar
               alt='FotoPerfilPaciente'
-              src='https://mui.com/static/images/avatar/3.jpg'
+              src={foto}
               sx={{ width: 90, height: 90 }}
             />
           </Grid>
