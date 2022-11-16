@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { useTheme } from '@mui/material';
 import Stack from '@mui/material/Stack';
 
+
+
 const PatientCard = ({ patient }) => {
   const theme = useTheme();
   return (
@@ -12,7 +14,7 @@ const PatientCard = ({ patient }) => {
           <Grid item xs={4.7}>
             <Avatar
               alt='FotoPerfilPaciente'
-              src='https://mui.com/static/images/avatar/3.jpg'
+              src={"Maria"=== patient.name ? 'https://mui.com/static/images/avatar/3.jpg': 'https://mui.com/static/images/avatar/4.jpg'}
               sx={{ width: 90, height: 90 }}
             />
           </Grid>

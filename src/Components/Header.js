@@ -104,7 +104,7 @@ const Header = ({ title, icon, routineData = null }) => {
             marginLeft={4}
             sx={{ color: '#ccc' }}
           >
-            Semana 1 de {routineData.schedule.weeks}
+            Semana 2 de {routineData.schedule.weeks}
           </Typography>
         )}
       </Box>

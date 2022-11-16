@@ -91,7 +91,7 @@ const ExerciseList = ({ exerciseList }) => {
         routineData={currentUser.role === 'paciente' ? routine : null}
       />
       <TabContext value={value}>
-      <Grid container justifyContent="center" sx={{ padding: "9vh 0" }}>
+      <Grid container justifyContent="center" sx={currentUser.role === "paciente" ? { padding: "20vh 0" }:{ padding: "8vh 0" }}>
       <Grid item xs={12}> 
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
           <TabList
