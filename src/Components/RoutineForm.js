@@ -41,6 +41,7 @@ const RoutineForm = ({
   const btnDisabled =
     rutineData.name === '' ||
     rutineData.weeks === '' ||
+    rutineData.description === '' ||
     rutineData.exercises.length === 0 ||
     Object.values(rutineData.days).filter((val) => val).length === 0;
 
@@ -158,6 +159,15 @@ const RoutineForm = ({
             ))}
           </FormGroup>
         </Box>
+        <TextField
+          name='description'
+          value={rutineData.description}
+          fullWidth
+          label='Descripción'
+          variant='outlined'
+          onChange={handleChange}
+          sx={textFieldSpacing}
+        />
         <Autocomplete
           multiple
           disablePortal

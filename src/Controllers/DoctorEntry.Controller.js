@@ -94,7 +94,7 @@ export const getDoctorById = async function(id){
     
 }
 
-export const addPatientToDoctor = async function(datos){
+export const addPatient = async function(datos){
     //url webservices
     let url = urlWebServices.addPatientToDoctor;
     //armo json con datos

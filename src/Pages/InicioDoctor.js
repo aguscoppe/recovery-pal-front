@@ -1,21 +1,51 @@
-import { Grid, Typography, Fab } from "@mui/material";
+import { Grid, Typography, Fab, Button } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 import Header from "../Components/Header";
 import NavBar from "../Components/NavBar";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "../Contexts/UserContext";
 import { Link } from "react-router-dom";
 import AddIcon from "@mui/icons-material/Add";
 import PersonIcon from "@mui/icons-material/Person";
 import { Bookmark } from "@mui/icons-material";
-
+import ModalPatient from "../Components/ModalPatient";
 /* Esta pagina es el home que deberia ver el doctor con los botones rapidos de acceso */
 const InicioDoctor = () => {
+  const [showModalPatient, setShowModalPatient] = useState(false);
+  const [modalAlert, setModalAlert] = useState({
+    open: false,
+    type: "",
+    title: "",
+    subtitle: "",
+    primaryBtnText: "",
+    primaryBtnPage: "",
+    setNotOpen: () => {},
+  });
   const currentUser = useContext(UserContext);
-
+  const handleAddPatient = () => {
+    setShowModalPatient(true);
+  };
+  const handleCloseModal = (v) => {
+    setShowModalPatient(false);
+    if (v === 0) {
+      setModalAlert({
+        open: true,
+        type: "success",
+        title: "Bien hecho",
+        subtitle: "Se ha agregado el paciente correctamente a tu lista.",
+        primaryBtnText: "Continuar",
+        setNotOpen: () => {
+          setModalAlert((prev) => ({ ...prev, open: false }));
+        },
+      });
+    }
+  };
   return (
     <>
       <Header title="Home" icon={<HomeIcon />} />
+      {showModalPatient && (
+        <ModalPatient open={showModalPatient} handleClose={handleCloseModal} />
+      )}
       <Grid
         container
         direction="column"
@@ -55,7 +85,6 @@ const InicioDoctor = () => {
           >
             {currentUser.name}
           </Typography>
-
           <Typography
             fontWeight="7000"
             marginBottom="35px"
@@ -63,7 +92,6 @@ const InicioDoctor = () => {
           >
             ¿Qué deseas hacer?
           </Typography>
-
           <Link to={`/patient`} style={{ textDecoration: "none" }}>
             <Fab
               color="info"
@@ -73,7 +101,6 @@ const InicioDoctor = () => {
               <PersonIcon />
             </Fab>
           </Link>
-
           <Typography
             fontWeight="700"
             marginTop="30px"
@@ -82,7 +109,7 @@ const InicioDoctor = () => {
           >
             Mis Pacientes
           </Typography>
-          <Link to={`/addpatient`} style={{ textDecoration: "none" }}>
+          <Button onClick={handleAddPatient}>
             <Fab
               color="info"
               aria-label="Agregar Paciente"
@@ -90,7 +117,7 @@ const InicioDoctor = () => {
             >
               <AddIcon />
             </Fab>
-          </Link>
+          </Button>
           <Typography
             fontWeight="700"
             marginTop="30px"
@@ -122,5 +149,4 @@ const InicioDoctor = () => {
     </>
   );
 };
-
 export default InicioDoctor;
