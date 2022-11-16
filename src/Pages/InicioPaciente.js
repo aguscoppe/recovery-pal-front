@@ -35,7 +35,7 @@ const InicioPaciente = () => {
         >
           <Typography
             fontWeight="7000"
-            marginBottom="5px"
+            marginBottom="0.7vh"
             sx={{ color: "#0B3D60", fontSize: "4rem" }}
           >
             Bienvenida,
@@ -52,7 +52,7 @@ const InicioPaciente = () => {
         >
           <Typography
             fontWeight="7000"
-            marginBottom="5px"
+            marginBottom="2vh"
             sx={{ color: "#0B3D60", fontSize: "4rem" }}
           >
             {currentUser.name}
@@ -60,7 +60,7 @@ const InicioPaciente = () => {
 
           <Typography
             fontWeight="7000"
-            marginBottom="35px"
+            marginBottom="8vh"
             sx={{ fontSize: "2rem" }}
           >
             ¿Qué deseas hacer?
