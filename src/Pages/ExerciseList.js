@@ -127,8 +127,7 @@ const ExerciseList = ({ exerciseList }) => {
           <TabPanel value="2">
             
           
-              <Typography align= "center"> {routine === null ? 'Cargando...' : routine.comment} 
-                         
+              <Typography align= "center" fontSize={'1.5em'}> {routine === null ? 'Cargando...' : routine.comment} 
               </Typography>
             
           </TabPanel>
