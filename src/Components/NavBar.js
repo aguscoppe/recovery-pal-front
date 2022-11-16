@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 const NavBar = () => {
   const theme = useTheme();
   return (
-    <Paper sx={{ position: "fixed", bottom: 0, left: 0, right: 0, zIndex: 99 }}>
+    <Paper sx={{ position: "fixed", bottom: 0, left: 0, right: 0, zIndex: 99999 }}>
       <BottomNavigation sx={{ backgroundColor: theme.palette.primary.main }}>
         <Link to="/home">
           <BottomNavigationAction
