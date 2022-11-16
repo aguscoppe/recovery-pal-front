@@ -1,7 +1,7 @@
 export const patient = {
-  email: 'paciente@mail.com',
+  email: 'mlopez@gmail.com',
   password: '123',
-  name: 'María',
+  name: 'Maria',
   surname: 'López',
   role: 'paciente',
   imgSrc: 'https://mui.com/static/images/avatar/3.jpg',
@@ -10,10 +10,10 @@ export const patient = {
 
 export const doctor = {
   id: 'do1',
-  email: 'doctor@mail.com',
+  email: 'cgomez@gmail.com',
   password: '123',
-  name: 'Martín',
-  surname: 'González',
+  name: 'Cristian',
+  surname: 'Gómez',
   role: 'doctor',
   imgSrc: 'https://mui.com/static/images/avatar/1.jpg',
   _id: '6344f9393a24686318707f3f',

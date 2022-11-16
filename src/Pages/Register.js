@@ -105,7 +105,7 @@ export default function Register() {
   };
 
   const pruebaRoutineReport = async function () {
-    var report = await routineReport("635c9903a5c75f3b588ed998")//IdRutina
+    var report = await routineReport("636195d0892e6224d4585318")//IdRutina 635c9903a5c75f3b588ed998
     console.log('Soy achievements del Back:', report.data.Achievements);
   };
 
@@ -181,9 +181,9 @@ export default function Register() {
           //pruebaPostRoutine();
           //pruebaAchievements()
           //pruebaAchievementsRoutine()
-          //pruebaRoutineReport()
+          pruebaRoutineReport()
           //pruebaAddUserFeedback()
-          pruebaGetAllCommentsDoctor()
+          //pruebaGetAllCommentsDoctor()
         }
       }
     }

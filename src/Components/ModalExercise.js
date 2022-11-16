@@ -22,6 +22,7 @@ const ModalExercise = ({ open, handleClose }) => {
 
   const [exerciseData, setExerciseData] = useState({
     name: "",
+    instructions: "",
     description: "",
     videoURL: "",
   });
@@ -121,7 +122,8 @@ const ModalExercise = ({ open, handleClose }) => {
     try {
       const res = await exerciseCreation({
         doctor: currentUser._id,
-        instructions: exerciseData.description,
+        instructions: exerciseData.instructions,
+        description: exerciseData.description,
         videoTitle: exerciseData.name,
         videoURL: value,
       });

@@ -112,6 +112,15 @@ const RoutineForm = ({
           sx={textFieldSpacing}
         />
         <TextField
+          name='comment'
+          value={rutineData.comment}
+          fullWidth
+          label='Comentario'
+          variant='outlined'
+          onChange={handleChange}
+          sx={textFieldSpacing}
+        />
+        <TextField
           type='number'
           name='weeks'
           value={rutineData.weeks}

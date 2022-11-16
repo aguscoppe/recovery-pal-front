@@ -5,6 +5,8 @@ import NavBar from '../Components/NavBar';
 import Exercise from '../Components/Exercise';
 import MultipleSelectChip from '../Components/MultipleSelectChip';
 
+
+//-----------------------DEPRECATED-------------------------
 const Home = () => {
   return (
     <>

@@ -14,12 +14,20 @@ import Routine from "../Components/Routine";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
-
-
+import Stack from '@mui/material/Stack';
+import { styled } from '@mui/material/styles';
+import Paper from '@mui/material/Paper';
 
 
 const ExerciseList = ({ exerciseList }) => {
   const currentUser = useContext(UserContext);
+  const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  }));
 
   const { idRoutine } = useParams();
   const [routine, setRoutine] = useState(null)
@@ -37,8 +45,9 @@ const ExerciseList = ({ exerciseList }) => {
       const respuesta = await getLastFeedbackByRoutin(idRoutine);
       console.log('Console log de respuesta de back ', respuesta);
       if (respuesta.rdo === 1) {
-        alert('No existe feedback para esta rutina');
-        window.location.href = '/';
+        console.log("No se encontro feedback")
+        setFeedback("");
+       //window.location.href = '/';
       } else {
         setFeedback(respuesta.feedback);
         console.log('Feedback: ', respuesta.feedback);
@@ -81,10 +90,9 @@ const ExerciseList = ({ exerciseList }) => {
         icon={<CalendarMonthIcon />}
         routineData={currentUser.role === 'paciente' ? routine : null}
       />
-
-      
-    <Grid container justifyContent="center" sx={{ padding: "20vh 0" }}>
       <TabContext value={value}>
+      <Grid container justifyContent="center" sx={{ padding: "20vh 0" }}>
+      <Grid item xs={12}> 
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
           <TabList
             onChange={handleChange}
@@ -95,8 +103,11 @@ const ExerciseList = ({ exerciseList }) => {
             <Tab label="Descripción" value="2" />
           </TabList>
         </Box>
+        </Grid>
+
+        <Grid item xs={12}> 
           <TabPanel value="1">
-            <Grid container justifyContent='center' sx={{ padding: '10vh 0' }}>
+            <Grid container justifyContent='center' sx={{ paddingTop: '10vh 0' }}>
               {routine === null || (feedback === null && currentUser.role === "paciente") ? (
                 <Grid item xs={12} md={12}>
                   <Box display="flex" justifyContent="center">
@@ -112,18 +123,19 @@ const ExerciseList = ({ exerciseList }) => {
               )}
             </Grid>
           </TabPanel>
+          
           <TabPanel value="2">
-            <Grid container justifyContent='center' sx={{ padding: '10vh 0' }}>
-              <Typography>{/* {routine === null ? 'Cargando...' : routine.description} */}
-                         Despues de realizar los ejercicios, la aplicación de hielo puede ayudar a prevenir o minimizar
-                        la inflamación o el dolor después de una sesión de ejercicios.                                
-                        Asegúrate de colocar una toalla debajo de la bolsa de hielo cuando te apliques la crioterapia en la zona lesionada.                      
-                        La terapia de frío no debe durar más de 20 minutos, sin embargo, puedes realizarla de 4 a 8 veces al día para obtener los mejores resultados.
+            
+          
+              <Typography align= "center"> {routine === null ? 'Cargando...' : routine.comment} 
+                         
               </Typography>
-            </Grid>
+            
           </TabPanel>
+          </Grid>
+          </Grid>
+
         </TabContext>
-      </Grid>
       <NavBar />
     </>
   );
