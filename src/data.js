@@ -1,19 +1,19 @@
 export const patient = {
-  email: 'mercedes@mail.com',
+  email: 'mlopez@gmail.com',
   password: '123',
-  name: 'Mercedes',
-  surname: 'Rodriguez',
+  name: 'Maria',
+  surname: 'López',
   role: 'paciente',
   imgSrc: 'https://mui.com/static/images/avatar/3.jpg',
-  _id: '6372f7c1feb43323bcb4f20b',
+  _id: '63476ca587539638249f3c9a',
 };
 
 export const doctor = {
   id: 'do1',
-  email: 'doctor@mail.com',
+  email: 'cgomez@gmail.com',
   password: '123',
-  name: 'Martín',
-  surname: 'González',
+  name: 'Cristian',
+  surname: 'Gómez',
   role: 'doctor',
   imgSrc: 'https://mui.com/static/images/avatar/1.jpg',
   _id: '6344f9393a24686318707f3f',
