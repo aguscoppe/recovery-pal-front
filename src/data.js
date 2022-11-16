@@ -1,11 +1,11 @@
 export const patient = {
-  email: 'paciente@mail.com',
+  email: 'mercedes@mail.com',
   password: '123',
-  name: 'María',
-  surname: 'López',
+  name: 'Mercedes',
+  surname: 'Rodriguez',
   role: 'paciente',
   imgSrc: 'https://mui.com/static/images/avatar/3.jpg',
-  _id: '63476ca587539638249f3c9a',
+  _id: '6372f7c1feb43323bcb4f20b',
 };
 
 export const doctor = {

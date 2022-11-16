@@ -14,12 +14,20 @@ import Routine from "../Components/Routine";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
-
-
+import Stack from '@mui/material/Stack';
+import { styled } from '@mui/material/styles';
+import Paper from '@mui/material/Paper';
 
 
 const ExerciseList = ({ exerciseList }) => {
   const currentUser = useContext(UserContext);
+  const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  }));
 
   const { idRoutine } = useParams();
   const [routine, setRoutine] = useState(null)
@@ -82,10 +90,9 @@ const ExerciseList = ({ exerciseList }) => {
         icon={<CalendarMonthIcon />}
         routineData={currentUser.role === 'paciente' ? routine : null}
       />
-
-      
-    <Grid container justifyContent="center" sx={{ padding: "20vh 0" }}>
       <TabContext value={value}>
+      <Grid container justifyContent="center" sx={{ padding: "20vh 0" }}>
+      <Grid item xs={12}> 
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
           <TabList
             onChange={handleChange}
@@ -96,8 +103,11 @@ const ExerciseList = ({ exerciseList }) => {
             <Tab label="Descripción" value="2" />
           </TabList>
         </Box>
+        </Grid>
+
+        <Grid item xs={12}> 
           <TabPanel value="1">
-            <Grid container justifyContent='center' sx={{ padding: '10vh 0' }}>
+            <Grid container justifyContent='center' sx={{ paddingTop: '10vh 0' }}>
               {routine === null || (feedback === null && currentUser.role === "paciente") ? (
                 <Grid item xs={12} md={12}>
                   <Box display="flex" justifyContent="center">
@@ -113,14 +123,19 @@ const ExerciseList = ({ exerciseList }) => {
               )}
             </Grid>
           </TabPanel>
+          
           <TabPanel value="2">
-            <Grid container justifyContent='center' sx={{ padding: '10vh 0' }}>
-              <Typography> {routine === null ? 'Cargando...' : routine.description} 
-                        </Typography>
-            </Grid>
+            
+          
+              <Typography align= "center"> {routine === null ? 'Cargando...' : routine.comment} 
+                         
+              </Typography>
+            
           </TabPanel>
+          </Grid>
+          </Grid>
+
         </TabContext>
-      </Grid>
       <NavBar />
     </>
   );

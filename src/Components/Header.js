@@ -85,6 +85,7 @@ const Header = ({ title, icon, routineData = null }) => {
         width: '100%',
         height: routineData ? '20vh' : '8vh',
         position: 'fixed',
+        zIndex:"1"
       }}
     >
       <Box

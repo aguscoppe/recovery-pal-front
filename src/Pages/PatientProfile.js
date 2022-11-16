@@ -229,7 +229,7 @@ const PatientProfile = () => {
           <Typography>
             <Progress
               patient={patient}
-              routineId={"636195d0892e6224d4585318"} //por que se le pasaria el id de una rutina??
+              routineId={"637414942ae5be28ec4651b4"} //por que se le pasaria el id de una rutina??
             />
           </Typography>
         </TabPanel>

@@ -11,6 +11,7 @@ import {
 } from "./../Controllers/AchievementEntry.Controller";
 
 const Progress = ({ patient, routineId }) => {
+  console.log("ERRRORR DE PRROOO",routineId)
   const [patientAchievements, setPatientAchievements] = useState(null);
   const [routineAchievements, setRoutineAchievements] = useState(null);
   const [report, setReport] = useState(null);
@@ -25,6 +26,8 @@ const Progress = ({ patient, routineId }) => {
 
   const getPatientAchievements = async () => {
     const response = await achievements(patient._id);
+    console.log("Response de achivementes que rompe")
+    console.log(response)
     const { data } = response;
     const res_achievements = data.Achievements;
     setPatientAchievements(res_achievements);
@@ -32,6 +35,7 @@ const Progress = ({ patient, routineId }) => {
 
   const getRoutineAchievements = async () => {
     const response = await achievementsRoutine(routineId);
+    console.log("Response de  que rompe")
     const { data } = response;
     const res_achievements = data.Achievements;
     setRoutineAchievements(res_achievements);
@@ -39,6 +43,7 @@ const Progress = ({ patient, routineId }) => {
 
   const getRoutineReport = async () => {
     const response = await routineReport(routineId);
+    console.log("Res que rompe", response)
     const { data } = response;
     const report = data.Achievements;
     setReport(report);
