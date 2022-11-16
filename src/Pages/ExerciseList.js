@@ -100,7 +100,7 @@ const ExerciseList = ({ exerciseList }) => {
             centered
           >
             <Tab label="Rutina" value="1" />
-            <Tab label="Descripción" value="2" />
+            <Tab label="Comentarios" value="2" />
           </TabList>
         </Box>
         </Grid>
