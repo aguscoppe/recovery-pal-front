@@ -63,7 +63,7 @@ const InicioDoctor = () => {
         >
           <Typography
             fontWeight="7000"
-            marginBottom="5px"
+            marginBottom="0.7vh"
             sx={{ color: "#0B3D60", fontSize: "4rem" }}
           >
             Bienvenido,
@@ -80,14 +80,14 @@ const InicioDoctor = () => {
         >
           <Typography
             fontWeight="7000"
-            marginBottom="5px"
+            marginBottom="2vh"
             sx={{ color: "#0B3D60", fontSize: "4rem" }}
           >
-            {currentUser.name}
+            {currentUser.name} 
           </Typography>
           <Typography
             fontWeight="7000"
-            marginBottom="35px"
+            marginBottom="8vh"
             sx={{ fontSize: "2rem" }}
           >
             ¿Qué deseas hacer?
@@ -129,7 +129,7 @@ const InicioDoctor = () => {
           <Link to={`/videos`} style={{ textDecoration: "none" }}>
             <Fab
               color="info"
-              aria-label="Ejercicios"
+              aria-label="Librería de Ejercicios"
               sx={{ transform: "scale(2)" }}
             >
               <Bookmark />
@@ -141,7 +141,7 @@ const InicioDoctor = () => {
             marginBottom="100px"
             sx={{ color: "#0B3D60" }}
           >
-            Ejercicios
+            Librería de Ejercicios
           </Typography>
         </Grid>
       </Grid>
