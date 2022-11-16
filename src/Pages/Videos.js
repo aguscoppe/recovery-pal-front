@@ -77,7 +77,7 @@ const Videos = () => {
         container
         fullWidth
         justifyContent="center"
-        sx={{ paddingTop: "10vh" , marginBottom: "50px"  }}
+        sx={{ paddingTop: "10vh" }}
       > {/* Added some white space at bottom to show the entire card */}
         <Grid item xs={12} md={12} alignSelf="center" sx={{ pt: 2 }}>
           <SearchExercise
@@ -85,7 +85,7 @@ const Videos = () => {
             setExercisesFiltrados={setExercisesFiltrados}
           />
         </Grid>
-        <Grid item xs={11} md={6} marginLeft="20px" marginRight="20px">
+        <Grid item xs={11} md={6} marginLeft="20px" marginRight="20px" marginBottom={"10vh"}>
           {exercisesFiltrados === null ? (
             <CircularProgress />
           ) : (

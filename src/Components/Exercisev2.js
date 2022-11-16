@@ -11,7 +11,7 @@ const Exercisev2 = ({ exercise }) => {
     <Link to={`${_id}`} style={{ textDecoration: "none" }}>
       <Card sx={{ marginBottom: "12px" }}>
         <Grid container alignItems="center" >
-          <Grid item xs={6} margin="10px">
+          <Grid item xs={5} margin="10px">
             <ReactPlayer url={videoURL} width="100%" height="100%" />
           </Grid>
           <Grid item xs={4} margin="10px">
