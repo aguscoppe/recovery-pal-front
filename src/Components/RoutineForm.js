@@ -159,15 +159,6 @@ const RoutineForm = ({
             ))}
           </FormGroup>
         </Box>
-        <TextField
-          name='description'
-          value={rutineData.description}
-          fullWidth
-          label='Descripción'
-          variant='outlined'
-          onChange={handleChange}
-          sx={textFieldSpacing}
-        />
         <Autocomplete
           multiple
           disablePortal
