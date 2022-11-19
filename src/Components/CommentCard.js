@@ -16,10 +16,6 @@ const CommentCard = ({ comment }) => {
     setShowOptions(!showOptions);
   };
 
-  //TO DO: Esto deberia traerse desde el back, para facilitar las cosas.
-  const idRoutine = '63750e050403e1073c19fc93';
-  const patientEmail = 'fdgerstner@gmail.com';
-
   const text = {
     color: theme.palette.primary.main,
     fontWeight: 'bold',
@@ -120,7 +116,7 @@ const CommentCard = ({ comment }) => {
                   variant='text'
                   sx={text}
                   onClick={() => {
-                    return navigate(`/routine/${idRoutine}`);
+                    return navigate(`/routine/${comment.routineId}`);
                   }}
                 >
                   Ver Rutina
@@ -129,7 +125,7 @@ const CommentCard = ({ comment }) => {
                   variant='text'
                   sx={text}
                   onClick={() => {
-                    return (window.location = `mailto:${patientEmail}`);
+                    return (window.location = `mailto:${comment.email}`);
                   }}
                 >
                   Enviar Mail
