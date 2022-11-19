@@ -32,7 +32,7 @@ const modalContainer = {
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    height: "auto",
+    height: "50%",
     width: "80%",
     backgroundColor: "#FFF",
     borderRadius: "20px",
@@ -105,11 +105,11 @@ const ModalComment = (props) =>{
     <Modal open={props.open}>
       <Box sx={modalContainer}>
         <Grid container justifyContent="center" alignItems="center">
-          <Grid item xs={12} sm={6} m={4}>
-            <Typography variant="h4" align="center" marginBottom={"1vh"}>
+          <Grid item xs={12} sm={8} m={4}>
+            <Typography variant="h3" align="center" marginBottom={"1vh"}>
              ¡Bien Hecho! 
             </Typography>
-            <Typography variant="body2" align="center" marginBottom={"1vh"}>
+            <Typography variant="h6" align="center" marginBottom={"1vh"}>
              Si tienes comentarios para tu fisioterapeuta, escríbelos aquí:
             </Typography>
             <TextField
@@ -162,7 +162,7 @@ const Question = (props) => {
        <Grid container direction="column" marginBottom="5vh" alignItems="center">
             <Grid item>
                 {/**texto con la pregunta que se pasa por parametro */}
-                <Typography variant="h5" align="center">
+                <Typography variant="h6" align="center">
                     {props.pregunta}
                 </Typography>
             </Grid>

@@ -118,7 +118,8 @@ const PatientProfile = () => {
           >
             {patient.name} {patient.lastName}
           </Typography>
-          <Typography variant="body1" color={theme.palette.textSecondary.main}>
+          <Typography variant="h7" color={theme.palette.textSecondary.main}
+            fontWeight="600">
             {patient.suffering}
           </Typography>
         </Box>

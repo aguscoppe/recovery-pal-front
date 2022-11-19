@@ -104,7 +104,7 @@ const Routine = ({ routine }) => {
         alert("No se pudo encontrar al doctor");
       } else {
         var name =
-          "Dr. " + respuesta.doctor.name + " " + respuesta.doctor.lastName;
+          respuesta.doctor.name + " " + respuesta.doctor.lastName;
         setDoctorName(name);
       }
     };
