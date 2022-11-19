@@ -13,8 +13,7 @@ const Comentarios = () => {
   const currentUser = useContext(UserContext);
 
   const [comments, setComments] = useState(null);
-  const [commentsFiltered, setCommentsFiltered] = useState(null)
-
+  const [commentsFiltered, setCommentsFiltered] = useState(null);
 
   useEffect(() => {
     const getComments = async function () {
@@ -52,8 +51,11 @@ const Comentarios = () => {
           alignItems='center'
           justifyContent='center'
         >
-                  <SearchComments setCommentsFiltered= {setCommentsFiltered} comments={comments}/>
-                  </Grid>
+          <SearchComments
+            setCommentsFiltered={setCommentsFiltered}
+            comments={comments}
+          />
+        </Grid>
         <Grid
           item
           container
@@ -63,9 +65,8 @@ const Comentarios = () => {
           flexDirection='column'
           alignItems='center'
           justifyContent='center'
-          sx= {{mt: 3}}
-          spacing = {2}
-
+          sx={{ mt: 3 }}
+          spacing={2}
         >
           {commentsFiltered === null ? (
             <CircularProgress />
