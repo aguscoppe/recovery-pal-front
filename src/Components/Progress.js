@@ -1,17 +1,17 @@
-import { Grid, Box, Typography, CircularProgress } from "@mui/material";
-import Achievements from "./Achievements";
-import Statistics from "./Statistics";
-import { useContext, useState, useEffect } from "react";
-import { UserContext } from "../Contexts/UserContext";
-import { theme } from "../theme";
+import { Grid, Box, Typography, CircularProgress } from '@mui/material';
+import Achievements from './Achievements';
+import Statistics from './Statistics';
+import { useContext, useState, useEffect } from 'react';
+import { UserContext } from '../Contexts/UserContext';
+import { theme } from '../theme';
 import {
   achievements,
   achievementsRoutine,
   routineReport,
-} from "./../Controllers/AchievementEntry.Controller";
+} from './../Controllers/AchievementEntry.Controller';
 
 const Progress = ({ patient, routineId }) => {
-  console.log("ERRRORR DE PRROOO",routineId)
+  console.log('ERRRORR DE PRROOO', routineId);
   const [patientAchievements, setPatientAchievements] = useState(null);
   const [routineAchievements, setRoutineAchievements] = useState(null);
   const [report, setReport] = useState(null);
@@ -26,8 +26,8 @@ const Progress = ({ patient, routineId }) => {
 
   const getPatientAchievements = async () => {
     const response = await achievements(patient._id);
-    console.log("Response de achivementes que rompe")
-    console.log(response)
+    console.log('Response de achivementes que rompe');
+    console.log(response);
     const { data } = response;
     const res_achievements = data.Achievements;
     setPatientAchievements(res_achievements);
@@ -35,7 +35,7 @@ const Progress = ({ patient, routineId }) => {
 
   const getRoutineAchievements = async () => {
     const response = await achievementsRoutine(routineId);
-    console.log("Response de  que rompe")
+    console.log('Response de  que rompe');
     const { data } = response;
     const res_achievements = data.Achievements;
     setRoutineAchievements(res_achievements);
@@ -43,7 +43,7 @@ const Progress = ({ patient, routineId }) => {
 
   const getRoutineReport = async () => {
     const response = await routineReport(routineId);
-    console.log("Res que rompe", response)
+    console.log('Res que rompe', response);
     const { data } = response;
     const report = data.Achievements;
     setReport(report);
@@ -51,13 +51,13 @@ const Progress = ({ patient, routineId }) => {
 
   const Banner = ({ role }) => {
     return (
-      <Typography variant="h5" sx={{ fontWeight: "700" }}>
-        {role !== "paciente"
+      <Typography variant='h5' sx={{ fontWeight: '700' }}>
+        {role !== 'paciente'
           ? `¡${patient.name} ${patient.lastName} tiene una racha de `
           : `¡Tienes una racha de `}
         <Typography
-          variant="h5"
-          sx={{ color: theme.palette.secondary.main, fontWeight: "700" }}
+          variant='h5'
+          sx={{ color: theme.palette.secondary.main, fontWeight: '700' }}
         >
           {report.feedbacksDone} sesiones!
         </Typography>
@@ -67,8 +67,8 @@ const Progress = ({ patient, routineId }) => {
 
   if (!report) {
     return (
-      <Grid justifyContent="center" alignItems="center" container>
-        <Grid sx={{ textAlign: "center" }} item xs={12}>
+      <Grid justifyContent='center' alignItems='center' container>
+        <Grid sx={{ textAlign: 'center' }} item xs={12}>
           <CircularProgress />
         </Grid>
       </Grid>
@@ -76,16 +76,16 @@ const Progress = ({ patient, routineId }) => {
   }
 
   return (
-    <Grid justifyContent="center" alignItems="center" container>
-      <Grid sx={{ textAlign: "center" }} item xs={12}>
+    <Grid justifyContent='center' alignItems='center' container>
+      <Grid sx={{ textAlign: 'center' }} item xs={12}>
         <Banner role={currentUser.role} />
       </Grid>
-      {currentUser.role === "doctor" && (
-        <Grid item xs={12} marginTop="20px">
+      {currentUser.role === 'doctor' && (
+        <Grid item xs={12} marginTop='20px'>
           <Typography
             color={theme.palette.primary.main}
-            fontWeight="700"
-            marginBottom="10px"
+            fontWeight='700'
+            marginBottom='10px'
           >
             Estadísticas
           </Typography>
@@ -96,16 +96,24 @@ const Progress = ({ patient, routineId }) => {
         </Grid>
       )}
 
-      <Grid item xs={12} marginTop="30px" marginBottom="30px">
+      <Grid item xs={12} marginTop='30px' marginBottom='30px'>
         <Typography
           color={theme.palette.primary.main}
-          fontWeight="700"
-          marginBottom="10px"
+          fontWeight='700'
+          marginBottom='10px'
         >
           Logros
         </Typography>
         {patientAchievements === null ? (
-          <CircularProgress />
+          <Grid
+            sx={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <CircularProgress />
+          </Grid>
         ) : (
           <Achievements
             achievements={patientAchievements}
