@@ -35,13 +35,14 @@ const RoutineForm = ({
   openExerciseModal,
   setCurrentForm,
 }) => {
+  console.log(rutineData)
   const currentUser = useContext(UserContext);
   const [exercises, setExercises] = useState([]);
 
   const btnDisabled =
     rutineData.name === '' ||
     rutineData.weeks === '' ||
-    rutineData.description === '' ||
+    rutineData.comment === '' ||
     rutineData.exercises.length === 0 ||
     Object.values(rutineData.days).filter((val) => val).length === 0;
 

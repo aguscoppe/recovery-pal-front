@@ -77,6 +77,7 @@ const PatientProfile = () => {
         } else {
           setDoctor(patient.doctor);
           setPatient(patient);
+          console.log("rutinas del paciente",patient.routines)
           setRoutines(patient.routines);
         }
       }
@@ -228,10 +229,19 @@ const PatientProfile = () => {
         </TabPanel>
         <TabPanel value="3">
           <Typography>
-            <Progress
-              patient={patient}
-              routineId={"63750e050403e1073c19fc93"} //por que se le pasaria el id de una rutina??
-            />
+            {routines === null ? (
+                  <Grid item xs={12} md={6}>
+                    <CircularProgress />
+                  </Grid>
+                ) : ( routines.length === 0 ? (
+                <Typography variant="body1">No tiene cargadas rutinas</Typography>) : 
+                (<Progress
+                  patient={patient}
+                  routineId={routines[0]._id} //por que se le pasaria el id de una rutina??
+                />)
+                  
+                )}
+            
           </Typography>
         </TabPanel>
       </TabContext>
