@@ -1,4 +1,4 @@
-import { Grid, Box, Typography, CircularProgress } from '@mui/material';
+import { Grid, Typography, CircularProgress } from '@mui/material';
 import Achievements from './Achievements';
 import Statistics from './Statistics';
 import { useContext, useState, useEffect } from 'react';

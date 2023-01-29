@@ -41,7 +41,6 @@ const RoutineForm = ({
   const btnDisabled =
     rutineData.name === '' ||
     rutineData.weeks === '' ||
-    rutineData.description === '' ||
     rutineData.exercises.length === 0 ||
     Object.values(rutineData.days).filter((val) => val).length === 0;
 
