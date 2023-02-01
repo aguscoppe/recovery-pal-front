@@ -64,7 +64,7 @@ const InicioDoctor = () => {
           <Typography
             fontWeight="7000"
             marginBottom="0.7vh"
-            sx={{ color: "#0B3D60", fontSize: "4rem" }}
+            sx={{ color: "#0B3D60", fontSize: "3rem" }}
           >
             Bienvenido,
           </Typography>
@@ -81,9 +81,9 @@ const InicioDoctor = () => {
           <Typography
             fontWeight="7000"
             marginBottom="2vh"
-            sx={{ color: "#0B3D60", fontSize: "4rem" }}
+            sx={{ color: "#0B3D60", fontSize: "3rem" }}
           >
-            {currentUser.name} 
+            {currentUser.name}
           </Typography>
           <Typography
             fontWeight="7000"

@@ -1,4 +1,12 @@
-import { Box, Grid, Typography, Avatar, Button, Tab, Zoom } from "@mui/material";
+import {
+  Box,
+  Grid,
+  Typography,
+  Avatar,
+  Button,
+  Tab,
+  Zoom,
+} from "@mui/material";
 import { useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
 import TabContext from "@mui/lab/TabContext";
@@ -16,8 +24,8 @@ import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import Progress from "./../Components/Progress";
 import { getPatientById } from "../Controllers/PatientEntry.Controller";
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 
 /** Esta Pagina es el perfil del paciente que el doctor puede ver, aca puede administrar las rutinas del paciente y crear nuevas  */
 const PatientProfile = () => {
@@ -77,7 +85,7 @@ const PatientProfile = () => {
         } else {
           setDoctor(patient.doctor);
           setPatient(patient);
-          console.log("rutinas del paciente",patient.routines)
+          console.log("rutinas del paciente", patient.routines);
           setRoutines(patient.routines);
         }
       }
@@ -96,7 +104,9 @@ const PatientProfile = () => {
   return (
     <>
       {patient === null ? (
-        <CircularProgress />
+        <Grid container justifyContent="center">
+          <CircularProgress />
+        </Grid>
       ) : (
         <Box
           bgcolor={theme.palette.primary.main}
@@ -109,7 +119,11 @@ const PatientProfile = () => {
         >
           <Avatar
             alt="FotoPerfilPaciente"
-            src={"Maria"=== patient.name ? 'https://mui.com/static/images/avatar/3.jpg': 'https://mui.com/static/images/avatar/4.jpg'}
+            src={
+              "Maria" === patient.name
+                ? "https://mui.com/static/images/avatar/3.jpg"
+                : "https://mui.com/static/images/avatar/4.jpg"
+            }
             sx={{ width: 90, height: 90 }}
           ></Avatar>
           <Typography
@@ -119,8 +133,11 @@ const PatientProfile = () => {
           >
             {patient.name} {patient.lastName}
           </Typography>
-          <Typography variant="h7" color={theme.palette.textSecondary.main}
-            fontWeight="600">
+          <Typography
+            variant="h7"
+            color={theme.palette.textSecondary.main}
+            fontWeight="600"
+          >
             {patient.suffering}
           </Typography>
         </Box>
@@ -155,58 +172,57 @@ const PatientProfile = () => {
                       bottom: 70,
                       right: 25,
                       height: 70,
-                      width: 70
+                      width: 70,
                     }}
                     onClick={handleAnimation}
                   >
-                    {checked ? (
-                    <ArrowBackIosNewIcon />):(
-                      <MoreVertIcon/>
-                    )}
+                    {checked ? <ArrowBackIosNewIcon /> : <MoreVertIcon />}
                   </Fab>
                   <Link
-                  to={`/patient/${idPatient}/createRoutine`}
-                  style={{ textDecoration: "none" }}
-                >
-                <Zoom in={checked}>
-                <Fab
-                      color="secondary"
-                      aria-label="add"
-                      sx={{
-                        position: "fixed",
-                        bottom: 150,
-                        right: 32,
-                        height: 56,
-                        width: 56
-                      }}
-                    >
-                      <AddIcon />
-                    </Fab>
-                </Zoom>
+                    to={`/patient/${idPatient}/createRoutine`}
+                    style={{ textDecoration: "none" }}
+                  >
+                    <Zoom in={checked}>
+                      <Fab
+                        color="secondary"
+                        aria-label="add"
+                        sx={{
+                          position: "fixed",
+                          bottom: 150,
+                          right: 32,
+                          height: 56,
+                          width: 56,
+                        }}
+                      >
+                        <AddIcon />
+                      </Fab>
+                    </Zoom>
                   </Link>
-                  <Link
-                   to={`/comentarios`}
-                  style={{ textDecoration: "none" }}
-                >
-                <Zoom in={checked}>
-                <Fab
-                      color="secondary"
-                      aria-label="add"
-                      sx={{
-                        position: "fixed",
-                        bottom: 220,
-                        right: 32,
-                        height: 56,
-                        width: 56
-                      }}
-                    >
-                      <SmsIcon />
-                    </Fab>
-                </Zoom>
+                  <Link to={`/comentarios`} style={{ textDecoration: "none" }}>
+                    <Zoom in={checked}>
+                      <Fab
+                        color="secondary"
+                        aria-label="add"
+                        sx={{
+                          position: "fixed",
+                          bottom: 220,
+                          right: 32,
+                          height: 56,
+                          width: 56,
+                        }}
+                      >
+                        <SmsIcon />
+                      </Fab>
+                    </Zoom>
                   </Link>
-                  </>
+                </>
               )}
-              <Grid container justifyContent="center" marginBottom={10} sx={{ padding: "3vh 0" }}>
+              <Grid
+                container
+                justifyContent="center"
+                marginBottom={10}
+                sx={{ padding: "3vh 0" }}
+              >
                 {routines === null ? (
                   <Grid item xs={12} md={6}>
                     <CircularProgress />
@@ -230,22 +246,21 @@ const PatientProfile = () => {
         <TabPanel value="3">
           <Typography>
             {routines === null ? (
-                  <Grid item xs={12} md={6}>
-                    <CircularProgress />
-                  </Grid>
-                ) : ( routines.length === 0 ? (
-                <Typography variant="body1">No tiene cargadas rutinas</Typography>) : 
-                (<Progress
-                  patient={patient}
-                  routineId={routines[0]._id} //por que se le pasaria el id de una rutina??
-                />)
-                  
-                )}
-            
+              <Grid item xs={12} md={6}>
+                <CircularProgress />
+              </Grid>
+            ) : routines.length === 0 ? (
+              <Typography variant="body1">No tiene cargadas rutinas</Typography>
+            ) : (
+              <Progress
+                patient={patient}
+                routineId={routines[0]._id} //por que se le pasaria el id de una rutina??
+              />
+            )}
           </Typography>
         </TabPanel>
       </TabContext>
-      <NavBar/>
+      <NavBar />
     </>
   );
 };
