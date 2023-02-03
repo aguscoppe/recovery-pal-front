@@ -38,7 +38,7 @@ const InicioPaciente = () => {
             marginBottom="0.7vh"
             sx={{ color: "#0B3D60", fontSize: "3rem" }}
           >
-            Bienvenida,
+            Bienvenida, {currentUser.name}
           </Typography>
         </Grid>
         <Grid
@@ -50,14 +50,6 @@ const InicioPaciente = () => {
           alignItems="center"
           justifyContent="center"
         >
-          <Typography
-            fontWeight="7000"
-            marginBottom="2vh"
-            sx={{ color: "#0B3D60", fontSize: "3rem" }}
-          >
-            {currentUser.name}
-          </Typography>
-
           <Typography
             fontWeight="7000"
             marginBottom="8vh"

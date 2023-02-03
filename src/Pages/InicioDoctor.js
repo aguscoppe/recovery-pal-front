@@ -64,9 +64,9 @@ const InicioDoctor = () => {
           <Typography
             fontWeight="7000"
             marginBottom="0.7vh"
-            sx={{ color: "#0B3D60", fontSize: "3rem" }}
+            sx={{ color: "#0B3D60", fontSize: "2.5rem" }}
           >
-            Bienvenido,
+            Bienvenido, {currentUser.name}
           </Typography>
         </Grid>
         <Grid
@@ -78,13 +78,6 @@ const InicioDoctor = () => {
           alignItems="center"
           justifyContent="center"
         >
-          <Typography
-            fontWeight="7000"
-            marginBottom="2vh"
-            sx={{ color: "#0B3D60", fontSize: "3rem" }}
-          >
-            {currentUser.name}
-          </Typography>
           <Typography
             fontWeight="7000"
             marginBottom="8vh"
