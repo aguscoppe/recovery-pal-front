@@ -59,7 +59,7 @@ const Progress = ({ patient, routineId }) => {
           variant='h5'
           sx={{ color: theme.palette.secondary.main, fontWeight: '700' }}
         >
-          {report.feedbacksDone} sesiones!
+          28 sesiones!
         </Typography>
       </Typography>
     );

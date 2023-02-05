@@ -2,7 +2,7 @@ import { Grid, Typography, Fab } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 import Header from "../Components/Header";
 import NavBar from "../Components/NavBar";
-import { useContext} from "react";
+import { useContext } from "react";
 import { UserContext } from "../Contexts/UserContext";
 import { Link } from "react-router-dom";
 import {
@@ -36,9 +36,9 @@ const InicioPaciente = () => {
           <Typography
             fontWeight="7000"
             marginBottom="0.7vh"
-            sx={{ color: "#0B3D60", fontSize: "4rem" }}
+            sx={{ color: "#0B3D60", fontSize: "3rem" }}
           >
-            Bienvenida,
+            Bienvenida, {currentUser.name}
           </Typography>
         </Grid>
         <Grid
@@ -50,14 +50,6 @@ const InicioPaciente = () => {
           alignItems="center"
           justifyContent="center"
         >
-          <Typography
-            fontWeight="7000"
-            marginBottom="2vh"
-            sx={{ color: "#0B3D60", fontSize: "4rem" }}
-          >
-            {currentUser.name}
-          </Typography>
-
           <Typography
             fontWeight="7000"
             marginBottom="8vh"

@@ -78,39 +78,47 @@ const Videos = () => {
         fullWidth
         justifyContent="center"
         sx={{ paddingTop: "10vh" }}
-      > {/* Added some white space at bottom to show the entire card */}
+      >
+        {" "}
+        {/* Added some white space at bottom to show the entire card */}
         <Grid item xs={12} md={12} alignSelf="center" sx={{ pt: 2 }}>
           <SearchExercise
             exercises={exercises}
             setExercisesFiltrados={setExercisesFiltrados}
           />
         </Grid>
-        <Grid item xs={11} md={6} marginLeft="20px" marginRight="20px" marginBottom={"10vh"}>
+        <Grid
+          item
+          xs={11}
+          md={6}
+          marginLeft="20px"
+          marginRight="20px"
+          marginBottom={"10vh"}
+        >
           {exercisesFiltrados === null ? (
-            <CircularProgress />
+            <Grid container justifyContent="center">
+              <CircularProgress />
+            </Grid>
           ) : (
             exercisesFiltrados.map((e) => <Exercisev2 exercise={e} />)
           )}
         </Grid>
         <Fab
-        color="primary"
-        aria-label="add"
-        sx={{
-          position: "fixed",
-          bottom: 80,
-          right: 25,
-        }}
-        onClick={openExerciseModal}
-      >
-        <AddIcon />
-      </Fab>
+          color="primary"
+          aria-label="add"
+          sx={{
+            position: "fixed",
+            bottom: 80,
+            right: 25,
+          }}
+          onClick={openExerciseModal}
+        >
+          <AddIcon />
+        </Fab>
       </Grid>
-
-
 
       <NavBar />
 
-      
       <ModalExercise
         open={modalExercise.open}
         handleClose={closeExerciseModal}
