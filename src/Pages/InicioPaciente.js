@@ -108,7 +108,7 @@ const InicioPaciente = () => {
             marginBottom="100px"
             sx={{ color: "#0B3D60" }}
           >
-            Mis Fisioterapeutas
+            Mis Kinesiólogos
           </Typography>
         </Grid>
       </Grid>
