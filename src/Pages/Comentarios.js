@@ -27,8 +27,14 @@ const Comentarios = () => {
         window.location.href = '/';
       } else {
         console.log(JSON.stringify(respuestaComments));
-        setComments(respuestaComments.comments);
-        setCommentsFiltered(respuestaComments.comments);
+        const filteredComments = respuestaComments.comments.filter(
+          (c) => c.comment !== 'test'
+        );
+        const filteredComments2 = filteredComments.filter(
+          (c) => c.comment !== '0'
+        );
+        setComments(filteredComments2);
+        setCommentsFiltered(filteredComments2);
       }
     };
     getComments();
