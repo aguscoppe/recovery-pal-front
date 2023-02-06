@@ -1,22 +1,31 @@
-import { Box, Card, Grid, Typography } from "@mui/material";
+import { Box, Card, Grid, Typography } from '@mui/material';
 
 const Achievements = ({ achievements }) => {
   const { routineAchievement, feedBackAchievement, exerciseAchievement } =
     achievements;
 
   return (
-    <Card sx={{ marginBottom: "12px" }}>
-      <Grid sx={{ p: "20px" }} container alignItems="center" columnSpacing={2}>
+    <Card sx={{ marginBottom: '12px' }}>
+      <Grid
+        sx={{
+          p: {
+            textAlign: 'center',
+          },
+        }}
+        container
+        alignItems='center'
+        columnSpacing={2}
+      >
         {exerciseAchievement > 0 && (
           <Grid
             sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              marginBottom: "10px",
-              marginTop: "10px",
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              marginBottom: '10px',
+              marginTop: '10px',
             }}
-            flexDirection="column"
+            flexDirection='column'
             item
             xs={4}
             xl={4}
@@ -24,15 +33,15 @@ const Achievements = ({ achievements }) => {
             md={4}
           >
             <Box
-              component="img"
+              component='img'
               sx={{
                 height: 50,
                 width: 50,
               }}
-              alt="Trophy"
-              src={require("../Assets/icons/trophy_firstExercise.png")}
+              alt='Trophy'
+              src={require('../Assets/icons/trophy_firstExercise.png')}
             />
-            <Typography sx={{ fontWeight: "700" }}>
+            <Typography sx={{ fontWeight: '700' }}>
               1° Ejercicio Completado
             </Typography>
           </Grid>
@@ -43,13 +52,13 @@ const Achievements = ({ achievements }) => {
             return (
               <Grid
                 sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  marginBottom: "10px",
-                  marginTop: "10px",
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  marginBottom: '10px',
+                  marginTop: '10px',
                 }}
-                flexDirection="column"
+                flexDirection='column'
                 item
                 xs={4}
                 xl={4}
@@ -57,15 +66,15 @@ const Achievements = ({ achievements }) => {
                 md={4}
               >
                 <Box
-                  component="img"
+                  component='img'
                   sx={{
                     height: 50,
                     width: 50,
                   }}
-                  alt="Trophy"
-                  src={require("../Assets/icons/trophy_firstExercise.png")}
+                  alt='Trophy'
+                  src={require('../Assets/icons/trophy_firstExercise.png')}
                 />
-                <Typography sx={{ fontWeight: "700" }}>
+                <Typography sx={{ fontWeight: '700' }}>
                   {5 * (index + 1)} Ejercicios Completados
                 </Typography>
               </Grid>
@@ -74,29 +83,29 @@ const Achievements = ({ achievements }) => {
         {feedBackAchievement > 0 && (
           <Grid
             sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              marginBottom: "10px",
-              marginTop: "10px",
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              marginBottom: '10px',
+              marginTop: '10px',
             }}
             item
-            flexDirection="column"
+            flexDirection='column'
             xs={4}
             xl={4}
             lg={4}
             md={4}
           >
             <Box
-              component="img"
+              component='img'
               sx={{
                 height: 50,
                 width: 50,
               }}
-              alt="Trophy"
-              src={require("../Assets/icons/trophy_firstweek.png")}
+              alt='Trophy'
+              src={require('../Assets/icons/trophy_firstweek.png')}
             />
-            <Typography sx={{ fontWeight: "700" }}>
+            <Typography sx={{ fontWeight: '700' }}>
               1° Sesion Completada
             </Typography>
           </Grid>
@@ -107,13 +116,13 @@ const Achievements = ({ achievements }) => {
             return (
               <Grid
                 sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  marginBottom: "10px",
-                  marginTop: "10px",
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  marginBottom: '10px',
+                  marginTop: '10px',
                 }}
-                flexDirection="column"
+                flexDirection='column'
                 item
                 xs={4}
                 xl={4}
@@ -121,15 +130,15 @@ const Achievements = ({ achievements }) => {
                 md={4}
               >
                 <Box
-                  component="img"
+                  component='img'
                   sx={{
                     height: 50,
                     width: 50,
                   }}
-                  alt="Trophy"
-                  src={require("../Assets/icons/trophy_firstweek.png")}
+                  alt='Trophy'
+                  src={require('../Assets/icons/trophy_firstweek.png')}
                 />
-                <Typography sx={{ fontWeight: "700" }}>
+                <Typography sx={{ fontWeight: '700' }}>
                   {5 * (index + 1)} Sesiones Completadas
                 </Typography>
               </Grid>
@@ -138,13 +147,13 @@ const Achievements = ({ achievements }) => {
         {routineAchievement > 0 && (
           <Grid
             sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              marginBottom: "10px",
-              marginTop: "10px",
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              marginBottom: '10px',
+              marginTop: '10px',
             }}
-            flexDirection="column"
+            flexDirection='column'
             item
             xs={4}
             xl={4}
@@ -152,15 +161,15 @@ const Achievements = ({ achievements }) => {
             md={4}
           >
             <Box
-              component="img"
+              component='img'
               sx={{
                 height: 50,
                 width: 50,
               }}
-              alt="Trophy"
-              src={require("../Assets/icons/trophy_firstRoutine.png")}
+              alt='Trophy'
+              src={require('../Assets/icons/trophy_firstRoutine.png')}
             />
-            <Typography sx={{ fontWeight: "700" }}>
+            <Typography sx={{ fontWeight: '700' }}>
               1° Rutina Completada
             </Typography>
           </Grid>
@@ -171,13 +180,13 @@ const Achievements = ({ achievements }) => {
             return (
               <Grid
                 sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  marginBottom: "10px",
-                  marginTop: "10px",
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  marginBottom: '10px',
+                  marginTop: '10px',
                 }}
-                flexDirection="column"
+                flexDirection='column'
                 item
                 xs={4}
                 xl={4}
@@ -185,15 +194,15 @@ const Achievements = ({ achievements }) => {
                 md={4}
               >
                 <Box
-                  component="img"
+                  component='img'
                   sx={{
                     height: 50,
                     width: 50,
                   }}
-                  alt="Trophy"
-                  src={require("../Assets/icons/trophy_firstRoutine.png")}
+                  alt='Trophy'
+                  src={require('../Assets/icons/trophy_firstRoutine.png')}
                 />
-                <Typography sx={{ fontWeight: "700" }}>
+                <Typography sx={{ fontWeight: '700' }}>
                   {5 * (index + 1)} Rutinas Completadas
                 </Typography>
               </Grid>
